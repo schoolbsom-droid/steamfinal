@@ -8,13 +8,15 @@
     <style>
         :root {
             --beige-bg: #F9F7F2;
-            --mauve-light: #E1BEE7;
+            --mauve-pill-bg: #E1BEE7;
+            --mauve-text: #6A1B9A;
             --mauve-main: #967BB6;
             --white: #ffffff;
-            --text-dark: #333;
+            --text-dark: #4A4A4A;
         }
 
-        * { box-sizing: border-box; }
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        
         body {
             font-family: 'Tajawal', sans-serif;
             background-color: var(--beige-bg);
@@ -24,100 +26,123 @@
             overflow-x: hidden;
         }
 
-        /* تصغير حجم العنوان الرئيسي بناءً على طلبك */
+        /* تنسيق الهيدر والعناوين بناءً على الصور */
         header {
             background: linear-gradient(135deg, #F3E5F5 0%, var(--beige-bg) 100%);
             padding: 30px 15px;
             text-align: center;
-            border-bottom: 4px solid var(--mauve-main);
         }
 
-        h1 { color: var(--mauve-main); font-size: 1.4rem; margin: 0; } /* حجم أصغر */
-        .school-info { font-size: 1rem; color: #666; margin: 5px 0; }
-        .organizers {
-            background: var(--white);
+        h1 { 
+            color: var(--mauve-main); 
+            font-size: 1.3rem; /* تصغير حجم العنوان الرئيسي */
+            margin: 0 0 15px 0; 
+            font-weight: 700;
+        }
+
+        /* تنسيق العنوان الفرعي الموضح في الصورة */
+        .subtitle-pill {
+            background-color: var(--mauve-pill-bg);
+            color: var(--mauve-text);
             display: inline-block;
-            padding: 6px 20px;
-            border-radius: 30px;
-            border: 1px solid var(--mauve-light);
-            font-weight: bold;
-            font-size: 0.85rem;
-            margin-top: 10px;
+            padding: 8px 25px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
         }
 
         .container { max-width: 1200px; margin: 20px auto; padding: 0 15px; }
+        .page { display: none; animation: fadeIn 0.4s ease; }
+        .active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        .page { display: none; }
-        .active { display: block; animation: fadeIn 0.4s ease; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-
+        /* تنسيق البطاقات كما في الصورة image_6ebf9c.png */
         .projects-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
         }
 
         .card {
             background: var(--white);
-            border-radius: 15px;
-            padding: 20px;
+            border-radius: 20px;
+            padding: 25px;
             border: 1px solid #eee;
             position: relative;
             display: flex;
             flex-direction: column;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
         }
 
         .card::before {
-            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 6px;
-            background: var(--mauve-main); border-radius: 15px 15px 0 0;
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 10px;
+            background: var(--mauve-main); border-radius: 20px 20px 0 0;
         }
 
-        .card h3 { color: var(--mauve-main); text-align: center; font-size: 1.2rem; margin-top: 10px; }
+        .card h3 { 
+            color: var(--mauve-main); 
+            text-align: center; 
+            border-bottom: 2px solid #F3E5F5; 
+            padding-bottom: 15px; 
+            font-size: 1.2rem;
+            margin-top: 10px;
+        }
 
-        .name-box {
+        .card-desc { font-size: 0.9rem; color: #666; margin: 15px 0; flex-grow: 1; text-align: justify; }
+
+        .team-box {
             background: #FDFBFA;
-            padding: 10px;
-            border-radius: 10px;
-            border-right: 4px solid var(--mauve-light);
-            font-size: 0.8rem;
-            margin: 15px 0;
+            padding: 15px;
+            border-radius: 12px;
+            border-right: 4px solid var(--mauve-pill-bg);
+            font-size: 0.85rem;
+            margin-bottom: 20px;
         }
+        .team-box strong { color: var(--mauve-text); display: block; margin-bottom: 5px; }
 
         .btn {
-            display: block; width: 100%; padding: 12px; border-radius: 10px;
+            display: block; width: 100%; padding: 12px; border-radius: 12px;
             text-align: center; text-decoration: none; font-weight: bold;
             cursor: pointer; border: 2px solid var(--mauve-main);
             color: var(--mauve-main); background: transparent; transition: 0.3s;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
         }
-
         .btn:hover { background: var(--mauve-main); color: white; }
         .btn-back { background: #eee; border: none; color: #555; width: auto; display: inline-block; margin-bottom: 15px; padding: 8px 20px; }
 
-        /* تفاصيل المحتوى الكاملة */
-        .detail-view { background: white; padding: 25px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
-        .section-box { margin-bottom: 20px; padding: 15px; background: #fafafa; border-radius: 10px; }
-        .section-title { color: var(--mauve-main); font-weight: bold; display: block; margin-bottom: 8px; border-bottom: 1px solid var(--mauve-light); }
-        
-        .method-tag { background: var(--mauve-light); color: #6A1B9A; padding: 4px 12px; border-radius: 6px; font-weight: bold; font-size: 0.85rem; margin-bottom: 15px; display: inline-block; }
+        /* تنسيق صفحة التفاصيل كما في الصورة image.png */
+        .detail-view { background: white; padding: 30px; border-radius: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.04); }
+        .method-header {
+            background-color: var(--mauve-pill-bg);
+            color: var(--mauve-text);
+            padding: 10px 25px;
+            border-radius: 15px;
+            display: inline-block;
+            font-weight: 700;
+            margin-bottom: 25px;
+        }
+
+        .step { margin-bottom: 20px; position: relative; padding-right: 15px; }
+        .step::after { content: ''; position: absolute; right: 0; top: 5px; bottom: 5px; width: 3px; background: var(--mauve-pill-bg); }
+        .step-title { color: var(--mauve-main); font-weight: bold; font-size: 1.05rem; }
 
         .footer-hub {
             background: var(--mauve-main); color: white; text-align: center;
-            padding: 30px 15px; border-radius: 20px; margin-top: 30px;
+            padding: 40px 20px; border-radius: 25px; margin-top: 40px;
         }
+        .hub-link { background: white; color: var(--mauve-main); padding: 12px 35px; border-radius: 50px; text-decoration: none; font-weight: bold; display: inline-block; margin-top: 15px; }
 
-        .hub-link { background: white; color: var(--mauve-main); padding: 10px 25px; border-radius: 50px; text-decoration: none; font-weight: bold; display: inline-block; margin-top: 10px; }
-
-        footer { text-align: center; padding: 30px; color: #888; font-size: 0.75rem; }
+        footer { text-align: center; padding: 40px; color: #888; font-size: 0.8rem; }
+        .zeolite { background: #E8F5E9; color: #2E7D32; padding: 2px 6px; border-radius: 4px; font-weight: bold; }
     </style>
 </head>
 <body>
 
 <header>
     <h1>مبادرة تنفيذ تطبيقات تحدي إنترنت الأشياء ضمن برنامج STEAM في مجال العلوم والتقنية</h1>
-    <div class="school-info">مدرسة المتوسطة الواحدة والعشرون بخميس مشيط</div>
-    <div class="organizers">المنفذات للمبادرة: كرزية عسيري - ابتسام الشهري</div>
+    <div class="subtitle-pill">المنفذات: كرزية عسيري - ابتسام الشهري</div>
 </header>
 
 <div class="container">
@@ -127,42 +152,52 @@
             
             <div class="card">
                 <h3>سلة المهملات الذكية</h3>
-                <div class="name-box">
-                    <strong>المشاركات:</strong><br> جنى ناصر الوذناني، تبيان طارق الحاج، رباب علي خبراني، وسن عبدالله فقيهي
+                <div class="card-desc">سلة مهملات تفتح غطائها تلقائيًا عند اقتراب جسم منها دون لمس، للمساهمة في تعزيز النظافة والصحة.</div>
+                <div class="team-box">
+                    <strong>الطالبات المشاركات:</strong>
+                    جنى الوذناني، تبيان الحاج، رباب خبراني، وسن فقيهي
                 </div>
-                <button class="btn" onclick="openPage('p2')">عرض كامل التفاصيل</button>
+                <button class="btn" onclick="openPage('p1')">استكشاف المنهجية</button>
             </div>
 
             <div class="card">
                 <h3>نموذج تنقية المياه</h3>
-                <div class="name-box">
-                    <strong>المشاركات:</strong><br> رتيل الشهري، روين الشهري، ريناد المزارقه، اسيل الطوره، جنى الاحمري، جنى غزواني
+                <div class="card-desc">نموذج عملي يوضح مراحل تنقية المياه من الشوائب والملوثات باستخدام مواد ترشيح بسيطة ومتدرجة.</div>
+                <div class="team-box">
+                    <strong>الطالبات المشاركات:</strong>
+                    رتيل الشهري، روين الشهري، ريناد المزارقه، اسيل الطوره، جنى الاحمري، جنى غزواني
                 </div>
-                <button class="btn" onclick="openPage('p3')">عرض كامل التفاصيل</button>
+                <button class="btn" onclick="openPage('p2')">استكشاف المنهجية</button>
             </div>
 
             <div class="card">
-                <h3>كاشف الحريق الذكي</h3>
-                <div class="name-box">
-                    <strong>المشاركات:</strong><br> رنيم الاحمري، ندى المالكي، المى خضير، تسنيم حسن الشهري
+                <h3>كاشف الحريق</h3>
+                <div class="card-desc">نموذج لجهاز كاشف حريق يعتمد على مستشعر للدخان أو الحرارة، وإطلاق تنبيه لحماية الأفراد والممتلكات.</div>
+                <div class="team-box">
+                    <strong>الطالبات المشاركات:</strong>
+                    رنيم الاحمري، ندى المالكي، المى خضير، تسنيم الشهري
                 </div>
-                <button class="btn" onclick="openPage('p4')">عرض كامل التفاصيل</button>
+                <button class="btn" onclick="openPage('p3')">استكشاف المنهجية</button>
             </div>
 
             <div class="card">
-                <h3>التشجير الرقمي (سكراتش 1)</h3>
-                <div class="name-box">
-                    <strong>المشاركات:</strong><br> جوري عبدالله القحطاني، داليا مفلح الشهراني، درر عبدالخالق الشهري
+                <h3>التشجير الرقمي (سكراتش) - 1</h3>
+                <div class="card-desc">لعبة توعوية تبرز أهمية التشجير والمحافظة على البيئة بأسلوب تفاعلي وممتع.</div>
+                <div class="team-box">
+                    <strong>الطالبات المشاركات:</strong>
+                    جوري القحطاني، داليا الشهراني، درر الشهري
                 </div>
-                <button class="btn" onclick="openPage('p5-1')">عرض كامل التفاصيل</button>
+                <button class="btn" onclick="openPage('p4')">استكشاف المنهجية</button>
             </div>
 
             <div class="card">
-                <h3>التشجير والزيولايت (سكراتش 2)</h3>
-                <div class="name-box">
-                    <strong>المشاركات:</strong><br> سمو القحطاني، نوادر ناصر الشهراني، شادن عمر عبدلي
+                <h3>التشجير الرقمي (سكراتش) - 2</h3>
+                <div class="card-desc">نشاط توعوي مبرمج يدمج بين التقنية والبيئة، مع إمكانية استخدام فكرة <span class="zeolite">الزيولايت</span>.</div>
+                <div class="team-box">
+                    <strong>الطالبات المشاركات:</strong>
+                    سمو القحطاني، نوادر الشهراني، شادن عبدلي
                 </div>
-                <button class="btn" onclick="openPage('p5-2')">عرض كامل التفاصيل</button>
+                <button class="btn" onclick="openPage('p5')">استكشاف المنهجية</button>
             </div>
 
         </div>
@@ -173,107 +208,62 @@
         </div>
     </div>
 
+    <div id="p1" class="page">
+        <button class="btn btn-back" onclick="openPage('home')">← عودة</button>
+        <div class="detail-view">
+            <div class="method-header">منهجية التصميم الهندسي (EDP)</div>
+            <div class="step"><span class="step-title">1. التساؤل:</span> كيف نحد من تلوث اليدين عند استخدام سلال المهملات؟</div>
+            <div class="step"><span class="step-title">2. التخيل:</span> تصميم آلية تفتح الغطاء تلقائياً باستخدام حساسات المسافة.</div>
+            <div class="step"><span class="step-title">3. التخطيط:</span> رسم مخطط يربط حساس الموجات فوق الصوتية بمحرك السيرفو.</div>
+            <div class="step"><span class="step-title">4. الإنشاء:</span> تركيب الدائرة البرمجية داخل الهيكل المبتكر للسلة.</div>
+            <div class="step"><span class="step-title">5. التحسين:</span> ضبط المسافة وسرعة الفتح لضمان سهولة الاستخدام.</div>
+        </div>
+    </div>
+
     <div id="p2" class="page">
         <button class="btn btn-back" onclick="openPage('home')">← عودة</button>
         <div class="detail-view">
-            <h2>سلة المهملات الذكية</h2>
-            <div class="section-box">
-                <span class="section-title">فكرة المشروع:</span>
-                تصميم سلة تفتح غطائها تلقائيًا عند اقتراب جسم منها دون لمس، للمساهمة في تعزيز النظافة والصحة.
-            </div>
-            <div class="section-box">
-                <span class="section-title">المكونات:</span>
-                • هيكلية: هيكل سلة، غطاء متحرك، مفصلات.<br>
-                • برمجية: حساس مسافة، محرك سيرفو، كود تحكم.
-            </div>
-            <div class="method-tag">منهجية التصميم الهندسي (EDP)</div>
-            <div class="step"><span class="step-title">1. التساؤل:</span> كيف نمنع التلوث الناتج عن لمس سلال النفايات؟</div>
-            <div class="step"><span class="step-title">4. الإنشاء:</span> تركيب الدائرة البرمجية داخل هيكل السلة واختبارها.</div>
-            <a href="https://youtu.be/34gGy-V2cV8" target="_blank" class="btn" style="width:auto; display:inline-block">مشاهدة الفيديو 📺</a>
+            <div class="method-header">منهجية التصميم الهندسي (EDP)</div>
+            <div class="step"><span class="step-title">1. التساؤل:</span> كيف يمكن الحصول على مياه نظيفة بمواد ترشيح بسيطة؟</div>
+            <div class="step"><span class="step-title">2. التخيل:</span> استخدام طبقات من الطبيعة (رمل وفحم وحصى) للفلترة.</div>
+            <div class="step"><span class="step-title">3. التخطيط:</span> تصميم هيكل شفاف متدرج لرؤية مراحل التنقية.</div>
+            <div class="step"><span class="step-title">4. الإنشاء:</span> ترتيب طبقات الترشيح من الأكبر مساماً إلى الأصغر.</div>
+            <div class="step"><span class="step-title">5. التحسين:</span> إضافة فلتر قطني دقيق لضمان نقاء المياه النهائي.</div>
         </div>
     </div>
 
     <div id="p3" class="page">
         <button class="btn btn-back" onclick="openPage('home')">← عودة</button>
         <div class="detail-view">
-            <h2>نموذج تنقية المياه</h2>
-            <div class="section-box">
-                <span class="section-title">فكرة المشروع:</span>
-                نموذج يوضّح مراحل تنقية المياه باستخدام مواد ترشيح بسيطة ومتدرجة بطريقة تعليمية.
-            </div>
-            <div class="section-box">
-                <span class="section-title">المكونات:</span>
-                • هيكلية: حاويات شفافة، طبقات ترشيح (حصى، رمل، فحم، قطن).<br>
-                • تقنية: (اختياري) حساس عكارة لقياس نقاء الماء.
-            </div>
-            <div class="method-tag">منهجية التصميم الهندسي (EDP)</div>
-            <div class="step"><span class="step-title">1. التساؤل:</span> هل يمكن تنقية المياه الملوثة بمواد من الطبيعة؟</div>
-            <div class="step"><span class="step-title">4. الإنشاء:</span> ترتيب طبقات الفلترة وتجربة مرور الماء العكر.</div>
-            <a href="https://youtu.be/73hCczOiePU" target="_blank" class="btn" style="width:auto; display:inline-block">مشاهدة الفيديو 📺</a>
+            <div class="method-header">منهجية التصميم الهندسي (EDP)</div>
+            <div class="step"><span class="step-title">1. التساؤل:</span> كيف يمكن الكشف المبكر عن الحرائق لتقليل الخسائر؟</div>
+            <div class="step"><span class="step-title">4. الإنشاء:</span> بناء نموذج يحتوي على مستشعر غاز وصفارة إنذار.</div>
         </div>
     </div>
 
     <div id="p4" class="page">
         <button class="btn btn-back" onclick="openPage('home')">← عودة</button>
         <div class="detail-view">
-            <h2>كاشف الحريق الذكي</h2>
-            <div class="section-box">
-                <span class="section-title">فكرة المشروع:</span>
-                نموذج لجهاز كاشف حريق يعتمد على مستشعر للدخان أو الحرارة، وإطلاق تنبيه لحماية الممتلكات.
-            </div>
-            <div class="section-box">
-                <span class="section-title">المكونات:</span>
-                • هيكلية: قاعدة تثبيت، سماعة تنبيه، لمبة.<br>
-                • برمجية: حساس دخان/حرارة، كود لإطلاق الإنذار (جرس، صفارة).
-            </div>
-            <div class="method-tag">منهجية التصميم الهندسي (EDP)</div>
-            <div class="step"><span class="step-title">1. التساؤل:</span> كيف نكتشف الحريق بسرعة لحماية الأرواح؟</div>
-            <div class="step"><span class="step-title">4. الإنشاء:</span> بناء النموذج وتجربة استجابته للدخان الصناعي.</div>
-            <a href="https://youtu.be/xPijt0gRe0E" target="_blank" class="btn" style="width:auto; display:inline-block">مشاهدة الفيديو 📺</a>
+            <div class="method-header">منهجية التفكير التصميمي (Design Thinking)</div>
+            <div class="step"><span class="step-title">1. التعاطف:</span> الشعور بأهمية الغطاء النباتي وتأثيره على المناخ.</div>
+            <div class="step"><span class="step-title">4. النموذج:</span> بناء لعبة تفاعلية عبر سكراتش تحاكي زراعة الأشجار.</div>
         </div>
     </div>
 
-    <div id="p5-1" class="page">
+    <div id="p5" class="page">
         <button class="btn btn-back" onclick="openPage('home')">← عودة</button>
         <div class="detail-view">
-            <h2>التشجير الرقمي (نموذج 1)</h2>
-            <div class="section-box">
-                <span class="section-title">فكرة المشروع:</span>
-                لعبة توعوية تفاعلية تبرز أهمية التشجير والمحافظة على البيئة عبر سكراتش.
-            </div>
-            <div class="section-box">
-                <span class="section-title">المكونات البرمجية:</span>
-                تصميم شخصيات، برمجة حركة الزراعة، عدّاد نقاط، رسائل توعوية.
-            </div>
-            <div class="method-tag">منهجية التفكير التصميمي (Design Thinking)</div>
-            <div class="step"><span class="step-title">1. التعاطف:</span> الشعور بمشكلة التصحر وأهمية الغطاء النباتي.</div>
-            <div class="step"><span class="step-title">4. النموذج:</span> بناء اللعبة وتصميم واجهتها الرسومية.</div>
-            <a href="https://sites.google.com/view/gamesforthegreenergood/home" target="_blank" class="btn" style="width:auto; display:inline-block">دخول اللعبة 🎮</a>
-        </div>
-    </div>
-
-    <div id="p5-2" class="page">
-        <button class="btn btn-back" onclick="openPage('home')">← عودة</button>
-        <div class="detail-view">
-            <h2>التشجير والزيولايت (نموذج 2)</h2>
-            <div class="section-box">
-                <span class="section-title">فكرة المشروع:</span>
-                نشاط توعوي مبرمج يدمج التقنية مع البيئة، مع التركيز على دور "الزيولايت" في تحسين الزراعة.
-            </div>
-            <div class="section-box">
-                <span class="section-title">المكونات البرمجية:</span>
-                بيئة سكراتش، برمجة أوامر الزراعة، دمج فكرة الزيولايت علمياً.
-            </div>
-            <div class="method-tag">منهجية التفكير التصميمي (Design Thinking)</div>
-            <div class="step"><span class="step-title">1. التعاطف:</span> إيجاد حلول لتحسين التربة في المناطق القاسية.</div>
-            <div class="step"><span class="step-title">4. النموذج:</span> توضيح أثر الزيولايت برمجياً داخل المحاكاة.</div>
-            <a href="https://sites.google.com/view/gamesforthegreenergood/home" target="_blank" class="btn" style="width:auto; display:inline-block">دخول اللعبة 🎮</a>
+            <div class="method-header">منهجية التفكير التصميمي (Design Thinking)</div>
+            <div class="step"><span class="step-title">1. التعاطف:</span> إيجاد حلول لتحسين التربة الزراعية في البيئات القاسية.</div>
+            <div class="step"><span class="step-title">4. النموذج:</span> دمج معلومة "الزيولايت" علمياً في عالم برمجي.</div>
         </div>
     </div>
 
 </div>
 
-<footer>&copy; 2026 المتوسطة الواحدة والعشرون بخميس مشيط</footer>
+<footer>
+    © 2026 المتوسطة الواحدة والعشرون بخميس مشيط
+</footer>
 
 <script>
     function openPage(id) {
