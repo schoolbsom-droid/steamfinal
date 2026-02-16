@@ -2,346 +2,536 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="color-scheme" content="light dark">
   <title>منهج STEAM العملي الإثرائي - المتوسطة 21</title>
-  https://fonts.googleapis.com/css2?family=Tajawal:wght@300;500;700&display=swap
+
+  <!-- ✅ Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;500;700&display=swap" rel="stylesheet">
+
   <style>
     :root{
-      --bg:#F9F7F2; --card:#FFFFFF; --ink:#444; --muted:#6b6b6b;
-      --main:#967BB6; --main-dark:#6A1B9A; --pill:#EADCF1;
-      --ok:#2e7d32; --warn:#f57c00; --danger:#c62828;
-      --shadow:0 4px 14px rgba(0,0,0,.06);
-      --radius:14px;
-      --tap:44px; /* أقل ارتفاع/عرض لمناطق اللمس */
+      --bg:#F5F6FA;
+      --card:#FFFFFF;
+      --ink:#1f1f1f;
+      --muted:#6b6b6b;
+
+      --main:#7B61B8;
+      --main-dark:#5A3FA8;
+      --pill:#EEE7FB;
+
+      --shadow:0 10px 24px rgba(0,0,0,.06);
+      --radius:16px;
+      --tap:44px;
+      --border: rgba(0,0,0,.08);
     }
+
     @media (prefers-color-scheme: dark){
       :root{
-        --bg:#141218; --card:#1b1822; --ink:#e9e7ef; --muted:#bdb8cc;
-        --pill:#3a2a55; --shadow:0 2px 10px rgba(0,0,0,.4);
+        --bg:#12121a;
+        --card:#1b1b26;
+        --ink:#eceaf2;
+        --muted:#b8b3c7;
+
+        --pill:#2b2340;
+        --shadow:0 10px 24px rgba(0,0,0,.35);
+        --border: rgba(255,255,255,.10);
       }
     }
+
     *{box-sizing:border-box; -webkit-tap-highlight-color:transparent}
     html,body{height:100%}
     body{
-      margin:0; font-family:'Tajawal',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
-      background:var(--bg); color:var(--ink); line-height:1.75;
+      margin:0;
+      font-family:'Tajawal',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+      background:var(--bg);
+      color:var(--ink);
+      line-height:1.8;
       padding: env(safe-area-inset-top) env(safe-area-inset-right)
                env(safe-area-inset-bottom) env(safe-area-inset-left);
       overflow-x:hidden;
     }
 
-    /* الرأس والتنقل */
-    header{
-      position:sticky; top:0; z-index:10;
-      background:linear-gradient(135deg,#efe7f7, var(--bg));
-      border-bottom:1px solid rgba(0,0,0,.06);
-      padding:10px 12px 12px;
-      backdrop-filter:saturate(120%) blur(8px);
-    }
-    h1{font-size:1.15rem; margin:.2rem 0; color:var(--main)}
-    .subtitle{
-      display:inline-block; background:var(--pill); color:var(--main-dark);
-      padding:4px 10px; border-radius:999px; font-weight:700; font-size:.85rem;
+    a{color:var(--main-dark); font-weight:700; text-decoration:none}
+    a:hover{text-decoration:underline}
+
+    /* Header */
+    .topbar{
+      position:sticky; top:0; z-index:20;
+      background: linear-gradient(135deg, rgba(123,97,184,.16), rgba(255,255,255,0));
+      backdrop-filter:saturate(120%) blur(10px);
+      border-bottom:1px solid var(--border);
     }
 
-    nav{
-      margin-top:8px; display:flex; gap:8px; overflow:auto; padding-bottom:6px;
-      -webkit-overflow-scrolling:touch; scrollbar-width:none;
+    .wrap{max-width:1100px; margin-inline:auto; padding:14px 14px}
+    .hero{
+      display:flex; gap:12px; flex-wrap:wrap; align-items:flex-end; justify-content:space-between;
+      padding-bottom:10px;
     }
-    nav::-webkit-scrollbar{display:none}
-    .tab{
-      flex:0 0 auto; border:1px solid rgba(0,0,0,.08); color:var(--main-dark);
-      background:var(--card); border-radius:10px; padding:10px 12px; font-weight:700;
-      min-height:var(--tap); min-width:var(--tap); cursor:pointer;
+    .title h1{margin:0; font-size:1.2rem; color:var(--main-dark)}
+    .title .sub{
+      display:inline-flex; gap:8px; flex-wrap:wrap;
+      margin-top:6px;
     }
-    .tab.active{background:var(--main); color:#fff; border-color:var(--main)}
+    .pill{
+      display:inline-block;
+      background:var(--pill);
+      color:var(--main-dark);
+      padding:6px 12px;
+      border-radius:999px;
+      font-weight:700;
+      font-size:.86rem;
+    }
 
-    /* الحاوية والصفحات */
-    .container{max-width:1100px; padding:10px 12px; margin-inline:auto}
-    .page{display:none; animation:fade .24s ease}
-    .page.active{display:block}
-    @keyframes fade{from{opacity:0; transform:translateY(4px)} to{opacity:1; transform:none}}
+    /* nav */
+    .nav{
+      display:flex;
+      gap:8px;
+      overflow:auto;
+      padding:10px 0 12px;
+      -webkit-overflow-scrolling:touch;
+      scrollbar-width:none;
+    }
+    .nav::-webkit-scrollbar{display:none}
 
-    /* أدوات */
+    .nav a{
+      flex:0 0 auto;
+      min-height:var(--tap);
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:6px;
+      padding:10px 12px;
+      border-radius:12px;
+      border:1px solid var(--border);
+      background:var(--card);
+      box-shadow: 0 2px 10px rgba(0,0,0,.03);
+      color:var(--main-dark);
+    }
+
     .toolbar{
-      display:flex; gap:8px; align-items:center; background:var(--card);
-      border:1px solid rgba(0,0,0,.06); border-radius:12px; padding:8px; box-shadow:var(--shadow);
-      position:sticky; top:64px; z-index:5; margin-bottom:10px;
+      margin-top:10px;
+      display:flex; gap:8px; flex-wrap:wrap;
+      align-items:center;
     }
     .search{
-      flex:1; border:1px solid rgba(0,0,0,.08); background:transparent; color:inherit;
-      padding:10px 12px; border-radius:10px; font-size:16px; /* >=16px لتجنب تكبير iOS */
+      flex:1;
+      min-width:220px;
+      padding:12px 12px;
+      border-radius:12px;
+      border:1px solid var(--border);
+      background:var(--card);
+      color:inherit;
+      font-size:16px;
+      box-shadow: var(--shadow);
     }
     .btn{
-      display:inline-flex; gap:6px; align-items:center; justify-content:center;
-      min-height:var(--tap); padding:8px 12px; border-radius:10px; font-weight:700;
-      border:2px solid var(--main); color:var(--main); background:transparent; cursor:pointer;
+      min-height:var(--tap);
+      padding:10px 12px;
+      border-radius:12px;
+      border:2px solid var(--main);
+      background:transparent;
+      color:var(--main);
+      font-weight:800;
+      cursor:pointer;
       touch-action:manipulation;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
     }
+    .btn.fill{background:var(--main); color:white}
+    .btn.soft{border:1px solid var(--border); color:var(--ink); background:var(--card)}
     .btn:active{transform:translateY(1px)}
-    .btn.fill{background:var(--main); color:#fff}
-    .btn.soft{border:1px solid rgba(0,0,0,.1); color:var(--ink)}
 
-    /* شبكات وبطاقات */
+    /* Sections */
+    section{scroll-margin-top:140px}
+    .section-title{
+      margin:18px 0 10px;
+      padding:12px 14px;
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      background:var(--card);
+      box-shadow:var(--shadow);
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+    .section-title h2{
+      margin:0;
+      color:var(--main-dark);
+      font-size:1.15rem;
+    }
+    .section-title p{margin:4px 0 0; color:var(--muted); font-size:.95rem}
+    .section-title .mini{display:flex; gap:8px; flex-wrap:wrap}
+
+    /* Cards & grid */
     .grid{display:grid; gap:12px}
-    @media (min-width:680px){ .grid.cols-2{grid-template-columns:repeat(2,1fr)} }
-    @media (min-width:960px){ .grid.cols-3{grid-template-columns:repeat(3,1fr)} }
+    @media (min-width:720px){ .grid.cols-2{grid-template-columns:repeat(2,1fr)} }
+    @media (min-width:980px){ .grid.cols-3{grid-template-columns:repeat(3,1fr)} }
+
     .card{
-      background:var(--card); border:1px solid rgba(0,0,0,.06);
-      border-radius:var(--radius); box-shadow:var(--shadow); padding:14px; position:relative;
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:14px 14px;
+      transition:.18s ease;
     }
-    .card h3,.card h4{color:var(--main); margin:.3rem 0 .5rem}
-    .muted{color:var(--muted); font-size:.92rem}
-    .badge{display:inline-block; background:#efe9fb; color:#553f88; padding:3px 10px; border-radius:999px; font-weight:700; font-size:.78rem; margin:2px}
-    @media (prefers-color-scheme: dark){ .badge{background:#2c2440; color:#d6c8ff} }
+    .card:hover{transform:translateY(-3px)}
+    .card h3,.card h4{margin:.2rem 0 .5rem; color:var(--main-dark)}
+    .muted{color:var(--muted); font-size:.95rem}
 
-    ul,ol{padding-right:1.2rem; margin:.4rem 0 .8rem}
-    .hr{height:1px; background:rgba(0,0,0,.08); margin:12px 0}
-    details{border:1px solid rgba(0,0,0,.08); border-radius:12px; padding:8px 10px; background:var(--card); margin:8px 0}
-    details summary{cursor:pointer; font-weight:700; color:var(--main-dark)}
+    .badges{display:flex; gap:6px; flex-wrap:wrap}
+    .badge{
+      background:rgba(123,97,184,.14);
+      color:var(--main-dark);
+      font-weight:800;
+      padding:4px 10px;
+      border-radius:999px;
+      font-size:.80rem;
+      border:1px solid rgba(123,97,184,.18);
+    }
+    @media (prefers-color-scheme: dark){
+      .badge{background:rgba(123,97,184,.22); border-color:rgba(123,97,184,.28)}
+    }
 
-    /* جداول قابلة للتمرير أفقيًا على الجوال */
+    .hr{height:1px; background:var(--border); margin:12px 0}
+    ul,ol{padding-right:1.15rem; margin:.4rem 0 .8rem}
+    details{
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:10px 12px;
+      background:rgba(0,0,0,.02);
+    }
+    @media (prefers-color-scheme: dark){ details{background:rgba(255,255,255,.03)} }
+    summary{cursor:pointer; font-weight:900; color:var(--main-dark)}
+
+    /* Table */
     .table-wrap{overflow:auto; -webkit-overflow-scrolling:touch}
-    table{width:100%; border-collapse:collapse; min-width:560px}
-    th,td{border-bottom:1px solid rgba(0,0,0,.08); padding:10px; text-align:right}
-    thead th{background:#f6f2ff; color:#57407f}
-    @media (prefers-color-scheme: dark){ thead th{background:#2b2540; color:#cfc3ef} }
+    table{width:100%; border-collapse:collapse; min-width:620px}
+    th,td{border-bottom:1px solid var(--border); padding:10px; text-align:right}
+    thead th{background:rgba(123,97,184,.10); color:var(--main-dark)}
 
-    /* طباعة: نمط بسيط ونظيف */
-    @media print{
-      header, .toolbar, nav { display:none !important }
-      body{background:#fff; color:#000}
-      .container{max-width:100%; padding:0}
-      .card{box-shadow:none; border:1px solid #ccc}
+    /* Inputs */
+    input,select,textarea{
+      width:100%;
+      padding:12px;
+      border-radius:12px;
+      border:1px solid var(--border);
+      background:var(--card);
+      color:inherit;
+      font-size:16px;
+      outline:none;
+    }
+    textarea{resize:vertical}
+    label{display:block; font-weight:800; margin-bottom:8px}
+    .form-grid{display:grid; gap:10px}
+
+    /* Footer */
+    footer{
+      text-align:center;
+      color:var(--muted);
+      padding:28px 14px 36px;
     }
 
-    /* تقليل الحركة لمن يفضل ذلك */
+    /* Print */
+    @media print{
+      .topbar, .toolbar, .nav, .print-hide{display:none !important}
+      body{background:#fff; color:#000}
+      .card, .section-title{box-shadow:none}
+      a{color:#000; text-decoration:underline}
+    }
+
+    /* Reduce motion */
     @media (prefers-reduced-motion: reduce){
       *{animation:none !important; transition:none !important}
+      .card:hover{transform:none}
     }
   </style>
 </head>
+
 <body>
-  <header aria-label="ترويسة الموقع">
-    <h1>منهج STEAM العملي الإثرائي - المتوسطة 21</h1>
-    <span class="subtitle">المنفذات: كرزية عسيري - ابتسام الشهري</span>
 
-    <nav role="tablist" aria-label="التبويبات" id="top-nav">
-      <button class="tab active" data-target="home" role="tab" aria-selected="true">الرئيسية</button>
-      <button class="tab" data-target="teacher" role="tab">دليل المعلمة</button>
-      <button class="tab" data-target="student" role="tab">دليل الطالبة</button>
-      <button class="tab" data-target="projects" role="tab">المشاريع</button>
-      <button class="tab" data-target="assessment" role="tab">التقييم</button>
-      <button class="tab" data-target="resources" role="tab">الموارد</button>
-      <button class="tab" data-target="faq" role="tab">الأسئلة</button>
-    </nav>
-  </header>
+  <!-- ===== Top Bar ===== -->
+  <div class="topbar">
+    <div class="wrap">
+      <div class="hero">
+        <div class="title">
+          <h1>منهج STEAM العملي الإثرائي - المتوسطة 21</h1>
+          <div class="sub">
+            <span class="pill">المنفذات: كرزية عسيري - ابتسام الشهري</span>
+            <span class="pill">خميس مشيط</span>
+            <span class="pill">© 2026</span>
+          </div>
+        </div>
 
-  <main class="container">
-    <!-- شريط الأدوات -->
-    <div class="toolbar" role="region" aria-label="أدوات عامة">
-      <input id="search" class="search" type="search" inputmode="search" placeholder="ابحثي عن كلمة أو مشروع…" autocomplete="off" aria-label="بحث">
-      <button class="btn soft" id="btn-print">🖨 طباعة الصفحة</button>
-      <button class="btn soft" id="btn-share">🔗 نسخ الرابط</button>
-    </div>
-
-    <!-- الرئيسية -->
-    <section id="home" class="page active" data-keywords="steam منهج إثرائي متوسطة21">
-      <div class="card">
-        <h3>مرحبًا بكِ</h3>
-        <p class="muted">هنا خطة تنفيذ، مواد تعليمية، أدوات تقييم، وسجلات تعلم—مصممة للجوال والحاسب، قابلة للطباعة، وتعمل دون اتصال.</p>
+        <div class="mini print-hide">
+          <button class="btn soft" id="btn-print">🖨 طباعة</button>
+          <button class="btn soft" id="btn-share">🔗 نسخ الرابط</button>
+        </div>
       </div>
 
-      <div class="grid cols-3" style="margin-top:8px">
-        <div class="card" data-keywords="أهداف تعلم مهارات 21">
-          <h4>الأهداف</h4>
+      <!-- Nav -->
+      <div class="nav print-hide" id="nav">
+        <a href="#home">🏠 الرئيسية</a>
+        <a href="#teacher">👩🏻‍🏫 دليل المعلمة</a>
+        <a href="#student">👩🏻‍🎓 دليل الطالبة</a>
+        <a href="#projects">🧪 المشاريع</a>
+        <a href="#assessment">✅ التقييم</a>
+        <a href="#resources">🔗 الموارد</a>
+        <a href="#faq">❓ الأسئلة</a>
+      </div>
+
+      <!-- Toolbar -->
+      <div class="toolbar print-hide" aria-label="أدوات">
+        <input id="search" class="search" type="search" inputmode="search"
+               placeholder="ابحثي عن كلمة أو مشروع… (مثال: سلة، MQ-2، Scratch)"
+               autocomplete="off" aria-label="بحث">
+        <button class="btn fill" id="btn-top">⬆︎ للأعلى</button>
+      </div>
+    </div>
+  </div>
+
+  <main class="wrap" id="content">
+
+    <!-- ===== Home ===== -->
+    <section id="home">
+      <div class="section-title">
+        <div>
+          <h2>مرحبًا بكِ</h2>
+          <p>هنا خطة التنفيذ، المشاريع، أدوات التقييم، وسجلات التعلّم—بتصميم مرتب للجوال والحاسب.</p>
+        </div>
+        <div class="mini">
+          <span class="pill">6 أسابيع</span>
+          <span class="pill">Arduino + Scratch</span>
+          <span class="pill">تعلّم بالمشاريع</span>
+        </div>
+      </div>
+
+      <div class="grid cols-3">
+        <div class="card">
+          <h3>الأهداف</h3>
           <ul>
             <li>توظيف التفكير التصميمي والهندسي لحل مشكلات واقعية.</li>
             <li>تنمية المنطق البرمجي في Arduino/Scratch.</li>
             <li>تعزيز التعاون والعرض العلمي بالبيانات.</li>
           </ul>
         </div>
-        <div class="card" data-keywords="خطة زمنية توزيع أسابيع">
-          <h4>الخطة الزمنية</h4>
+
+        <div class="card">
+          <h3>الخطة الزمنية المختصرة</h3>
           <div class="table-wrap">
             <table>
               <thead><tr><th>الأسبوع</th><th>المحور</th><th>مخرجات</th></tr></thead>
               <tbody>
-                <tr><td>1</td><td>التعاطف/التحديد</td><td>تعريف المشكلة ومقاييس النجاح</td></tr>
-                <tr><td>2</td><td>التخيل/التخطيط</td><td>مخططات/اختيار مواد</td></tr>
-                <tr><td>3–4</td><td>الإنشاء</td><td>بناء/برمجة</td></tr>
-                <tr><td>5</td><td>الاختبار/التحسين</td><td>تجارب وتحسينات</td></tr>
-                <tr><td>6</td><td>العرض</td><td>ملصق/عرض شفهي</td></tr>
+                <tr><td>1</td><td>التعاطف/التحديد</td><td>تعريف المشكلة + مقاييس النجاح</td></tr>
+                <tr><td>2</td><td>التخيل/التخطيط</td><td>تصميم أولي + قائمة مواد</td></tr>
+                <tr><td>3–4</td><td>الإنشاء</td><td>بناء/برمجة + توثيق</td></tr>
+                <tr><td>5</td><td>الاختبار/التحسين</td><td>تجارب + تحسينات</td></tr>
+                <tr><td>6</td><td>العرض</td><td>ملصق + عرض شفهي</td></tr>
               </tbody>
             </table>
           </div>
         </div>
-        <div class="card" data-keywords="سلامة معمل كهرباء">
-          <h4>إرشادات السلامة</h4>
+
+        <div class="card">
+          <h3>إرشادات السلامة</h3>
           <ul>
-            <li><b class="danger">ممنوع</b> فصل/توصيل مع الطاقة متصلة.</li>
+            <li><b>ممنوع</b> فصل/توصيل مع الطاقة متصلة.</li>
             <li>ارتداء واقيات العين والعمل تحت إشراف.</li>
             <li>تنظيم الأدوات وتصنيف المواد بعد الاستخدام.</li>
           </ul>
+          <p class="muted">تنبيه: يمنع استخدام اللهب الحقيقي داخل الصف.</p>
         </div>
       </div>
 
       <div class="hr"></div>
-      <div class="grid cols-3">
-        <div class="card" data-keywords="سلة المهملات الذكية Ultrasonic Servo Arduino" >
-          <h4>سلة المهملات الذكية</h4>
-          <p class="muted">فتح تلقائي بالاستشعار—تقليل التلامس.</p>
-          <div><span class="badge">Arduino</span><span class="badge">HC-SR04</span></div>
-          <button class="btn" data-go="projects#p1" style="margin-top:6px">فتح التفاصيل</button>
-        </div>
-        <div class="card" data-keywords="تنقية المياه فلترة رمل فحم عكارة">
-          <h4>نموذج تنقية المياه</h4>
-          <p class="muted">محاكاة الفلترة الطبيعية—خيار حساس العكارة.</p>
-          <div><span class="badge">Science</span><span class="badge">Sustainability</span></div>
-          <button class="btn" data-go="projects#p2" style="margin-top:6px">فتح التفاصيل</button>
-        </div>
-        <div class="card" data-keywords="كاشف الحريق MQ-2 Buzzer LED">
-          <h4>كاشف الحريق الذكي</h4>
-          <p class="muted">إنذار دخان/حرارة—زر إعادة ضبط.</p>
-          <div><span class="badge">Safety</span><span class="badge">Sensors</span></div>
-          <button class="btn" data-go="projects#p3" style="margin-top:6px">فتح التفاصيل</button>
-        </div>
-        <div class="card" data-keywords="التشجير الرقمي Scratch لعبة">
-          <h4>التشجير الرقمي (1)</h4>
-          <p class="muted">لعبة سكراتش لخفض التصحر.</p>
-          <div><span class="badge">Scratch</span><span class="badge">Game</span></div>
-          <button class="btn" data-go="projects#p4" style="margin-top:6px">فتح التفاصيل</button>
-        </div>
-        <div class="card" data-keywords="زيولايت تربة ري محاكاة">
-          <h4>التشجير والزيولايت (2)</h4>
-          <p class="muted">أثر الزيولايت في نمو النبات.</p>
-          <div><span class="badge">Soil</span><span class="badge">Simulation</span></div>
-          <button class="btn" data-go="projects#p5" style="margin-top:6px">فتح التفاصيل</button>
+
+      <div class="card">
+        <h3>اختصارات سريعة</h3>
+        <div class="badges">
+          <a class="badge" href="#projects">فتح المشاريع</a>
+          <a class="badge" href="#assessment">فتح الروبرك</a>
+          <a class="badge" href="#resources">فتح الموارد</a>
         </div>
       </div>
     </section>
 
-    <!-- دليل المعلمة -->
-    <section id="teacher" class="page" data-keywords="خطة درس تفاضل سلامة">
-      <div class="card" id="teacher-plan">
-        <h3>خطة تنفيذ (6 أسابيع)</h3>
-        <div class="table-wrap">
-          <table>
-            <thead><tr><th>الأسبوع</th><th>الأهداف</th><th>أنشطة</th><th>تقويم</th></tr></thead>
-            <tbody>
-              <tr><td>1</td><td>صياغة المشكلة، أدوار</td><td>عصف ذهني/بطاقات تحدي</td><td>قائمة فحص</td></tr>
-              <tr><td>2</td><td>تصميم أولي</td><td>مخططات/اختيار مواد</td><td>تسليم تصميم</td></tr>
-              <tr><td>3–4</td><td>بناء/برمجة</td><td>اختبار جزئي/توثيق</td><td>روبرك متوسط</td></tr>
-              <tr><td>5</td><td>تحسين</td><td>قياسات/تعديل</td><td>روبرك التحسين</td></tr>
-              <tr><td>6</td><td>عرض</td><td>ملصق/عرض شفهي</td><td>روبرك العرض</td></tr>
-            </tbody>
-          </table>
+    <!-- ===== Teacher ===== -->
+    <section id="teacher">
+      <div class="section-title">
+        <div>
+          <h2>دليل المعلمة</h2>
+          <p>خطة تنفيذ 6 أسابيع + ميثاق سلامة + تفاضل للدعم والإثراء.</p>
         </div>
-        <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:8px">
-          <button class="btn" data-print="#teacher-plan">🖨 طباعة هذا القسم</button>
+        <div class="mini">
+          <button class="btn soft" onclick="printElement('#teacher-plan')">🖨 طباعة الخطة</button>
+          <button class="btn soft" onclick="printElement('#teacher-safety')">🖨 طباعة الميثاق</button>
         </div>
       </div>
 
-      <div class="grid cols-2" style="margin-top:10px">
-        <div class="card" id="teacher-safety">
-          <h3>ميثاق السلامة</h3>
-          <ul>
-            <li>العمل تحت إشراف معلمة المختبر.</li>
-            <li>عدم لمس الأسلاك مع الطاقة موصولة.</li>
-            <li>تنظيم الأدوات وإبلاغ أي طارئ.</li>
-          </ul>
-          <p class="muted">توقيع الطالبة: ____________ &nbsp; توقيع ولي الأمر: ____________</p>
-          <button class="btn" data-print="#teacher-safety">🖨 للطباعة</button>
+      <div class="grid cols-2">
+        <div class="card" id="teacher-plan">
+          <h3>خطة تنفيذ (6 أسابيع)</h3>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>الأسبوع</th><th>الأهداف</th><th>أنشطة</th><th>تقويم</th></tr></thead>
+              <tbody>
+                <tr><td>1</td><td>صياغة المشكلة، أدوار</td><td>عصف ذهني/بطاقات تحدي</td><td>قائمة فحص</td></tr>
+                <tr><td>2</td><td>تصميم أولي</td><td>مخططات/اختيار مواد</td><td>تسليم تصميم</td></tr>
+                <tr><td>3–4</td><td>بناء/برمجة</td><td>اختبار جزئي/توثيق</td><td>روبرك متوسط</td></tr>
+                <tr><td>5</td><td>تحسين</td><td>قياسات/تعديل</td><td>روبرك التحسين</td></tr>
+                <tr><td>6</td><td>عرض</td><td>ملصق/عرض شفهي</td><td>روبرك العرض</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="grid" style="gap:12px">
+          <div class="card" id="teacher-safety">
+            <h3>ميثاق السلامة</h3>
+            <ul>
+              <li>العمل تحت إشراف معلمة المختبر.</li>
+              <li>عدم لمس الأسلاك مع الطاقة موصولة.</li>
+              <li>تنظيم الأدوات وإبلاغ أي طارئ.</li>
+            </ul>
+            <p class="muted">توقيع الطالبة: ____________ &nbsp; توقيع ولي الأمر: ____________</p>
+          </div>
+
+          <div class="card">
+            <h3>تفاضل (دعم/إثراء)</h3>
+            <details open>
+              <summary>للدعم</summary>
+              <ul><li>خطوات مصوّرة.</li><li>أزواج تعلّم.</li><li>تجارب قصيرة آمنة.</li></ul>
+            </details>
+            <div class="hr"></div>
+            <details>
+              <summary>للإثراء</summary>
+              <ul><li>حساس إضافي/شاشة LCD.</li><li>مقارنات عتبات وتفسير بيانات.</li></ul>
+            </details>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Student ===== -->
+    <section id="student">
+      <div class="section-title">
+        <div>
+          <h2>دليل الطالبة</h2>
+          <p>رحلة التعلم + سجل تقدّم يُحفظ على نفس الجهاز (بدون إنترنت).</p>
+        </div>
+        <div class="mini">
+          <button class="btn soft" onclick="printElement('#student-journey')">🖨 طباعة الرحلة</button>
+        </div>
+      </div>
+
+      <div class="grid cols-2">
+        <div class="card" id="student-journey">
+          <h3>رحلتي في التعلم</h3>
+          <ol>
+            <li><b>التعاطف:</b> من يتأثر بالمشكلة؟</li>
+            <li><b>التحديد:</b> متطلبات الحل.</li>
+            <li><b>الابتكار:</b> فكرة ونموذج أولي.</li>
+            <li><b>البناء/البرمجة:</b> تنفيذ واختبار.</li>
+            <li><b>التحسين:</b> لماذا وكيف؟</li>
+            <li><b>العرض:</b> أقنعي بالبيانات.</li>
+          </ol>
         </div>
 
         <div class="card">
-          <h3>تفاضل (دعم/إثراء)</h3>
-          <details open><summary>للدعم</summary>
-            <ul><li>خطوات مصوّرة.</li><li>أزواج تعلّم.</li><li>تجارب قصيرة آمنة.</li></ul>
-          </details>
-          <details><summary>للإثراء</summary>
-            <ul><li>حساس إضافي/شاشة LCD.</li><li>مقارنات عتبات وتفسير بيانات.</li></ul>
-          </details>
+          <h3>سجل تقدّم شخصي</h3>
+          <div class="form-grid">
+            <div>
+              <label>اسمي</label>
+              <input id="st-name" placeholder="اكتبي الاسم هنا">
+            </div>
+
+            <div>
+              <label>مشروعي</label>
+              <select id="st-project">
+                <option>سلة المهملات الذكية</option>
+                <option>نموذج تنقية المياه</option>
+                <option>كاشف الحريق الذكي</option>
+                <option>التشجير الرقمي (1)</option>
+                <option>التشجير والزيولايت (2)</option>
+              </select>
+            </div>
+
+            <div>
+              <label>ماذا أنجزتِ اليوم؟</label>
+              <textarea id="st-log" rows="4" placeholder="سجل مختصر..."></textarea>
+            </div>
+
+            <div>
+              <label>تحدٍ واجهته</label>
+              <textarea id="st-issue" rows="3" placeholder="ما المشكلة؟ وكيف حاولتِ حلها؟"></textarea>
+            </div>
+
+            <div style="display:flex; gap:8px; flex-wrap:wrap">
+              <button class="btn fill" id="save-log">💾 حفظ</button>
+              <button class="btn soft" id="clear-log">♻️ مسح</button>
+              <span class="pill" id="log-status">الحفظ على هذا الجهاز</span>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- دليل الطالبة -->
-    <section id="student" class="page" data-keywords="سجل الطالبة تأمل تقدم">
-      <div class="card" id="student-journey">
-        <h3>رحلتي في التعلم</h3>
-        <ol>
-          <li><b>التعاطف:</b> من يتأثر بالمشكلة؟</li>
-          <li><b>التحديد:</b> متطلبات الحل.</li>
-          <li><b>الابتكار:</b> فكرة ونموذج أولي.</li>
-          <li><b>البناء/البرمجة:</b> تنفيذ واختبار.</li>
-          <li><b>التحسين:</b> لماذا وكيف؟</li>
-          <li><b>العرض:</b> أقنعي بالبيانات.</li>
-        </ol>
-        <button class="btn" data-print="#student-journey">🖨 طباعة</button>
-      </div>
-
-      <div class="card">
-        <h3>سجل تقدّم شخصي</h3>
-        <div style="display:grid; gap:8px">
-          <label>اسمي:
-            <input id="st-name" style="width:100%; padding:10px; border-radius:10px; border:1px solid rgba(0,0,0,.15); font-size:16px">
-          </label>
-          <label>مشروعي:
-            <select id="st-project" style="width:100%; padding:10px; border-radius:10px; border:1px solid rgba(0,0,0,.15); font-size:16px">
-              <option>سلة المهملات الذكية</option>
-              <option>نموذج تنقية المياه</option>
-              <option>كاشف الحريق الذكي</option>
-              <option>التشجير الرقمي (1)</option>
-              <option>التشجير والزيولايت (2)</option>
-            </select>
-          </label>
-          <label>ماذا أنجزت اليوم؟
-            <textarea id="st-log" rows="4" style="width:100%; padding:10px; border-radius:10px; border:1px solid rgba(0,0,0,.15); font-size:16px"></textarea>
-          </label>
-          <label>تحدٍ واجهته:
-            <textarea id="st-issue" rows="3" style="width:100%; padding:10px; border-radius:10px; border:1px solid rgba(0,0,0,.15); font-size:16px"></textarea>
-          </label>
+    <!-- ===== Projects ===== -->
+    <section id="projects">
+      <div class="section-title">
+        <div>
+          <h2>المشاريع</h2>
+          <p>مقسمة كبطاقات واضحة—افتحي أي مشروع واطبعيه مباشرة.</p>
         </div>
-        <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:8px">
-          <button class="btn fill" id="save-log">💾 حفظ</button>
-          <button class="btn soft" id="clear-log">♻️ مسح</button>
+        <div class="mini">
+          <button class="btn soft" onclick="printElement('#projects')">🖨 طباعة صفحة المشاريع</button>
         </div>
       </div>
-    </section>
 
-    <!-- المشاريع -->
-    <section id="projects" class="page" data-keywords="مشاريع Arduino Scratch زيولايت">
-      <div class="card" id="p1">
-        <h3>سلة المهملات الذكية</h3>
-        <p class="muted">المشاركات: جنى الوذناني، تبيان الحاج، رباب خبراني، وسن فقيهي</p>
-        <div class="grid cols-2">
-          <div>
-            <h4>الفكرة</h4>
-            <p>فتح الغطاء تلقائيًا عند اقتراب اليد باستخدام حساس مسافة لتقليل التلامس.</p>
-            <h4>نواتج تعلم</h4>
-            <ul><li>عمل الحساسات والمحركات.</li><li>برمجة Servo وفقًا للمسافة.</li><li>تصميم ميكانيكي للغطاء.</li></ul>
+      <div class="grid cols-2">
+
+        <!-- P1 -->
+        <article class="card" id="p1" data-keywords="سلة المهملات ultrasonic servo arduino hc-sr04">
+          <h3>سلة المهملات الذكية</h3>
+          <p class="muted">المشاركات: جنى الوذناني، تبيان الحاج، رباب خبراني، وسن فقيهي</p>
+          <div class="badges">
+            <span class="badge">Arduino</span>
+            <span class="badge">HC-SR04</span>
+            <span class="badge">Servo</span>
           </div>
-          <div>
-            <h4>المكونات</h4>
-            <ul><li>Arduino Uno، HC-SR04، Servo SG90</li><li>أسلاك، مفصلات، مزود طاقة</li></ul>
-            <h4>سلامة</h4>
-            <ul><li>تثبيت قوي وتجنّب وضع الوجه قرب الغطاء.</li><li>زاوية فتح آمنة (60–90°).</li></ul>
+          <div class="hr"></div>
+
+          <h4>الفكرة</h4>
+          <p>فتح الغطاء تلقائيًا عند اقتراب اليد باستخدام حساس مسافة لتقليل التلامس.</p>
+
+          <div class="grid cols-2">
+            <div>
+              <h4>نواتج تعلم</h4>
+              <ul><li>عمل الحساسات والمحركات.</li><li>برمجة Servo وفقًا للمسافة.</li><li>تصميم ميكانيكي للغطاء.</li></ul>
+            </div>
+            <div>
+              <h4>المكونات</h4>
+              <ul><li>Arduino Uno</li><li>HC-SR04</li><li>Servo SG90</li><li>أسلاك + مفصلات + مزود طاقة</li></ul>
+            </div>
           </div>
-        </div>
-        <details open>
-          <summary>خطوات التنفيذ</summary>
-          <ol>
-            <li>تثبيت السيرفو على الغطاء بوصلة مرنة.</li>
-            <li>توصيل HC‑SR04 (VCC/GND/TRIG/ECHO).</li>
-            <li>شرط: المسافة &lt; 20 سم → فتح، ثم إغلاق تدريجي.</li>
-          </ol>
-        </details>
-<details>
-  <summary>نموذج كود Arduino</summary>
-  <pre><code>// سلة المهملات الذكية
+
+          <details open>
+            <summary>خطوات التنفيذ</summary>
+            <ol>
+              <li>تثبيت السيرفو على الغطاء بوصلة مرنة.</li>
+              <li>توصيل HC-SR04 (VCC/GND/TRIG/ECHO).</li>
+              <li>شرط: المسافة &lt; 20 سم → فتح، ثم إغلاق.</li>
+            </ol>
+          </details>
+
+          <details>
+            <summary>نموذج كود Arduino</summary>
+            <pre><code>// سلة المهملات الذكية
 #include &lt;Servo.h&gt;
 Servo lid;
 const int trig=9, echo=10, servoPin=6;
@@ -366,56 +556,88 @@ void loop(){
     lid.write(closeAngle);
   }
   delay(80);
-}
-</code></pre>
-</details>
-        <button class="btn" data-print="#p1">🖨 طباعة</button>
-      </div>
+}</code></pre>
+          </details>
 
-      <div class="card" id="p2">
-        <h3>نموذج تنقية المياه</h3>
-        <p class="muted">المشاركات: رتيل، روين، ريناد، اسيل، جنى الاحمري، جنى غزواني</p>
-        <h4>الفكرة</h4><p>طبقات: قطن → فحم نشط → رمل → حصى.</p>
-        <div class="grid cols-2">
-          <div>
-            <h4>مواد</h4>
-            <ul><li>زجاجة/أنبوب شفاف، قطن، فحم، رمل، حصى</li><li>أكواب قبل/بعد</li></ul>
-            <h4>سلامة</h4>
-            <ul><li>ماء عكر آمن فقط (تراب نظيف).</li><li>غسل اليدين بعد التجربة.</li></ul>
+          <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:10px">
+            <button class="btn soft" onclick="printElement('#p1')">🖨 طباعة المشروع</button>
           </div>
-          <div>
-            <h4>خطوات</h4>
-            <ol><li>ثقوب تصريف صغيرة أسفل الوعاء.</li><li>ترتيب الطبقات من الأكبر للمسام الأصغر.</li><li>سكب الماء العكر والملاحظة/التسجيل.</li><li>تعديل السمك لتحسين النتائج.</li></ol>
+        </article>
+
+        <!-- P2 -->
+        <article class="card" id="p2" data-keywords="تنقية المياه فلترة قطن فحم رمل حصى عكارة">
+          <h3>نموذج تنقية المياه</h3>
+          <p class="muted">المشاركات: رتيل، روين، ريناد، اسيل، جنى الاحمري، جنى غزواني</p>
+          <div class="badges">
+            <span class="badge">Science</span>
+            <span class="badge">Sustainability</span>
           </div>
-        </div>
-<details>
-  <summary>اختياري: قراءة عكارة</summary>
-  <pre><code>// حساس عكارة/توصيل (حسب المتوفر)
+          <div class="hr"></div>
+
+          <h4>الفكرة</h4>
+          <p>طبقات: قطن → فحم نشط → رمل → حصى (من الأكبر مسامًا إلى الأصغر).</p>
+
+          <div class="grid cols-2">
+            <div>
+              <h4>مواد</h4>
+              <ul><li>زجاجة/أنبوب شفاف</li><li>قطن، فحم، رمل، حصى</li><li>أكواب قبل/بعد</li></ul>
+              <h4>سلامة</h4>
+              <ul><li>ماء عكر آمن فقط (تراب نظيف).</li><li>غسل اليدين بعد التجربة.</li></ul>
+            </div>
+            <div>
+              <h4>خطوات</h4>
+              <ol>
+                <li>ثقوب تصريف صغيرة أسفل الوعاء.</li>
+                <li>ترتيب الطبقات من الأكبر للمسام الأصغر.</li>
+                <li>سكب الماء العكر والملاحظة/التسجيل.</li>
+                <li>تعديل السمك لتحسين النتائج.</li>
+              </ol>
+            </div>
+          </div>
+
+          <details>
+            <summary>اختياري: قراءة عكارة (حسب المتوفر)</summary>
+            <pre><code>// حساس عكارة/توصيل (حسب المتوفر)
 const int A=A0;
 void setup(){ Serial.begin(9600); }
-void loop(){ int v=analogRead(A); Serial.println(v); delay(500); }
-</code></pre>
-</details>
-        <button class="btn" data-print="#p2">🖨 طباعة</button>
-      </div>
+void loop(){ int v=analogRead(A); Serial.println(v); delay(500); }</code></pre>
+          </details>
 
-      <div class="card" id="p3">
-        <h3>كاشف الحريق الذكي</h3>
-        <p class="muted">المشاركات: رنيم الاحمري، ندى المالكي، المى خضير، تسنيم الشهري</p>
-        <div class="grid cols-2">
-          <div>
-            <h4>الفكرة</h4><p>استشعار دخان/لهب وإطلاق إنذار ضوئي/صوتي.</p>
-            <h4>مكونات</h4><ul><li>MQ‑2 أو حساس لهب، Buzzer، LED، Arduino</li></ul>
+          <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:10px">
+            <button class="btn soft" onclick="printElement('#p2')">🖨 طباعة المشروع</button>
           </div>
-          <div>
-            <h4>سلامة</h4>
-            <ul><li><b class="danger">ممنوع</b> اللهب الحقيقي داخل الصف.</li>
-              <li>استخدمي محاكاة/كبسولة دخان تعليمية خارج المختبر.</li></ul>
+        </article>
+
+        <!-- P3 -->
+        <article class="card" id="p3" data-keywords="كاشف حريق mq-2 buzzer led smoke flame">
+          <h3>كاشف الحريق الذكي</h3>
+          <p class="muted">المشاركات: رنيم الاحمري، ندى المالكي، المى خضير، تسنيم الشهري</p>
+          <div class="badges">
+            <span class="badge">Safety</span>
+            <span class="badge">Sensors</span>
+            <span class="badge">Arduino</span>
           </div>
-        </div>
-<details open>
-  <summary>نموذج كود (MQ‑2)</summary>
-  <pre><code>const int mqA0=A0, buz=7, led=8; 
+          <div class="hr"></div>
+
+          <div class="grid cols-2">
+            <div>
+              <h4>الفكرة</h4>
+              <p>استشعار دخان/لهب وإطلاق إنذار ضوئي/صوتي.</p>
+              <h4>المكونات</h4>
+              <ul><li>MQ-2 أو حساس لهب</li><li>Buzzer + LED</li><li>Arduino</li></ul>
+            </div>
+            <div>
+              <h4>سلامة</h4>
+              <ul>
+                <li><b>ممنوع</b> اللهب الحقيقي داخل الصف.</li>
+                <li>استخدمي محاكاة/مواد تعليمية آمنة خارج المختبر إن لزم.</li>
+              </ul>
+            </div>
+          </div>
+
+          <details open>
+            <summary>نموذج كود (MQ-2)</summary>
+            <pre><code>const int mqA0=A0, buz=7, led=8; 
 int threshold=350;
 void setup(){ pinMode(buz,OUTPUT); pinMode(led,OUTPUT); }
 void loop(){
@@ -423,44 +645,77 @@ void loop(){
   if(val &gt;= threshold){ digitalWrite(led,1); tone(buz,2000); }
   else{ digitalWrite(led,0); noTone(buz); }
   delay(100);
-}
-</code></pre>
-</details>
-        <button class="btn" data-print="#p3">🖨 طباعة</button>
-      </div>
+}</code></pre>
+          </details>
 
-      <div class="card" id="p4">
-        <h3>التشجير الرقمي (1)</h3>
-        <p class="muted">المشاركات: جوري القحطاني، داليا الشهراني، درر الشهري</p>
-        <details open>
-          <summary>خطوات سريعة في Scratch</summary>
-          <ol>
-            <li>خلفية أرض قاحلة + شخصية زارع + بذور.</li>
-            <li>منطق: عند ضغط زر بالقرب من التربة ← زرع شجرة +1 نقطة.</li>
-            <li>شريط تقدم يقلل التصحر مع النقاط.</li>
-          </ol>
-        </details>
-        <button class="btn" data-print="#p4">🖨 طباعة</button>
-      </div>
+          <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:10px">
+            <button class="btn soft" onclick="printElement('#p3')">🖨 طباعة المشروع</button>
+          </div>
+        </article>
 
-      <div class="card" id="p5">
-        <h3>التشجير والزيولايت (2)</h3>
-        <p class="muted">المشاركات: سمو القحطاني، نوادر الشهراني، شادن عبدلي</p>
-<details open>
-  <summary>خوارزمية مبسطة</summary>
-  <pre><code>// متغيرات: water, soilQuality, growth
+        <!-- P4 -->
+        <article class="card" id="p4" data-keywords="التشجير الرقمي scratch game تصحر">
+          <h3>التشجير الرقمي (1)</h3>
+          <p class="muted">المشاركات: جوري القحطاني، داليا الشهراني، درر الشهري</p>
+          <div class="badges">
+            <span class="badge">Scratch</span>
+            <span class="badge">Game</span>
+          </div>
+          <div class="hr"></div>
+
+          <details open>
+            <summary>خطوات سريعة في Scratch</summary>
+            <ol>
+              <li>خلفية أرض قاحلة + شخصية زارع + بذور.</li>
+              <li>منطق: عند ضغط زر بالقرب من التربة ← زرع شجرة +1 نقطة.</li>
+              <li>شريط تقدم يقلل التصحر مع النقاط.</li>
+            </ol>
+          </details>
+
+          <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:10px">
+            <button class="btn soft" onclick="printElement('#p4')">🖨 طباعة المشروع</button>
+          </div>
+        </article>
+
+        <!-- P5 -->
+        <article class="card" id="p5" data-keywords="زيولايت تربة ري محاكاة نمو نبات">
+          <h3>التشجير والزيولايت (2)</h3>
+          <p class="muted">المشاركات: سمو القحطاني، نوادر الشهراني، شادن عبدلي</p>
+          <div class="badges">
+            <span class="badge">Soil</span>
+            <span class="badge">Simulation</span>
+          </div>
+          <div class="hr"></div>
+
+          <details open>
+            <summary>خوارزمية مبسطة</summary>
+            <pre><code>// متغيرات: water, soilQuality, growth
 // إذا كان "زيولايت" مفعلًا:
 // soilQuality *= 1.2 ، معدل فقد الماء *= 0.7
-// كل دورة: growth += f(water, soilQuality) حتى حد أقصى
-</code></pre>
-</details>
-        <button class="btn" data-print="#p5">🖨 طباعة</button>
+// كل دورة: growth += f(water, soilQuality) حتى حد أقصى</code></pre>
+          </details>
+
+          <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:10px">
+            <button class="btn soft" onclick="printElement('#p5')">🖨 طباعة المشروع</button>
+          </div>
+        </article>
+
       </div>
     </section>
 
-    <!-- التقييم -->
-    <section id="assessment" class="page" data-keywords="روبرك تقييم حفظ طباعة">
-      <div class="card" id="rubric">
+    <!-- ===== Assessment ===== -->
+    <section id="assessment">
+      <div class="section-title">
+        <div>
+          <h2>التقييم</h2>
+          <p>روبرك شامل (100) + حفظ تلقائي على نفس الجهاز.</p>
+        </div>
+        <div class="mini">
+          <button class="btn soft" onclick="printElement('#rubric')">🖨 طباعة الروبرك</button>
+        </div>
+      </div>
+
+      <div class="card" id="rubric" data-keywords="روبرك تقييم مجموع 100">
         <h3>روبرك شامل (100)</h3>
         <div class="table-wrap">
           <table>
@@ -468,154 +723,100 @@ void loop(){
               <tr><th>المعيار</th><th>الوصف</th><th>الوزن</th><th>الدرجة</th></tr>
             </thead>
             <tbody>
-              <tr><td>التفكير العلمي</td><td>تعريف المشكلة/تفسير البيانات</td><td>25</td><td><input id="r1" type="number" min="0" max="25" style="width:90px; font-size:16px"></td></tr>
-              <tr><td>الهندسة/البناء</td><td>متانة/مطابقة المتطلبات</td><td>25</td><td><input id="r2" type="number" min="0" max="25" style="width:90px; font-size:16px"></td></tr>
-              <tr><td>البرمجة/المنطق</td><td>صحة المنطق/الأخطاء</td><td>20</td><td><input id="r3" type="number" min="0" max="20" style="width:90px; font-size:16px"></td></tr>
-              <tr><td>العمل التعاوني</td><td>تقسيم أدوار/التزام</td><td>15</td><td><input id="r4" type="number" min="0" max="15" style="width:90px; font-size:16px"></td></tr>
-              <tr><td>العرض والتوثيق</td><td>ملصق/عرض وشواهد</td><td>15</td><td><input id="r5" type="number" min="0" max="15" style="width:90px; font-size:16px"></td></tr>
+              <tr><td>التفكير العلمي</td><td>تعريف المشكلة/تفسير البيانات</td><td>25</td><td><input id="r1" type="number" min="0" max="25" style="width:120px"></td></tr>
+              <tr><td>الهندسة/البناء</td><td>متانة/مطابقة المتطلبات</td><td>25</td><td><input id="r2" type="number" min="0" max="25" style="width:120px"></td></tr>
+              <tr><td>البرمجة/المنطق</td><td>صحة المنطق/الأخطاء</td><td>20</td><td><input id="r3" type="number" min="0" max="20" style="width:120px"></td></tr>
+              <tr><td>العمل التعاوني</td><td>تقسيم أدوار/التزام</td><td>15</td><td><input id="r4" type="number" min="0" max="15" style="width:120px"></td></tr>
+              <tr><td>العرض والتوثيق</td><td>ملصق/عرض وشواهد</td><td>15</td><td><input id="r5" type="number" min="0" max="15" style="width:120px"></td></tr>
             </tbody>
           </table>
         </div>
-        <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:8px">
-          <button class="btn" id="calc">🧮 حساب</button>
+
+        <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:12px">
+          <button class="btn fill" id="calc">🧮 حساب</button>
           <button class="btn soft" id="save-rubric">💾 حفظ</button>
           <button class="btn soft" id="clear-rubric">♻️ مسح</button>
-          <span id="total" class="badge">المجموع: 0/100</span>
+          <span class="pill" id="total">المجموع: 0/100</span>
         </div>
       </div>
     </section>
 
-    <!-- الموارد -->
-    <section id="resources" class="page" data-keywords="SharePoint Scratch Tinkercad Arduino">
+    <!-- ===== Resources ===== -->
+    <section id="resources">
+      <div class="section-title">
+        <div>
+          <h2>الموارد</h2>
+          <p>روابط التوثيق والمواقع التعليمية للمحاكاة والبرمجة.</p>
+        </div>
+      </div>
+
       <div class="grid cols-2">
-        <div class="card">
+        <div class="card" data-keywords="sharepoint توثيق صور ملفات">
           <h3>معرض التوثيق (SharePoint)</h3>
           <p class="muted">كل الصور/الملفات والتفاصيل الموسّعة محفوظة في المكتبة الرقمية.</p>
-          https://asrgirls-my.sharepoint.com/:f:/g/personal/t763621_asrg_moe_gov_sa/IgDdBsIIDxDWRJGH_ZC118iCAVr1du9ueqyhNpcAYAQUHQM?e=E8ghbJ📁 دخول المكتبة</a>
+          <p>
+            <a href="https://asrgirls-my.sharepoint.com/:f:/g/personal/t763621_asrg_moe_gov_sa/IgDdBsIIDxDWRJGH_ZC118iCAVr1du9ueqyhNpcAYAQUHQM?e=E8ghbJ"
+               target="_blank" rel="noopener">📁 دخول المكتبة</a>
+          </p>
         </div>
-        <div class="card">
+
+        <div class="card" data-keywords="scratch tinkercad arduino reference">
           <h3>روابط سريعة</h3>
           <ul>
-            <li>https://scratch.mit.eduScratch — برمجة بصرية</a></li>
-            <li>https://www.tinkercad.com/circuitsTinkercad Circuits — محاكاة Arduino</a></li>
-            <li>https://www.arduino.cc/reference/en/Arduino Reference</a></li>
+            <li><a href="https://scratch.mit.edu" target="_blank" rel="noopener">Scratch — برمجة بصرية</a></li>
+            <li><a href="https://www.tinkercad.com/circuits" target="_blank" rel="noopener">Tinkercad Circuits — محاكاة Arduino</a></li>
+            <li><a href="https://www.arduino.cc/reference/en/" target="_blank" rel="noopener">Arduino Reference</a></li>
           </ul>
         </div>
       </div>
     </section>
 
-    <!-- الأسئلة -->
-    <section id="faq" class="page" data-keywords="مشاكل جوال طباعة مشاركة حفظ">
-      <div class="card">
-        <details open><summary>لا تستجيب الصفحة في الجوال</summary>
-          <ul>
-            <li>تأكدي من اتصال جيد وإغلاق أية أشرطة أدوات كثيفة.</li>
-            <li>جرّبي إغلاق تبويبات كثيرة لتقليل ضغط الذاكرة.</li>
-            <li>امسحي الكاش من إعدادات المتصفح وأعيدي التحميل.</li>
-          </ul>
-        </details>
-        <details><summary>كيف أطبع جزءًا محددًا؟</summary>
-          <p>اضغطي زر <b>“طباعة هذا القسم”</b> داخل البطاقة التي تريدينها.</p>
-        </details>
+    <!-- ===== FAQ ===== -->
+    <section id="faq">
+      <div class="section-title">
+        <div>
+          <h2>الأسئلة الشائعة</h2>
+          <p>حلول سريعة لمشاكل الجوال والطباعة والحفظ.</p>
+        </div>
+      </div>
+
+      <div class="grid cols-2">
+        <div class="card" data-keywords="لا تستجيب الجوال بطء تعليق">
+          <details open>
+            <summary>لا تستجيب الصفحة في الجوال</summary>
+            <ul>
+              <li>أغلقي تبويبات كثيرة لتقليل ضغط الذاكرة.</li>
+              <li>امسحي الكاش من إعدادات المتصفح ثم أعيدي التحميل.</li>
+              <li>يفضل استخدام Safari أو Chrome المحدث.</li>
+            </ul>
+          </details>
+        </div>
+
+        <div class="card" data-keywords="طباعة جزء قسم">
+          <details open>
+            <summary>كيف أطبع جزءًا محددًا؟</summary>
+            <p>اضغطي زر الطباعة الخاص بالقسم، أو استخدمي “طباعة” من الأعلى لطباعة الصفحة كاملة.</p>
+          </details>
+        </div>
       </div>
     </section>
 
-    <footer style="text-align:center; color:var(--muted); padding:22px">
-      © 2026 المتوسطة الواحدة والعشرون بخميس مشيط - منهج STEAM الإثرائي
+    <footer>
+      © 2026 المتوسطة الواحدة والعشرون بخميس مشيط — منهج STEAM الإثرائي
     </footer>
   </main>
 
   <script>
-    // ===== تنقل مبسّط متوافق مع الجوال =====
-    const pages = [...document.querySelectorAll('.page')];
-    const nav = document.getElementById('top-nav');
-
-    function show(id){
-      pages.forEach(p=>p.classList.toggle('active', p.id===id));
-      nav.querySelectorAll('.tab').forEach(b=>{
-        const on = b.dataset.target === id;
-        b.classList.toggle('active', on);
-        b.setAttribute('aria-selected', on ? 'true' : 'false');
-      });
-      history.replaceState(null,'','#'+id);
-      // تمرير للأعلى بسلاسة مع احترام تقليل الحركة
+    // ===== Scroll top =====
+    document.getElementById('btn-top').addEventListener('click', ()=>{
       const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      window.scrollTo({ top: 0, behavior: prefersReduced ? 'auto' : 'smooth' });
-    }
-
-    nav.addEventListener('click', (e)=>{
-      const b = e.target.closest('.tab'); if(!b) return;
-      show(b.dataset.target);
-    }, {passive:true});
-
-    // فتح من روابط “فتح التفاصيل”
-    document.body.addEventListener('click', (e)=>{
-      const b = e.target.closest('[data-go]'); if(!b) return;
-      const val = b.getAttribute('data-go'); // ex: "projects#p1"
-      const [page, anchor] = val.split('#');
-      show(page);
-      if(anchor){
-        setTimeout(()=>{
-          const el = document.getElementById(anchor);
-          if(el) el.scrollIntoView({behavior:'smooth', block:'start'});
-        }, 150);
-      }
-    }, {passive:true});
-
-    // تفعيل الصفحة من الـ hash عند التحميل
-    window.addEventListener('load', ()=>{
-      const id = location.hash.replace('#','') || 'home';
-      if(document.getElementById(id)) show(id);
-      loadStudentLog();
-      loadRubric();
+      window.scrollTo({top:0, behavior: prefersReduced ? 'auto' : 'smooth'});
     });
 
-    // ===== بحث مع إيقاف مؤقت (Debounce) =====
-    const search = document.getElementById('search');
-    let tDeb = null;
-    search.addEventListener('input', ()=>{
-      clearTimeout(tDeb);
-      tDeb = setTimeout(()=>{
-        const q = (search.value||'').toLowerCase().trim();
-        document.querySelectorAll('.card').forEach(card=>{
-          const kw = (card.dataset.keywords||'') + ' ' + card.textContent;
-          card.style.display = kw.toLowerCase().includes(q) ? '' : 'none';
-        });
-      }, 160);
-    });
+    // ===== Print whole page =====
+    document.getElementById('btn-print').addEventListener('click', ()=> window.print());
 
-    // ===== طباعة الصفحة/الأقسام (بدون كسر الصفحة) =====
-    document.getElementById('btn-print').addEventListener('click', ()=> window.print(), {passive:true});
-
-    function printElement(selector){
-      const node = document.querySelector(selector);
-      if(!node) return;
-      const w = window.open('', '_blank', 'noopener,noreferrer');
-      if(!w) { alert('يبدو أن مانع النوافذ منع الطباعة. اسمحي بالنوافذ المنبثقة وحاولي مجددًا.'); return; }
-      const html = `
-<!DOCTYPE html><html lang="ar" dir="rtl"><head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>طباعة</title>
-https://fonts.googleapis.com/css2?family=Tajawal:wght@300;500;700&display=swap
-<style>
-  body{font-family:'Tajawal',sans-serif; padding:14px; color:#000}
-  .card{border:1px solid #ccc; border-radius:8px; padding:12px}
-  h3,h4{margin:.4rem 0}
-  table{width:100%; border-collapse:collapse}
-  th,td{border:1px solid #ccc; padding:8px; text-align:right}
-</style>
-</head><body>${node.outerHTML}</body></html>`;
-      w.document.open(); w.document.write(html); w.document.close();
-      setTimeout(()=>{ w.focus(); w.print(); w.close(); }, 300);
-    }
-
-    document.body.addEventListener('click', (e)=>{
-      const b = e.target.closest('[data-print]'); if(!b) return;
-      e.preventDefault();
-      printElement(b.getAttribute('data-print'));
-    });
-
-    // ===== مشاركة الرابط (مع بديل إن لم تتوفر API) =====
+    // ===== Share link =====
     document.getElementById('btn-share').addEventListener('click', async ()=>{
       const url = location.href;
       try{
@@ -631,10 +832,57 @@ https://fonts.googleapis.com/css2?family=Tajawal:wght@300;500;700&display=swap
           alert('تم نسخ الرابط ✅');
         }
       }catch(_){}
-    }, {passive:true});
+    });
 
-    // ===== سجل الطالبة (localStorage) =====
-    const LS_LOG = 'steam_student_log_v2';
+    // ===== Print specific element =====
+    function printElement(selector){
+      const node = document.querySelector(selector);
+      if(!node) return;
+
+      const w = window.open('', '_blank', 'noopener,noreferrer');
+      if(!w){ alert('اسمحي بالنوافذ المنبثقة للطباعة ثم أعيدي المحاولة.'); return; }
+
+      const html = `
+<!DOCTYPE html><html lang="ar" dir="rtl"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;500;700&display=swap" rel="stylesheet">
+<title>طباعة</title>
+<style>
+  body{font-family:'Tajawal',sans-serif; padding:14px; color:#000}
+  .box{border:1px solid #ccc; border-radius:12px; padding:14px}
+  table{width:100%; border-collapse:collapse}
+  th,td{border:1px solid #ccc; padding:8px; text-align:right}
+  pre{white-space:pre-wrap}
+</style>
+</head><body><div class="box">${node.outerHTML}</div></body></html>`;
+      w.document.open(); w.document.write(html); w.document.close();
+      setTimeout(()=>{ w.focus(); w.print(); w.close(); }, 260);
+    }
+    window.printElement = printElement;
+
+    // ===== Search (filters cards/sections) =====
+    const search = document.getElementById('search');
+    const items = Array.from(document.querySelectorAll('[data-keywords], .card, .section-title, article'));
+    let tDeb=null;
+    search.addEventListener('input', ()=>{
+      clearTimeout(tDeb);
+      tDeb=setTimeout(()=>{
+        const q = (search.value||'').toLowerCase().trim();
+        if(!q){
+          items.forEach(el=> el.style.display = '');
+          return;
+        }
+        items.forEach(el=>{
+          const kw = (el.getAttribute('data-keywords')||'') + ' ' + (el.textContent||'');
+          el.style.display = kw.toLowerCase().includes(q) ? '' : 'none';
+        });
+      }, 150);
+    });
+
+    // ===== Student log localStorage =====
+    const LS_LOG = 'steam_student_log_v3';
+    const logStatus = document.getElementById('log-status');
+
     function saveStudentLog(){
       const rec = {
         name: document.getElementById('st-name').value||'',
@@ -644,8 +892,10 @@ https://fonts.googleapis.com/css2?family=Tajawal:wght@300;500;700&display=swap
         ts: new Date().toISOString()
       };
       localStorage.setItem(LS_LOG, JSON.stringify(rec));
-      alert('تم الحفظ على هذا الجهاز ✅');
+      logStatus.textContent = 'تم الحفظ ✅';
+      setTimeout(()=> logStatus.textContent='الحفظ على هذا الجهاز', 1200);
     }
+
     function loadStudentLog(){
       try{
         const rec = JSON.parse(localStorage.getItem(LS_LOG)||'{}');
@@ -655,25 +905,32 @@ https://fonts.googleapis.com/css2?family=Tajawal:wght@300;500;700&display=swap
         if(rec.issue) document.getElementById('st-issue').value = rec.issue;
       }catch(_){}
     }
+
     function clearStudentLog(){
       localStorage.removeItem(LS_LOG);
-      ['st-name','st-project','st-log','st-issue'].forEach(id=>{
-        const el = document.getElementById(id);
-        if(el.tagName==='SELECT') el.selectedIndex = 0; else el.value = '';
-      });
+      document.getElementById('st-name').value='';
+      document.getElementById('st-project').selectedIndex=0;
+      document.getElementById('st-log').value='';
+      document.getElementById('st-issue').value='';
+      logStatus.textContent='تم المسح ✅';
+      setTimeout(()=> logStatus.textContent='الحفظ على هذا الجهاز', 1200);
     }
-    document.getElementById('save-log').addEventListener('click', saveStudentLog, {passive:true});
-    document.getElementById('clear-log').addEventListener('click', clearStudentLog, {passive:true});
 
-    // ===== رُوبرِك (localStorage) =====
-    const LS_RUB = 'steam_rubric_v2';
+    document.getElementById('save-log').addEventListener('click', saveStudentLog);
+    document.getElementById('clear-log').addEventListener('click', clearStudentLog);
+
+    // ===== Rubric localStorage =====
+    const LS_RUB = 'steam_rubric_v3';
+    const totalEl = document.getElementById('total');
+
     function calc(){
       const ids = ['r1','r2','r3','r4','r5'];
       const val = ids.map(id=>Number(document.getElementById(id).value||0));
       const total = val.reduce((a,b)=>a+b,0);
-      document.getElementById('total').textContent = 'المجموع: '+total+'/100';
+      totalEl.textContent = 'المجموع: '+total+'/100';
       return total;
     }
+
     function saveRubric(){
       const data = {
         r1:+document.getElementById('r1').value||0,
@@ -686,23 +943,34 @@ https://fonts.googleapis.com/css2?family=Tajawal:wght@300;500;700&display=swap
       localStorage.setItem(LS_RUB, JSON.stringify(data));
       alert('تم حفظ الروبرك ✅');
     }
+
     function loadRubric(){
       try{
         const d = JSON.parse(localStorage.getItem(LS_RUB)||'{}');
         ['r1','r2','r3','r4','r5'].forEach((id,i)=>{
-          const k='r'+(i+1); if(d[k]!==undefined) document.getElementById(id).value = d[k];
+          const k='r'+(i+1);
+          if(d[k]!==undefined) document.getElementById(id).value = d[k];
         });
-        if(d.total) document.getElementById('total').textContent = 'المجموع: '+d.total+'/100';
-      }catch(_){}
+        if(d.total!==undefined) totalEl.textContent = 'المجموع: '+d.total+'/100';
+        else calc();
+      }catch(_){ calc(); }
     }
+
     function clearRubric(){
       localStorage.removeItem(LS_RUB);
       ['r1','r2','r3','r4','r5'].forEach(id=>document.getElementById(id).value='');
       calc();
     }
-    document.getElementById('calc').addEventListener('click', calc, {passive:true});
-    document.getElementById('save-rubric').addEventListener('click', saveRubric, {passive:true});
-    document.getElementById('clear-rubric').addEventListener('click', clearRubric, {passive:true});
+
+    document.getElementById('calc').addEventListener('click', calc);
+    document.getElementById('save-rubric').addEventListener('click', saveRubric);
+    document.getElementById('clear-rubric').addEventListener('click', clearRubric);
+
+    // Init
+    window.addEventListener('load', ()=>{
+      loadStudentLog();
+      loadRubric();
+    });
   </script>
 </body>
 </html>
