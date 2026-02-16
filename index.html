@@ -1,306 +1,708 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>منهج STEAM العملي - المتوسطة 21</title>
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;500;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --beige-bg: #F9F7F2;
-            --mauve-pill: #E1BEE7;
-            --mauve-dark: #6A1B9A;
-            --mauve-main: #967BB6;
-            --white: #ffffff;
-            --text-main: #444;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="color-scheme" content="light dark">
+  <title>منهج STEAM العملي الإثرائي - المتوسطة 21</title>
+  https://fonts.googleapis.com/css2?family=Tajawal:wght@300;500;700&display=swap
+  <style>
+    :root{
+      --bg:#F9F7F2; --card:#FFFFFF; --ink:#444; --muted:#6b6b6b;
+      --main:#967BB6; --main-dark:#6A1B9A; --pill:#EADCF1;
+      --ok:#2e7d32; --warn:#f57c00; --danger:#c62828;
+      --shadow:0 4px 14px rgba(0,0,0,.06);
+      --radius:14px;
+      --tap:44px; /* أقل ارتفاع/عرض لمناطق اللمس */
+    }
+    @media (prefers-color-scheme: dark){
+      :root{
+        --bg:#141218; --card:#1b1822; --ink:#e9e7ef; --muted:#bdb8cc;
+        --pill:#3a2a55; --shadow:0 2px 10px rgba(0,0,0,.4);
+      }
+    }
+    *{box-sizing:border-box; -webkit-tap-highlight-color:transparent}
+    html,body{height:100%}
+    body{
+      margin:0; font-family:'Tajawal',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+      background:var(--bg); color:var(--ink); line-height:1.75;
+      padding: env(safe-area-inset-top) env(safe-area-inset-right)
+               env(safe-area-inset-bottom) env(safe-area-inset-left);
+      overflow-x:hidden;
+    }
 
-        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-        
-        body {
-            font-family: 'Tajawal', sans-serif;
-            background-color: var(--beige-bg);
-            color: var(--text-main);
-            margin: 0; padding: 0;
-            line-height: 1.7;
-        }
+    /* الرأس والتنقل */
+    header{
+      position:sticky; top:0; z-index:10;
+      background:linear-gradient(135deg,#efe7f7, var(--bg));
+      border-bottom:1px solid rgba(0,0,0,.06);
+      padding:10px 12px 12px;
+      backdrop-filter:saturate(120%) blur(8px);
+    }
+    h1{font-size:1.15rem; margin:.2rem 0; color:var(--main)}
+    .subtitle{
+      display:inline-block; background:var(--pill); color:var(--main-dark);
+      padding:4px 10px; border-radius:999px; font-weight:700; font-size:.85rem;
+    }
 
-        header {
-            background: linear-gradient(135deg, #F3E5F5 0%, var(--beige-bg) 100%);
-            padding: 25px 15px;
-            text-align: center;
-        }
+    nav{
+      margin-top:8px; display:flex; gap:8px; overflow:auto; padding-bottom:6px;
+      -webkit-overflow-scrolling:touch; scrollbar-width:none;
+    }
+    nav::-webkit-scrollbar{display:none}
+    .tab{
+      flex:0 0 auto; border:1px solid rgba(0,0,0,.08); color:var(--main-dark);
+      background:var(--card); border-radius:10px; padding:10px 12px; font-weight:700;
+      min-height:var(--tap); min-width:var(--tap); cursor:pointer;
+    }
+    .tab.active{background:var(--main); color:#fff; border-color:var(--main)}
 
-        /* تصغير العنوان الرئيسي بناءً على طلبك */
-        h1 { 
-            color: var(--mauve-main); 
-            font-size: 1.25rem; 
-            margin: 0 0 12px 0; 
-            font-weight: 700;
-        }
+    /* الحاوية والصفحات */
+    .container{max-width:1100px; padding:10px 12px; margin-inline:auto}
+    .page{display:none; animation:fade .24s ease}
+    .page.active{display:block}
+    @keyframes fade{from{opacity:0; transform:translateY(4px)} to{opacity:1; transform:none}}
 
-        .subtitle-pill {
-            background-color: var(--mauve-pill);
-            color: var(--mauve-dark);
-            display: inline-block;
-            padding: 6px 20px;
-            border-radius: 50px;
-            font-weight: 700;
-            font-size: 0.85rem;
-            margin-bottom: 10px;
-        }
+    /* أدوات */
+    .toolbar{
+      display:flex; gap:8px; align-items:center; background:var(--card);
+      border:1px solid rgba(0,0,0,.06); border-radius:12px; padding:8px; box-shadow:var(--shadow);
+      position:sticky; top:64px; z-index:5; margin-bottom:10px;
+    }
+    .search{
+      flex:1; border:1px solid rgba(0,0,0,.08); background:transparent; color:inherit;
+      padding:10px 12px; border-radius:10px; font-size:16px; /* >=16px لتجنب تكبير iOS */
+    }
+    .btn{
+      display:inline-flex; gap:6px; align-items:center; justify-content:center;
+      min-height:var(--tap); padding:8px 12px; border-radius:10px; font-weight:700;
+      border:2px solid var(--main); color:var(--main); background:transparent; cursor:pointer;
+      touch-action:manipulation;
+    }
+    .btn:active{transform:translateY(1px)}
+    .btn.fill{background:var(--main); color:#fff}
+    .btn.soft{border:1px solid rgba(0,0,0,.1); color:var(--ink)}
 
-        .container { max-width: 1200px; margin: 15px auto; padding: 0 15px; }
-        .page { display: none; animation: fadeIn 0.4s ease; }
-        .active { display: block; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    /* شبكات وبطاقات */
+    .grid{display:grid; gap:12px}
+    @media (min-width:680px){ .grid.cols-2{grid-template-columns:repeat(2,1fr)} }
+    @media (min-width:960px){ .grid.cols-3{grid-template-columns:repeat(3,1fr)} }
+    .card{
+      background:var(--card); border:1px solid rgba(0,0,0,.06);
+      border-radius:var(--radius); box-shadow:var(--shadow); padding:14px; position:relative;
+    }
+    .card h3,.card h4{color:var(--main); margin:.3rem 0 .5rem}
+    .muted{color:var(--muted); font-size:.92rem}
+    .badge{display:inline-block; background:#efe9fb; color:#553f88; padding:3px 10px; border-radius:999px; font-weight:700; font-size:.78rem; margin:2px}
+    @media (prefers-color-scheme: dark){ .badge{background:#2c2440; color:#d6c8ff} }
 
-        /* معرض المشاريع */
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-        }
+    ul,ol{padding-right:1.2rem; margin:.4rem 0 .8rem}
+    .hr{height:1px; background:rgba(0,0,0,.08); margin:12px 0}
+    details{border:1px solid rgba(0,0,0,.08); border-radius:12px; padding:8px 10px; background:var(--card); margin:8px 0}
+    details summary{cursor:pointer; font-weight:700; color:var(--main-dark)}
 
-        .card {
-            background: var(--white);
-            border-radius: 15px;
-            padding: 20px;
-            border: 1px solid #eee;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.02);
-        }
+    /* جداول قابلة للتمرير أفقيًا على الجوال */
+    .table-wrap{overflow:auto; -webkit-overflow-scrolling:touch}
+    table{width:100%; border-collapse:collapse; min-width:560px}
+    th,td{border-bottom:1px solid rgba(0,0,0,.08); padding:10px; text-align:right}
+    thead th{background:#f6f2ff; color:#57407f}
+    @media (prefers-color-scheme: dark){ thead th{background:#2b2540; color:#cfc3ef} }
 
-        .card::before {
-            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 8px;
-            background: var(--mauve-main); border-radius: 15px 15px 0 0;
-        }
+    /* طباعة: نمط بسيط ونظيف */
+    @media print{
+      header, .toolbar, nav { display:none !important }
+      body{background:#fff; color:#000}
+      .container{max-width:100%; padding:0}
+      .card{box-shadow:none; border:1px solid #ccc}
+    }
 
-        .card h3 { color: var(--mauve-main); text-align: center; border-bottom: 1px solid #F3E5F5; padding-bottom: 10px; font-size: 1.15rem; }
-
-        .name-box {
-            background: #FDFBFA;
-            padding: 12px;
-            border-radius: 10px;
-            border-right: 4px solid var(--mauve-pill);
-            font-size: 0.85rem;
-            margin: 15px 0;
-        }
-        .name-box strong { color: var(--mauve-dark); }
-
-        .btn {
-            display: block; width: 100%; padding: 10px; border-radius: 10px;
-            text-align: center; text-decoration: none; font-weight: bold;
-            cursor: pointer; border: 2px solid var(--mauve-main);
-            color: var(--mauve-main); background: transparent; transition: 0.3s;
-            font-size: 0.9rem;
-        }
-        .btn:hover { background: var(--mauve-main); color: white; }
-        .btn-back { background: #eee; border: none; color: #555; width: auto; display: inline-block; margin-bottom: 15px; padding: 8px 20px; }
-
-        /* صفحات التفاصيل الإثرائية */
-        .detail-view { background: white; padding: 25px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.03); }
-        .section-header {
-            background-color: var(--mauve-pill);
-            color: var(--mauve-dark);
-            padding: 8px 20px;
-            border-radius: 10px;
-            display: inline-block;
-            font-weight: 700;
-            margin-bottom: 20px;
-            font-size: 0.9rem;
-        }
-
-        .info-block { margin-bottom: 20px; }
-        .info-title { color: var(--mauve-main); font-weight: 700; display: block; border-right: 3px solid var(--mauve-pill); padding-right: 10px; margin-bottom: 5px; }
-        .info-content { font-size: 0.9rem; color: #555; padding-right: 15px; text-align: justify; }
-
-        .footer-hub {
-            background: var(--mauve-main); color: white; text-align: center;
-            padding: 30px 15px; border-radius: 20px; margin-top: 30px;
-        }
-        .hub-link { background: white; color: var(--mauve-main); padding: 10px 30px; border-radius: 50px; text-decoration: none; font-weight: bold; display: inline-block; margin-top: 15px; }
-
-        footer { text-align: center; padding: 30px; color: #999; font-size: 0.75rem; }
-    </style>
+    /* تقليل الحركة لمن يفضل ذلك */
+    @media (prefers-reduced-motion: reduce){
+      *{animation:none !important; transition:none !important}
+    }
+  </style>
 </head>
 <body>
+  <header aria-label="ترويسة الموقع">
+    <h1>منهج STEAM العملي الإثرائي - المتوسطة 21</h1>
+    <span class="subtitle">المنفذات: كرزية عسيري - ابتسام الشهري</span>
 
-<header>
-    <h1>مبادرة تنفيذ تطبيقات تحدي إنترنت الأشياء ضمن برنامج STEAM</h1>
-    <div class="subtitle-pill">المنفذات: كرزية عسيري - ابتسام الشهري</div>
-</header>
+    <nav role="tablist" aria-label="التبويبات" id="top-nav">
+      <button class="tab active" data-target="home" role="tab" aria-selected="true">الرئيسية</button>
+      <button class="tab" data-target="teacher" role="tab">دليل المعلمة</button>
+      <button class="tab" data-target="student" role="tab">دليل الطالبة</button>
+      <button class="tab" data-target="projects" role="tab">المشاريع</button>
+      <button class="tab" data-target="assessment" role="tab">التقييم</button>
+      <button class="tab" data-target="resources" role="tab">الموارد</button>
+      <button class="tab" data-target="faq" role="tab">الأسئلة</button>
+    </nav>
+  </header>
 
-<div class="container">
-    
-    <div id="home" class="page active">
-        <div class="projects-grid">
-            
-            <div class="card">
-                <h3>سلة المهملات الذكية</h3>
-                <div class="name-box"><strong>المشاركات:</strong> جنى الوذناني، تبيان الحاج، رباب خبراني، وسن فقيهي</div>
-                <button class="btn" onclick="openPage('p1')">المنهج العملي للمشروع</button>
-            </div>
-
-            <div class="card">
-                <h3>نموذج تنقية المياه</h3>
-                <div class="name-box"><strong>المشاركات:</strong> رتيل، روين، ريناد، اسيل، جنى الاحمري، جنى غزواني</div>
-                <button class="btn" onclick="openPage('p2')">المنهج العملي للمشروع</button>
-            </div>
-
-            <div class="card">
-                <h3>كاشف الحريق الذكي</h3>
-                <div class="name-box"><strong>المشاركات:</strong> رنيم الاحمري، ندى المالكي، المى خضير، تسنيم الشهري</div>
-                <button class="btn" onclick="openPage('p3')">المنهج العملي للمشروع</button>
-            </div>
-
-            <div class="card">
-                <h3>التشجير الرقمي (1)</h3>
-                <div class="name-box"><strong>المشاركات:</strong> جوري القحطاني، داليا الشهراني، درر الشهري</div>
-                <button class="btn" onclick="openPage('p4')">المنهج العملي للمشروع</button>
-            </div>
-
-            <div class="card">
-                <h3>التشجير والزيولايت (2)</h3>
-                <div class="name-box"><strong>المشاركات:</strong> سمو القحطاني، نوادر الشهراني، شادن عبدلي</div>
-                <button class="btn" onclick="openPage('p5')">المنهج العملي للمشروع</button>
-            </div>
-
-        </div>
-
-        <div class="footer-hub">
-            <h3>معرض التوثيق والروابط (SharePoint)</h3>
-            <a href="https://asrgirls-my.sharepoint.com/:f:/g/personal/t763621_asrg_moe_gov_sa/IgDdBsIIDxDWRJGH_ZC118iCAVr1du9ueqyhNpcAYAQUHQM?e=E8ghbJ" target="_blank" class="hub-link">دخول المكتبة الرقمية 📁</a>
-        </div>
+  <main class="container">
+    <!-- شريط الأدوات -->
+    <div class="toolbar" role="region" aria-label="أدوات عامة">
+      <input id="search" class="search" type="search" inputmode="search" placeholder="ابحثي عن كلمة أو مشروع…" autocomplete="off" aria-label="بحث">
+      <button class="btn soft" id="btn-print">🖨 طباعة الصفحة</button>
+      <button class="btn soft" id="btn-share">🔗 نسخ الرابط</button>
     </div>
 
-    <div id="p1" class="page">
-        <button class="btn btn-back" onclick="openPage('home')">← عودة</button>
-        <div class="detail-view">
-            <div class="section-header">مشروع سلة المهملات الذكية</div>
-            <div class="info-block">
-                <span class="info-title">فكرة المشروع:</span>
-                <span class="info-content">تصميم نظام أوتوماتيكي لفتح غطاء السلة باستخدام مستشعرات المسافة، مما يلغي الحاجة للتلامس الجسدي ويعزز معايير الصحة العامة.</span>
-            </div>
-            <div class="info-block">
-                <span class="info-title">المكونات الهيكلية:</span>
-                <span class="info-content">هيكل سلة متين، غطاء متحرك، مفصلات دقيقة، ومكان داخلي مخصص للكيس.</span>
-            </div>
-            <div class="info-block">
-                <span class="info-title">المكونات البرمجية:</span>
-                <span class="info-content">حساس مسافة (Ultrasonic)، محرك سيرفو صغير، وكود برمجي يتحكم في زاوية فتح الغطاء بناءً على قرب الجسم.</span>
-            </div>
-            <div class="section-header">منهجية التصميم الهندسي (EDP)</div>
-            <div class="info-block">
-                <span class="info-content">1. **التساؤل**: كيف نحد من انتقال الجراثيم عبر أغطية النفايات؟<br>
-                2. **التخيل**: استخدام مستشعر يكتشف الحركة ويفتح الغطاء آلياً.<br>
-                3. **التخطيط**: رسم الدائرة الإلكترونية وتحديد زاوية فتح المحرك.<br>
-                4. **الإنشاء**: تركيب الحساس والمحرك وكتابة الكود البرمجي.<br>
-                5. **التحسين**: تعديل زمن بقاء الغطاء مفتوحاً وسرعة استجابة الحساس.</span>
-            </div>
+    <!-- الرئيسية -->
+    <section id="home" class="page active" data-keywords="steam منهج إثرائي متوسطة21">
+      <div class="card">
+        <h3>مرحبًا بكِ</h3>
+        <p class="muted">هنا خطة تنفيذ، مواد تعليمية، أدوات تقييم، وسجلات تعلم—مصممة للجوال والحاسب، قابلة للطباعة، وتعمل دون اتصال.</p>
+      </div>
+
+      <div class="grid cols-3" style="margin-top:8px">
+        <div class="card" data-keywords="أهداف تعلم مهارات 21">
+          <h4>الأهداف</h4>
+          <ul>
+            <li>توظيف التفكير التصميمي والهندسي لحل مشكلات واقعية.</li>
+            <li>تنمية المنطق البرمجي في Arduino/Scratch.</li>
+            <li>تعزيز التعاون والعرض العلمي بالبيانات.</li>
+          </ul>
         </div>
-    </div>
-
-    <div id="p2" class="page">
-        <button class="btn btn-back" onclick="openPage('home')">← عودة</button>
-        <div class="detail-view">
-            <div class="section-header">مشروع نموذج تنقية المياه</div>
-            <div class="info-block">
-                <span class="info-title">فكرة المشروع:</span>
-                <span class="info-content">بناء نموذج فيزيائي يحاكي عمليات الفلترة الطبيعية للمياه من خلال طبقات ترشيح متدرجة المسام.</span>
-            </div>
-            <div class="info-block">
-                <span class="info-title">المكونات الهيكلية:</span>
-                <span class="info-content">أنابيب شفافة، حصى كبير، رمل ناعم، فحم نشط، وقطن طبي لضمان النقاء النهائي.</span>
-            </div>
-            <div class="section-header">منهجية التصميم الهندسي (EDP)</div>
-            <div class="info-block">
-                <span class="info-content">1. **التساؤل**: هل يمكن تنقية الماء بمواد بسيطة متوفرة في البيئة؟<br>
-                2. **التخيل**: ترتيب طبقات ترشيح تزيد كفاءتها كلما اتجهنا للأسفل.<br>
-                3. **التخطيط**: تحديد سماكة كل طبقة لضمان أفضل ترشيح ممكن.<br>
-                4. **الإنشاء**: بناء الهيكل وترتيب المواد داخل الحاوية الشفافة.<br>
-                5. **التحسين**: إضافة حساس عكارة (اختياري) لقياس مدى نقاء الماء الخارج.</span>
-            </div>
+        <div class="card" data-keywords="خطة زمنية توزيع أسابيع">
+          <h4>الخطة الزمنية</h4>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>الأسبوع</th><th>المحور</th><th>مخرجات</th></tr></thead>
+              <tbody>
+                <tr><td>1</td><td>التعاطف/التحديد</td><td>تعريف المشكلة ومقاييس النجاح</td></tr>
+                <tr><td>2</td><td>التخيل/التخطيط</td><td>مخططات/اختيار مواد</td></tr>
+                <tr><td>3–4</td><td>الإنشاء</td><td>بناء/برمجة</td></tr>
+                <tr><td>5</td><td>الاختبار/التحسين</td><td>تجارب وتحسينات</td></tr>
+                <tr><td>6</td><td>العرض</td><td>ملصق/عرض شفهي</td></tr>
+              </tbody>
+            </table>
+          </div>
         </div>
-    </div>
-
-    <div id="p3" class="page">
-        <button class="btn btn-back" onclick="openPage('home')">← عودة</button>
-        <div class="detail-view">
-            <div class="section-header">مشروع كاشف الحريق الذكي</div>
-            <div class="info-block">
-                <span class="info-title">فكرة المشروع:</span>
-                <span class="info-content">نظام أمان ذكي يكتشف بوادر الحريق (دخان أو حرارة زائدة) ويطلق إنذاراً فورياً لحماية الأرواح.</span>
-            </div>
-            <div class="info-block">
-                <span class="info-title">المكونات البرمجية:</span>
-                <span class="info-content">حساس دخان/حرارة، صفارة إنذار (Buzzer)، لمبة LED للتنبيه البصري، ولوحة تحكم مبرمجة.</span>
-            </div>
-            <div class="section-header">منهجية التصميم الهندسي (EDP)</div>
-            <div class="info-block">
-                <span class="info-content">1. **التساؤل**: كيف نكتشف الحريق في بدايته لتجنب الكوارث؟<br>
-                2. **التخيل**: استخدام مستشعرات غاز ودخان مبرمجة لإطلاق صفارة.<br>
-                3. **التخطيط**: برمجة النظام ليعمل عند وصول قراءة الحساس لمستوى معين.<br>
-                4. **الإنشاء**: دمج المكونات داخل هيكل مخصص يسهل تثبيته.<br>
-                5. **التحسين**: إضافة زر إعادة ضبط للنظام بعد توقف الخطر.</span>
-            </div>
+        <div class="card" data-keywords="سلامة معمل كهرباء">
+          <h4>إرشادات السلامة</h4>
+          <ul>
+            <li><b class="danger">ممنوع</b> فصل/توصيل مع الطاقة متصلة.</li>
+            <li>ارتداء واقيات العين والعمل تحت إشراف.</li>
+            <li>تنظيم الأدوات وتصنيف المواد بعد الاستخدام.</li>
+          </ul>
         </div>
-    </div>
+      </div>
 
-    <div id="p4" class="page">
-        <button class="btn btn-back" onclick="openPage('home')">← عودة</button>
-        <div class="detail-view">
-            <div class="section-header">التشجير الرقمي - نموذج 1</div>
-            <div class="info-block">
-                <span class="info-title">فكرة المشروع:</span>
-                <span class="info-content">لعبة تعليمية عبر بيئة سكراتش تحاكي زراعة الأشجار وتوضح أثرها في تقليل التصحر.</span>
-            </div>
-            <div class="section-header">منهجية التفكير التصميمي (Design Thinking)</div>
-            <div class="info-block">
-                <span class="info-content">1. **التعاطف**: فهم مشكلة انحسار الغطاء النباتي وتأثيرها البيئي.<br>
-                2. **التحديد**: صياغة التحدي في كيفية تشجيع الطلاب على الزراعة.<br>
-                3. **الابتكار**: ابتكار نظام نقاط ومكافآت داخل اللعبة عند زراعة شجرة.<br>
-                4. **النموذج**: برمجة الشخصيات والأكواد في سكراتش.<br>
-                5. **الاختبار**: عرض اللعبة على الزميلات لتقييم المتعة والفائدة التوعوية.</span>
-            </div>
+      <div class="hr"></div>
+      <div class="grid cols-3">
+        <div class="card" data-keywords="سلة المهملات الذكية Ultrasonic Servo Arduino" >
+          <h4>سلة المهملات الذكية</h4>
+          <p class="muted">فتح تلقائي بالاستشعار—تقليل التلامس.</p>
+          <div><span class="badge">Arduino</span><span class="badge">HC-SR04</span></div>
+          <button class="btn" data-go="projects#p1" style="margin-top:6px">فتح التفاصيل</button>
         </div>
-    </div>
-
-    <div id="p5" class="page">
-        <button class="btn btn-back" onclick="openPage('home')">← عودة</button>
-        <div class="detail-view">
-            <div class="section-header">التشجير والزيولايت - نموذج 2</div>
-            <div class="info-block">
-                <span class="info-title">فكرة المشروع:</span>
-                <span class="info-content">دمج مفهوم "الزيولايت" كحل علمي لتحسين التربة داخل محاكاة برمجية تعليمية.</span>
-            </div>
-            <div class="section-header">منهجية التفكير التصميمي (Design Thinking)</div>
-            <div class="info-block">
-                <span class="info-content">1. **التعاطف**: دراسة صعوبة الزراعة في التربة الفقيرة وهدر المياه.<br>
-                2. **التحديد**: كيفية تعريف الجمهور بفائدة الزيولايت علمياً.<br>
-                3. **الابتكار**: إضافة خيار "استخدام الزيولايت" داخل اللعبة لملاحظة الفرق في سرعة النمو.<br>
-                4. **النموذج**: بناء الكود البرمجي الذي يغير خصائص النبات عند استخدام المحسنات.<br>
-                5. **الاختبار**: قياس مدى فهم الطالبات للعلاقة بين العلم (الزيولايت) والزراعة.</span>
-            </div>
+        <div class="card" data-keywords="تنقية المياه فلترة رمل فحم عكارة">
+          <h4>نموذج تنقية المياه</h4>
+          <p class="muted">محاكاة الفلترة الطبيعية—خيار حساس العكارة.</p>
+          <div><span class="badge">Science</span><span class="badge">Sustainability</span></div>
+          <button class="btn" data-go="projects#p2" style="margin-top:6px">فتح التفاصيل</button>
         </div>
-    </div>
+        <div class="card" data-keywords="كاشف الحريق MQ-2 Buzzer LED">
+          <h4>كاشف الحريق الذكي</h4>
+          <p class="muted">إنذار دخان/حرارة—زر إعادة ضبط.</p>
+          <div><span class="badge">Safety</span><span class="badge">Sensors</span></div>
+          <button class="btn" data-go="projects#p3" style="margin-top:6px">فتح التفاصيل</button>
+        </div>
+        <div class="card" data-keywords="التشجير الرقمي Scratch لعبة">
+          <h4>التشجير الرقمي (1)</h4>
+          <p class="muted">لعبة سكراتش لخفض التصحر.</p>
+          <div><span class="badge">Scratch</span><span class="badge">Game</span></div>
+          <button class="btn" data-go="projects#p4" style="margin-top:6px">فتح التفاصيل</button>
+        </div>
+        <div class="card" data-keywords="زيولايت تربة ري محاكاة">
+          <h4>التشجير والزيولايت (2)</h4>
+          <p class="muted">أثر الزيولايت في نمو النبات.</p>
+          <div><span class="badge">Soil</span><span class="badge">Simulation</span></div>
+          <button class="btn" data-go="projects#p5" style="margin-top:6px">فتح التفاصيل</button>
+        </div>
+      </div>
+    </section>
 
-</div>
+    <!-- دليل المعلمة -->
+    <section id="teacher" class="page" data-keywords="خطة درس تفاضل سلامة">
+      <div class="card" id="teacher-plan">
+        <h3>خطة تنفيذ (6 أسابيع)</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>الأسبوع</th><th>الأهداف</th><th>أنشطة</th><th>تقويم</th></tr></thead>
+            <tbody>
+              <tr><td>1</td><td>صياغة المشكلة، أدوار</td><td>عصف ذهني/بطاقات تحدي</td><td>قائمة فحص</td></tr>
+              <tr><td>2</td><td>تصميم أولي</td><td>مخططات/اختيار مواد</td><td>تسليم تصميم</td></tr>
+              <tr><td>3–4</td><td>بناء/برمجة</td><td>اختبار جزئي/توثيق</td><td>روبرك متوسط</td></tr>
+              <tr><td>5</td><td>تحسين</td><td>قياسات/تعديل</td><td>روبرك التحسين</td></tr>
+              <tr><td>6</td><td>عرض</td><td>ملصق/عرض شفهي</td><td>روبرك العرض</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:8px">
+          <button class="btn" data-print="#teacher-plan">🖨 طباعة هذا القسم</button>
+        </div>
+      </div>
 
-<footer>
-    © 2026 المتوسطة الواحدة والعشرون بخميس مشيط - منهج STEAM الإثرائي
-</footer>
+      <div class="grid cols-2" style="margin-top:10px">
+        <div class="card" id="teacher-safety">
+          <h3>ميثاق السلامة</h3>
+          <ul>
+            <li>العمل تحت إشراف معلمة المختبر.</li>
+            <li>عدم لمس الأسلاك مع الطاقة موصولة.</li>
+            <li>تنظيم الأدوات وإبلاغ أي طارئ.</li>
+          </ul>
+          <p class="muted">توقيع الطالبة: ____________ &nbsp; توقيع ولي الأمر: ____________</p>
+          <button class="btn" data-print="#teacher-safety">🖨 للطباعة</button>
+        </div>
 
-<script>
-    function openPage(id) {
-        document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-        document.getElementById(id).classList.add('active');
-        window.scrollTo(0,0);
+        <div class="card">
+          <h3>تفاضل (دعم/إثراء)</h3>
+          <details open><summary>للدعم</summary>
+            <ul><li>خطوات مصوّرة.</li><li>أزواج تعلّم.</li><li>تجارب قصيرة آمنة.</li></ul>
+          </details>
+          <details><summary>للإثراء</summary>
+            <ul><li>حساس إضافي/شاشة LCD.</li><li>مقارنات عتبات وتفسير بيانات.</li></ul>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- دليل الطالبة -->
+    <section id="student" class="page" data-keywords="سجل الطالبة تأمل تقدم">
+      <div class="card" id="student-journey">
+        <h3>رحلتي في التعلم</h3>
+        <ol>
+          <li><b>التعاطف:</b> من يتأثر بالمشكلة؟</li>
+          <li><b>التحديد:</b> متطلبات الحل.</li>
+          <li><b>الابتكار:</b> فكرة ونموذج أولي.</li>
+          <li><b>البناء/البرمجة:</b> تنفيذ واختبار.</li>
+          <li><b>التحسين:</b> لماذا وكيف؟</li>
+          <li><b>العرض:</b> أقنعي بالبيانات.</li>
+        </ol>
+        <button class="btn" data-print="#student-journey">🖨 طباعة</button>
+      </div>
+
+      <div class="card">
+        <h3>سجل تقدّم شخصي</h3>
+        <div style="display:grid; gap:8px">
+          <label>اسمي:
+            <input id="st-name" style="width:100%; padding:10px; border-radius:10px; border:1px solid rgba(0,0,0,.15); font-size:16px">
+          </label>
+          <label>مشروعي:
+            <select id="st-project" style="width:100%; padding:10px; border-radius:10px; border:1px solid rgba(0,0,0,.15); font-size:16px">
+              <option>سلة المهملات الذكية</option>
+              <option>نموذج تنقية المياه</option>
+              <option>كاشف الحريق الذكي</option>
+              <option>التشجير الرقمي (1)</option>
+              <option>التشجير والزيولايت (2)</option>
+            </select>
+          </label>
+          <label>ماذا أنجزت اليوم؟
+            <textarea id="st-log" rows="4" style="width:100%; padding:10px; border-radius:10px; border:1px solid rgba(0,0,0,.15); font-size:16px"></textarea>
+          </label>
+          <label>تحدٍ واجهته:
+            <textarea id="st-issue" rows="3" style="width:100%; padding:10px; border-radius:10px; border:1px solid rgba(0,0,0,.15); font-size:16px"></textarea>
+          </label>
+        </div>
+        <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:8px">
+          <button class="btn fill" id="save-log">💾 حفظ</button>
+          <button class="btn soft" id="clear-log">♻️ مسح</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- المشاريع -->
+    <section id="projects" class="page" data-keywords="مشاريع Arduino Scratch زيولايت">
+      <div class="card" id="p1">
+        <h3>سلة المهملات الذكية</h3>
+        <p class="muted">المشاركات: جنى الوذناني، تبيان الحاج، رباب خبراني، وسن فقيهي</p>
+        <div class="grid cols-2">
+          <div>
+            <h4>الفكرة</h4>
+            <p>فتح الغطاء تلقائيًا عند اقتراب اليد باستخدام حساس مسافة لتقليل التلامس.</p>
+            <h4>نواتج تعلم</h4>
+            <ul><li>عمل الحساسات والمحركات.</li><li>برمجة Servo وفقًا للمسافة.</li><li>تصميم ميكانيكي للغطاء.</li></ul>
+          </div>
+          <div>
+            <h4>المكونات</h4>
+            <ul><li>Arduino Uno، HC-SR04، Servo SG90</li><li>أسلاك، مفصلات، مزود طاقة</li></ul>
+            <h4>سلامة</h4>
+            <ul><li>تثبيت قوي وتجنّب وضع الوجه قرب الغطاء.</li><li>زاوية فتح آمنة (60–90°).</li></ul>
+          </div>
+        </div>
+        <details open>
+          <summary>خطوات التنفيذ</summary>
+          <ol>
+            <li>تثبيت السيرفو على الغطاء بوصلة مرنة.</li>
+            <li>توصيل HC‑SR04 (VCC/GND/TRIG/ECHO).</li>
+            <li>شرط: المسافة &lt; 20 سم → فتح، ثم إغلاق تدريجي.</li>
+          </ol>
+        </details>
+<details>
+  <summary>نموذج كود Arduino</summary>
+  <pre><code>// سلة المهملات الذكية
+#include &lt;Servo.h&gt;
+Servo lid;
+const int trig=9, echo=10, servoPin=6;
+const int openAngle=90, closeAngle=0, threshold=20;
+
+long readCM(){
+  digitalWrite(trig,LOW); delayMicroseconds(2);
+  digitalWrite(trig,HIGH); delayMicroseconds(10);
+  digitalWrite(trig,LOW);
+  long d=pulseIn(echo,HIGH,30000);
+  return d*0.034/2;
+}
+void setup(){
+  pinMode(trig,OUTPUT); pinMode(echo,INPUT);
+  lid.attach(servoPin); lid.write(closeAngle);
+}
+void loop(){
+  long distance = readCM();
+  if(distance&gt;0 && distance&lt;=threshold){
+    lid.write(openAngle); delay(1200);
+  } else {
+    lid.write(closeAngle);
+  }
+  delay(80);
+}
+</code></pre>
+</details>
+        <button class="btn" data-print="#p1">🖨 طباعة</button>
+      </div>
+
+      <div class="card" id="p2">
+        <h3>نموذج تنقية المياه</h3>
+        <p class="muted">المشاركات: رتيل، روين، ريناد، اسيل، جنى الاحمري، جنى غزواني</p>
+        <h4>الفكرة</h4><p>طبقات: قطن → فحم نشط → رمل → حصى.</p>
+        <div class="grid cols-2">
+          <div>
+            <h4>مواد</h4>
+            <ul><li>زجاجة/أنبوب شفاف، قطن، فحم، رمل، حصى</li><li>أكواب قبل/بعد</li></ul>
+            <h4>سلامة</h4>
+            <ul><li>ماء عكر آمن فقط (تراب نظيف).</li><li>غسل اليدين بعد التجربة.</li></ul>
+          </div>
+          <div>
+            <h4>خطوات</h4>
+            <ol><li>ثقوب تصريف صغيرة أسفل الوعاء.</li><li>ترتيب الطبقات من الأكبر للمسام الأصغر.</li><li>سكب الماء العكر والملاحظة/التسجيل.</li><li>تعديل السمك لتحسين النتائج.</li></ol>
+          </div>
+        </div>
+<details>
+  <summary>اختياري: قراءة عكارة</summary>
+  <pre><code>// حساس عكارة/توصيل (حسب المتوفر)
+const int A=A0;
+void setup(){ Serial.begin(9600); }
+void loop(){ int v=analogRead(A); Serial.println(v); delay(500); }
+</code></pre>
+</details>
+        <button class="btn" data-print="#p2">🖨 طباعة</button>
+      </div>
+
+      <div class="card" id="p3">
+        <h3>كاشف الحريق الذكي</h3>
+        <p class="muted">المشاركات: رنيم الاحمري، ندى المالكي، المى خضير، تسنيم الشهري</p>
+        <div class="grid cols-2">
+          <div>
+            <h4>الفكرة</h4><p>استشعار دخان/لهب وإطلاق إنذار ضوئي/صوتي.</p>
+            <h4>مكونات</h4><ul><li>MQ‑2 أو حساس لهب، Buzzer، LED، Arduino</li></ul>
+          </div>
+          <div>
+            <h4>سلامة</h4>
+            <ul><li><b class="danger">ممنوع</b> اللهب الحقيقي داخل الصف.</li>
+              <li>استخدمي محاكاة/كبسولة دخان تعليمية خارج المختبر.</li></ul>
+          </div>
+        </div>
+<details open>
+  <summary>نموذج كود (MQ‑2)</summary>
+  <pre><code>const int mqA0=A0, buz=7, led=8; 
+int threshold=350;
+void setup(){ pinMode(buz,OUTPUT); pinMode(led,OUTPUT); }
+void loop(){
+  int val=analogRead(mqA0);
+  if(val &gt;= threshold){ digitalWrite(led,1); tone(buz,2000); }
+  else{ digitalWrite(led,0); noTone(buz); }
+  delay(100);
+}
+</code></pre>
+</details>
+        <button class="btn" data-print="#p3">🖨 طباعة</button>
+      </div>
+
+      <div class="card" id="p4">
+        <h3>التشجير الرقمي (1)</h3>
+        <p class="muted">المشاركات: جوري القحطاني، داليا الشهراني، درر الشهري</p>
+        <details open>
+          <summary>خطوات سريعة في Scratch</summary>
+          <ol>
+            <li>خلفية أرض قاحلة + شخصية زارع + بذور.</li>
+            <li>منطق: عند ضغط زر بالقرب من التربة ← زرع شجرة +1 نقطة.</li>
+            <li>شريط تقدم يقلل التصحر مع النقاط.</li>
+          </ol>
+        </details>
+        <button class="btn" data-print="#p4">🖨 طباعة</button>
+      </div>
+
+      <div class="card" id="p5">
+        <h3>التشجير والزيولايت (2)</h3>
+        <p class="muted">المشاركات: سمو القحطاني، نوادر الشهراني، شادن عبدلي</p>
+<details open>
+  <summary>خوارزمية مبسطة</summary>
+  <pre><code>// متغيرات: water, soilQuality, growth
+// إذا كان "زيولايت" مفعلًا:
+// soilQuality *= 1.2 ، معدل فقد الماء *= 0.7
+// كل دورة: growth += f(water, soilQuality) حتى حد أقصى
+</code></pre>
+</details>
+        <button class="btn" data-print="#p5">🖨 طباعة</button>
+      </div>
+    </section>
+
+    <!-- التقييم -->
+    <section id="assessment" class="page" data-keywords="روبرك تقييم حفظ طباعة">
+      <div class="card" id="rubric">
+        <h3>روبرك شامل (100)</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>المعيار</th><th>الوصف</th><th>الوزن</th><th>الدرجة</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>التفكير العلمي</td><td>تعريف المشكلة/تفسير البيانات</td><td>25</td><td><input id="r1" type="number" min="0" max="25" style="width:90px; font-size:16px"></td></tr>
+              <tr><td>الهندسة/البناء</td><td>متانة/مطابقة المتطلبات</td><td>25</td><td><input id="r2" type="number" min="0" max="25" style="width:90px; font-size:16px"></td></tr>
+              <tr><td>البرمجة/المنطق</td><td>صحة المنطق/الأخطاء</td><td>20</td><td><input id="r3" type="number" min="0" max="20" style="width:90px; font-size:16px"></td></tr>
+              <tr><td>العمل التعاوني</td><td>تقسيم أدوار/التزام</td><td>15</td><td><input id="r4" type="number" min="0" max="15" style="width:90px; font-size:16px"></td></tr>
+              <tr><td>العرض والتوثيق</td><td>ملصق/عرض وشواهد</td><td>15</td><td><input id="r5" type="number" min="0" max="15" style="width:90px; font-size:16px"></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:8px">
+          <button class="btn" id="calc">🧮 حساب</button>
+          <button class="btn soft" id="save-rubric">💾 حفظ</button>
+          <button class="btn soft" id="clear-rubric">♻️ مسح</button>
+          <span id="total" class="badge">المجموع: 0/100</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- الموارد -->
+    <section id="resources" class="page" data-keywords="SharePoint Scratch Tinkercad Arduino">
+      <div class="grid cols-2">
+        <div class="card">
+          <h3>معرض التوثيق (SharePoint)</h3>
+          <p class="muted">كل الصور/الملفات والتفاصيل الموسّعة محفوظة في المكتبة الرقمية.</p>
+          https://asrgirls-my.sharepoint.com/:f:/g/personal/t763621_asrg_moe_gov_sa/IgDdBsIIDxDWRJGH_ZC118iCAVr1du9ueqyhNpcAYAQUHQM?e=E8ghbJ📁 دخول المكتبة</a>
+        </div>
+        <div class="card">
+          <h3>روابط سريعة</h3>
+          <ul>
+            <li>https://scratch.mit.eduScratch — برمجة بصرية</a></li>
+            <li>https://www.tinkercad.com/circuitsTinkercad Circuits — محاكاة Arduino</a></li>
+            <li>https://www.arduino.cc/reference/en/Arduino Reference</a></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- الأسئلة -->
+    <section id="faq" class="page" data-keywords="مشاكل جوال طباعة مشاركة حفظ">
+      <div class="card">
+        <details open><summary>لا تستجيب الصفحة في الجوال</summary>
+          <ul>
+            <li>تأكدي من اتصال جيد وإغلاق أية أشرطة أدوات كثيفة.</li>
+            <li>جرّبي إغلاق تبويبات كثيرة لتقليل ضغط الذاكرة.</li>
+            <li>امسحي الكاش من إعدادات المتصفح وأعيدي التحميل.</li>
+          </ul>
+        </details>
+        <details><summary>كيف أطبع جزءًا محددًا؟</summary>
+          <p>اضغطي زر <b>“طباعة هذا القسم”</b> داخل البطاقة التي تريدينها.</p>
+        </details>
+      </div>
+    </section>
+
+    <footer style="text-align:center; color:var(--muted); padding:22px">
+      © 2026 المتوسطة الواحدة والعشرون بخميس مشيط - منهج STEAM الإثرائي
+    </footer>
+  </main>
+
+  <script>
+    // ===== تنقل مبسّط متوافق مع الجوال =====
+    const pages = [...document.querySelectorAll('.page')];
+    const nav = document.getElementById('top-nav');
+
+    function show(id){
+      pages.forEach(p=>p.classList.toggle('active', p.id===id));
+      nav.querySelectorAll('.tab').forEach(b=>{
+        const on = b.dataset.target === id;
+        b.classList.toggle('active', on);
+        b.setAttribute('aria-selected', on ? 'true' : 'false');
+      });
+      history.replaceState(null,'','#'+id);
+      // تمرير للأعلى بسلاسة مع احترام تقليل الحركة
+      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      window.scrollTo({ top: 0, behavior: prefersReduced ? 'auto' : 'smooth' });
     }
-</script>
+
+    nav.addEventListener('click', (e)=>{
+      const b = e.target.closest('.tab'); if(!b) return;
+      show(b.dataset.target);
+    }, {passive:true});
+
+    // فتح من روابط “فتح التفاصيل”
+    document.body.addEventListener('click', (e)=>{
+      const b = e.target.closest('[data-go]'); if(!b) return;
+      const val = b.getAttribute('data-go'); // ex: "projects#p1"
+      const [page, anchor] = val.split('#');
+      show(page);
+      if(anchor){
+        setTimeout(()=>{
+          const el = document.getElementById(anchor);
+          if(el) el.scrollIntoView({behavior:'smooth', block:'start'});
+        }, 150);
+      }
+    }, {passive:true});
+
+    // تفعيل الصفحة من الـ hash عند التحميل
+    window.addEventListener('load', ()=>{
+      const id = location.hash.replace('#','') || 'home';
+      if(document.getElementById(id)) show(id);
+      loadStudentLog();
+      loadRubric();
+    });
+
+    // ===== بحث مع إيقاف مؤقت (Debounce) =====
+    const search = document.getElementById('search');
+    let tDeb = null;
+    search.addEventListener('input', ()=>{
+      clearTimeout(tDeb);
+      tDeb = setTimeout(()=>{
+        const q = (search.value||'').toLowerCase().trim();
+        document.querySelectorAll('.card').forEach(card=>{
+          const kw = (card.dataset.keywords||'') + ' ' + card.textContent;
+          card.style.display = kw.toLowerCase().includes(q) ? '' : 'none';
+        });
+      }, 160);
+    });
+
+    // ===== طباعة الصفحة/الأقسام (بدون كسر الصفحة) =====
+    document.getElementById('btn-print').addEventListener('click', ()=> window.print(), {passive:true});
+
+    function printElement(selector){
+      const node = document.querySelector(selector);
+      if(!node) return;
+      const w = window.open('', '_blank', 'noopener,noreferrer');
+      if(!w) { alert('يبدو أن مانع النوافذ منع الطباعة. اسمحي بالنوافذ المنبثقة وحاولي مجددًا.'); return; }
+      const html = `
+<!DOCTYPE html><html lang="ar" dir="rtl"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>طباعة</title>
+https://fonts.googleapis.com/css2?family=Tajawal:wght@300;500;700&display=swap
+<style>
+  body{font-family:'Tajawal',sans-serif; padding:14px; color:#000}
+  .card{border:1px solid #ccc; border-radius:8px; padding:12px}
+  h3,h4{margin:.4rem 0}
+  table{width:100%; border-collapse:collapse}
+  th,td{border:1px solid #ccc; padding:8px; text-align:right}
+</style>
+</head><body>${node.outerHTML}</body></html>`;
+      w.document.open(); w.document.write(html); w.document.close();
+      setTimeout(()=>{ w.focus(); w.print(); w.close(); }, 300);
+    }
+
+    document.body.addEventListener('click', (e)=>{
+      const b = e.target.closest('[data-print]'); if(!b) return;
+      e.preventDefault();
+      printElement(b.getAttribute('data-print'));
+    });
+
+    // ===== مشاركة الرابط (مع بديل إن لم تتوفر API) =====
+    document.getElementById('btn-share').addEventListener('click', async ()=>{
+      const url = location.href;
+      try{
+        if(navigator.share){
+          await navigator.share({title:document.title, url});
+        }else if(navigator.clipboard && navigator.clipboard.writeText){
+          await navigator.clipboard.writeText(url);
+          alert('تم نسخ الرابط ✅');
+        }else{
+          const tmp = document.createElement('input');
+          tmp.value = url; document.body.appendChild(tmp); tmp.select();
+          document.execCommand('copy'); document.body.removeChild(tmp);
+          alert('تم نسخ الرابط ✅');
+        }
+      }catch(_){}
+    }, {passive:true});
+
+    // ===== سجل الطالبة (localStorage) =====
+    const LS_LOG = 'steam_student_log_v2';
+    function saveStudentLog(){
+      const rec = {
+        name: document.getElementById('st-name').value||'',
+        project: document.getElementById('st-project').value||'',
+        log: document.getElementById('st-log').value||'',
+        issue: document.getElementById('st-issue').value||'',
+        ts: new Date().toISOString()
+      };
+      localStorage.setItem(LS_LOG, JSON.stringify(rec));
+      alert('تم الحفظ على هذا الجهاز ✅');
+    }
+    function loadStudentLog(){
+      try{
+        const rec = JSON.parse(localStorage.getItem(LS_LOG)||'{}');
+        if(rec.name) document.getElementById('st-name').value = rec.name;
+        if(rec.project) document.getElementById('st-project').value = rec.project;
+        if(rec.log) document.getElementById('st-log').value = rec.log;
+        if(rec.issue) document.getElementById('st-issue').value = rec.issue;
+      }catch(_){}
+    }
+    function clearStudentLog(){
+      localStorage.removeItem(LS_LOG);
+      ['st-name','st-project','st-log','st-issue'].forEach(id=>{
+        const el = document.getElementById(id);
+        if(el.tagName==='SELECT') el.selectedIndex = 0; else el.value = '';
+      });
+    }
+    document.getElementById('save-log').addEventListener('click', saveStudentLog, {passive:true});
+    document.getElementById('clear-log').addEventListener('click', clearStudentLog, {passive:true});
+
+    // ===== رُوبرِك (localStorage) =====
+    const LS_RUB = 'steam_rubric_v2';
+    function calc(){
+      const ids = ['r1','r2','r3','r4','r5'];
+      const val = ids.map(id=>Number(document.getElementById(id).value||0));
+      const total = val.reduce((a,b)=>a+b,0);
+      document.getElementById('total').textContent = 'المجموع: '+total+'/100';
+      return total;
+    }
+    function saveRubric(){
+      const data = {
+        r1:+document.getElementById('r1').value||0,
+        r2:+document.getElementById('r2').value||0,
+        r3:+document.getElementById('r3').value||0,
+        r4:+document.getElementById('r4').value||0,
+        r5:+document.getElementById('r5').value||0,
+        total: calc(), ts: new Date().toISOString()
+      };
+      localStorage.setItem(LS_RUB, JSON.stringify(data));
+      alert('تم حفظ الروبرك ✅');
+    }
+    function loadRubric(){
+      try{
+        const d = JSON.parse(localStorage.getItem(LS_RUB)||'{}');
+        ['r1','r2','r3','r4','r5'].forEach((id,i)=>{
+          const k='r'+(i+1); if(d[k]!==undefined) document.getElementById(id).value = d[k];
+        });
+        if(d.total) document.getElementById('total').textContent = 'المجموع: '+d.total+'/100';
+      }catch(_){}
+    }
+    function clearRubric(){
+      localStorage.removeItem(LS_RUB);
+      ['r1','r2','r3','r4','r5'].forEach(id=>document.getElementById(id).value='');
+      calc();
+    }
+    document.getElementById('calc').addEventListener('click', calc, {passive:true});
+    document.getElementById('save-rubric').addEventListener('click', saveRubric, {passive:true});
+    document.getElementById('clear-rubric').addEventListener('click', clearRubric, {passive:true});
+  </script>
 </body>
 </html>
-   صمم لي موقع اريد ان يكون اكثر تفصيلا في المعلومات 
-بحيث يكون منهج عملي إثرائي" يخدم الطالبات والمعلمات
