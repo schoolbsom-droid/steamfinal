@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مسابقة قيمنا الرقمية الرمضانية</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-orange: #ff9800;
+            --light-orange: #fff3e0;
+            --dark-orange: #e65100;
+            --gradient: linear-gradient(135deg, #ff9800 0%, #feb47b 100%);
+        }
+
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background: #fff8f0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+            color: #444;
+        }
+
+        .container {
+            width: 95%;
+            max-width: 600px;
+            background: white;
+            margin: 20px;
+            border-radius: 30px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(255, 152, 0, 0.1);
+        }
+
+        /* الجزء العلوي */
+        .header { background: white; padding: 15px; text-align: center; border-bottom: 1px solid #ffe0b2; }
+        .school-info { font-size: 0.85rem; color: #888; margin: 2px 0; }
+        .manager { font-weight: bold; color: var(--dark-orange); }
+
+        /* المقدمة التشويقية */
+        .intro-section {
+            background: var(--gradient);
+            padding: 30px 20px;
+            color: white;
+            text-align: center;
+        }
+        .intro-section h1 { font-size: 1.8rem; margin: 0 0 10px; }
+        .intro-section p { font-size: 0.9rem; line-height: 1.6; opacity: 0.9; }
+
+        /* منطقة الأسئلة */
+        .quiz-area { padding: 30px 20px; }
+        .progress-bar { height: 6px; background: #eee; border-radius: 10px; margin-bottom: 25px; }
+        .progress { height: 100%; background: var(--primary-orange); width: 0%; transition: 0.3s; }
+        
+        .question-text { font-size: 1.2rem; font-weight: bold; margin-bottom: 20px; min-height: 60px; }
+        .options { display: flex; flex-direction: column; gap: 10px; }
+        .option-btn {
+            background: var(--light-orange);
+            border: 2px solid transparent;
+            padding: 15px;
+            border-radius: 15px;
+            cursor: pointer;
+            text-align: right;
+            font-family: 'Tajawal';
+            transition: 0.2s;
+        }
+        .option-btn:hover { border-color: var(--primary-orange); background: #ffe0b2; }
+
+        /* النتيجة */
+        #result-box { display: none; padding: 40px 20px; text-align: center; }
+        .score-circle { 
+            width: 100px; height: 100px; border: 5px solid var(--primary-orange); 
+            border-radius: 50%; display: flex; align-items: center; 
+            justify-content: center; font-size: 2rem; font-weight: 900; margin: 0 auto 20px;
+        }
+
+        .organizers { font-size: 0.8rem; background: #fafafa; padding: 15px; border-top: 1px solid #eee; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <p class="school-info">المتوسطة الواحدة والعشرون بخميس مشيط</p>
+        <p class="manager">مديرة المدرسة: أمينة آل مشيط</p>
+    </div>
+
+    <div class="intro-section" id="intro-screen">
+        <p>مجال العلوم والتقنية يطلق</p>
+        <h1>هاكاثون قيمنا الرقمية</h1>
+        <p>تحدي رمضاني مخصص لتطوير قدراتك في اتخاذ القرارات الذكية تقنياً وأخلاقياً. 10 أسئلة تفصلك عن لقب بطلة الوعي الرقمي!</p>
+        <button onclick="startQuiz()" style="background: white; color: var(--dark-orange); border: none; padding: 12px 30px; border-radius: 25px; font-weight: bold; margin-top: 15px; cursor: pointer;">ابدئي التحدي</button>
+    </div>
+
+    <div class="quiz-area" id="quiz-screen" style="display: none;">
+        <div class="progress-bar"><div class="progress" id="progress"></div></div>
+        <div class="question-text" id="question"></div>
+        <div class="options" id="options"></div>
+    </div>
+
+    <div id="result-box">
+        <div class="score-circle" id="score-num">0</div>
+        <h3>تقييمك في القيم الرقمية</h3>
+        <p id="feedback"></p>
+        <button onclick="location.reload()" style="background: var(--primary-orange); color: white; border: none; padding: 10px 25px; border-radius: 20px; cursor: pointer;">إعادة المحاولة</button>
+    </div>
+
+    <div class="organizers">
+        المنفذات للمبادرة:<br>
+        <strong>كرزية عسيري</strong><br>
+        <strong>ابتسام الشهري</strong>
+    </div>
+</div>
+
+<script>
+    const quizData = [
+        { q: "عند كتابة تعليق في منصة مدرستي، أحرص أن يكون:", options: ["نقداً قاسياً", "كلمة طيبة ومفيدة", "رأياً شخصياً جارحاً"], correct: 1 },
+        { q: "رأيتِ صورة لزميلتك دون علمها، هل تنشرينها؟", options: ["نعم، للمزاح", "لا، احتراماً لخصوصيتها", "نعم، إذا كانت جميلة"], correct: 1 },
+        { q: "ماذا تفعلين إذا واجهتِ إعلاناً غير لائق؟", options: ["أغلق الصفحة فوراً", "أشاهده بدافع الفضول", "أرسله لصديقاتي"], correct: 0 },
+        { q: "كلمة المرور القوية يجب أن تحتوي على:", options: ["اسمي وتاريخ ميلادي", "أرقام ورموز وحروف متنوعة", "123456"], correct: 1 },
+        { q: "الأمانة الرقمية تعني:", options: ["تحميل الكتب المقرصنة", "ذكر اسم صاحب العمل عند النشر", "تجاهل حقوق الآخرين"], correct: 1 },
+        { q: "عند الغضب من شخص في الإنترنت، الأفضل هو:", options: ["الرد عليه بالمثل", "تجاهله أو التبليغ عنه بهدوء", "البحث عن معلوماته الشخصية"], correct: 1 },
+        { q: "استخدام التقنية في رمضان يجب أن يكون:", options: ["مضيعة للوقت", "موازناً بين العبادة والفائدة", "طوال اليوم دون توقف"], correct: 1 },
+        { q: "وصلكِ رابط لربح جائزة مالية ضخمة بشكل مفاجئ:", options: ["أضغط عليه بسرعة", "أتجاهله لأنه قد يكون اختراقاً", "أرسله لكل المضافين عندي"], correct: 1 },
+        { q: "وجدتِ تطبيقاً يطلب الوصول لموقعك وصورك دون حاجة:", options: ["أوافق للسرعة", "أرفض لحماية خصوصيتي", "أسأل صديقتي"], correct: 1 },
+        { q: "بصمتك الرقمية هي:", options: ["أثرك الذي تتركينه في الإنترنت", "عدد إعجاباتك فقط", "نوع جهازك المحمول"], correct: 0 }
+    ];
+
+    let currentIdx = 0;
+    let score = 0;
+
+    function startQuiz() {
+        document.getElementById('intro-screen').style.display = 'none';
+        document.getElementById('quiz-screen').style.display = 'block';
+        showQuestion();
+    }
+
+    function showQuestion() {
+        const item = quizData[currentIdx];
+        document.getElementById('question').innerText = item.q;
+        const opts = document.getElementById('options');
+        opts.innerHTML = "";
+        item.options.forEach((o, i) => {
+            const b = document.createElement('button');
+            b.className = 'option-btn';
+            b.innerText = o;
+            b.onclick = () => handleAnswer(i);
+            opts.appendChild(b);
+        });
+        document.getElementById('progress').style.width = ((currentIdx / quizData.length) * 100) + "%";
+    }
+
+    function handleAnswer(i) {
+        if(i === quizData[currentIdx].correct) score++;
+        currentIdx++;
+        if(currentIdx < quizData.length) showQuestion();
+        else showFinal();
+    }
+
+    function showFinal() {
+        document.getElementById('quiz-screen').style.display = 'none';
+        document.getElementById('result-box').style.display = 'block';
+        document.getElementById('score-num').innerText = score;
+        document.getElementById('feedback').innerText = score > 7 ? "أنتِ بطلة في القيم الرقمية!" : "بداية جيدة، حاولي التعرف أكثر على قيمنا الرقمية.";
+    }
+</script>
+
+</body>
+</html>
