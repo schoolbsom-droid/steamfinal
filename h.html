@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>هاكاثون قيمنا الرقمية 1447هـ</title>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100;400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --deep-orange: #e65100;
+            --main-orange: #ff9800;
+            --light-orange: #fff8f0;
+            --peach: #ffe0b2;
+            --gold-glow: #ffc107;
+            --red-glow: #ff5252;
+            --pure-black: #000000;
+        }
+
+        * { box-sizing: border-box; font-family: 'Vazirmatn', sans-serif; -webkit-tap-highlight-color: transparent; }
+
+        body { margin: 0; padding: 0; background-color: #fffcf9; color: #4e342e; }
+
+        /* الهيدر بتدرج برتقالي */
+        header {
+            background: linear-gradient(180deg, #ffa726 0%, #fb8c00 100%);
+            padding: 50px 20px;
+            text-align: center;
+            color: white;
+            box-shadow: 0 4px 15px rgba(230, 81, 0, 0.15);
+        }
+
+        /* بيانات القيادة - خط صغير جداً برتقالي على خلفية فاتحة */
+        .header-meta {
+            background-color: rgba(255, 255, 255, 0.95);
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            border: 1px solid var(--peach);
+        }
+
+        .header-meta span {
+            display: block;
+            color: var(--deep-orange);
+            font-size: 0.6rem; /* أصغر مرتين */
+            font-weight: 800;
+            line-height: 1.6;
+        }
+
+        /* اسم المشروع بالأسود الصريح */
+        .hero-title {
+            color: var(--pure-black);
+            font-size: 2.4rem;
+            font-weight: 900;
+            margin: 15px 0;
+        }
+
+        .container { max-width: 650px; margin: -25px auto 50px; padding: 0 20px; }
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 25px;
+            box-shadow: 0 10px 30px rgba(230, 81, 0, 0.05);
+            margin-bottom: 25px;
+            text-align: center;
+            border: 1px solid #fdf2e4;
+        }
+
+        .card h2 { color: var(--deep-orange); font-size: 1.25rem; margin-bottom: 12px; }
+        .card p { font-size: 0.95rem; line-height: 1.8; color: #5a4040; }
+
+        /* منطقة الاختبار */
+        .quiz-card {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 30px;
+            border: 2px solid var(--peach);
+            text-align: center;
+        }
+
+        /* زر البدء البرتقالي المبهج */
+        .orange-btn {
+            background: linear-gradient(90deg, #ff9800, #e65100);
+            color: white;
+            border: none;
+            padding: 16px 45px;
+            font-size: 1.1rem;
+            font-weight: 800;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(230, 81, 0, 0.3);
+            transition: all 0.3s;
+        }
+
+        .orange-btn:hover { transform: translateY(-3px); box-shadow: 0 12px 25px rgba(230, 81, 0, 0.4); }
+
+        .options-container { display: flex; flex-direction: column; gap: 12px; margin-top: 25px; }
+
+        .option {
+            background: #fff;
+            border: 2px solid var(--peach);
+            padding: 18px;
+            border-radius: 15px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+            color: #4e342e;
+            outline: none;
+        }
+
+        /* تأثيرات الحركة والإضاءة */
+        @keyframes shake {
+            0% { transform: translateX(0); }
+            25% { transform: translateX(-7px); }
+            50% { transform: translateX(7px); }
+            100% { transform: translateX(0); }
+        }
+        .shaking { animation: shake 0.3s ease-in-out; }
+
+        .glow-correct {
+            background-color: #fffde7 !important;
+            border-color: var(--gold-glow) !important;
+            box-shadow: 0 0 25px rgba(255, 193, 7, 0.8);
+            color: #000 !important;
+        }
+
+        .glow-wrong {
+            background-color: #fff5f5 !important;
+            border-color: var(--red-glow) !important;
+            box-shadow: 0 0 25px rgba(255, 82, 82, 0.6);
+            color: var(--red-glow) !important;
+        }
+
+        /* النصيحة اللطيفة */
+        .advice-box {
+            background-color: #fff3e0;
+            padding: 40px 25px;
+            border-radius: 20px;
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .advice-box p { font-size: 1.05rem; line-height: 2; color: #5d4037; font-weight: 500; }
+
+        .credits {
+            background: white;
+            margin-top: 30px;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            font-weight: 700;
+            color: var(--deep-orange);
+            border-top: 3px solid var(--main-orange);
+        }
+
+        footer { text-align: center; padding: 40px 20px; color: #a1887f; font-size: 0.85rem; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-meta">
+            <span>مدرسة المتوسطة الواحدة والعشرون بخميس مشيط</span>
+            <span>مديرة المدرسة: أمينة آل مشيط</span>
+            <span>المنفذات للمبادرة: كرزية عسيري - ابتسام الشهري</span>
+        </div>
+        <p style="font-weight: 400; margin: 0; font-size: 0.85rem;">مجال العلوم والتقنية يقدم</p>
+        <h1 class="hero-title">هاكاثون قيمنا الرقمية</h1>
+    </header>
+
+    <div class="container">
+        <div class="card">
+            <h2>عن المسابقة</h2>
+            <p>
+                مسابقة رقمية تعنى بالبرمجة والتصاميم والنمذجة والابتكار في مجال التقنية والذكاء الاصطناعي في شهر رمضان المبارك لعام ١٤٤٧هـ. نسعى من خلالها إلى اكتشاف المواهب وبناء جيل تقني يفتخر بقيمه وهويته.
+            </p>
+        </div>
+
+        <div class="quiz-card" id="quiz-container">
+            <div id="intro">
+                <h2 style="color: #000; margin-bottom: 10px;">تحدي الوعي الرقمي</h2>
+                <p style="margin-bottom: 25px; color: #6d4c41;">10 مواقف ذكية بانتظار قراراتكِ المبدعة</p>
+                <button class="orange-btn" onclick="startQuiz()">بدء التحدي</button>
+            </div>
+
+            <div id="content" style="display: none;">
+                <h3 id="question-text" style="color: var(--deep-orange); min-height: 60px;"></h3>
+                <div class="options-container" id="options-area"></div>
+            </div>
+        </div>
+
+        <div class="advice-box">
+            <p>
+                عزيزتي المبدعة اجعلي من كل سطر برمجي تكتبينه ومن كل تصميم تبتكرينه بصمة خير تعكس جمال روحك ورقي قيمك فالتقنية قوة لا يكتمل سحرها إلا حين تزدان بالأخلاق والصدق فكوني أنت الوجه المشرق للمستقبل التقني الذي نفخر به
+            </p>
+        </div>
+
+        <div class="credits">
+            إعداد المعلمتين / كرزية عسيري وابتسام الشهري
+        </div>
+
+        <footer>
+            المسابقة الرمضانية في مجال العلوم والتقنية لعام ١٤٤٧ هـ
+        </footer>
+    </div>
+
+    <audio id="snd-success" src="https://assets.mixkit.co/active_storage/sfx/2013/2013-preview.mp3"></audio>
+    <audio id="snd-error" src="https://assets.mixkit.co/active_storage/sfx/2869/2869-preview.mp3"></audio>
+
+    <script>
+        const quizData = [
+            { q: "عند كتابة تعليق في منصة مدرستي، أحرص أن يكون:", a: ["نقداً قاسياً", "كلمة طيبة ومفيدة", "رأياً شخصياً جارحاً"], c: 1 },
+            { q: "رأيتِ صورة لزميلتك دون علمها، هل تنشرينها؟", a: ["نعم، للمزاح", "لا، احتراماً لخصوصيتها", "نعم، إذا كانت جميلة"], c: 1 },
+            { q: "ماذا تفعلين إذا واجهتِ إعلاناً غير لائق؟", a: ["أغلق الصفحة فوراً", "أشاهده بدافع الفضول", "أرسله لصديقاتي"], c: 0 },
+            { q: "كلمة المرور القوية يجب أن تحتوي على:", a: ["اسمي وتاريخ ميلادي", "أرقام ورموز وحروف متنوعة", "123456"], c: 1 },
+            { q: "الأمانة الرقمية تعني:", a: ["تحميل الكتب المقرصنة", "ذكر اسم صاحب العمل عند النشر", "تجاهل حقوق الآخرين"], c: 1 },
+            { q: "عند الغضب من شخص في الإنترنت، الأفضل هو:", a: ["الرد عليه بالمثل", "تجاهله أو التبليغ عنه بهدوء", "البحث عن معلوماته الشخصية"], c: 1 },
+            { q: "استخدام التقنية في رمضان يجب أن يكون:", a: ["مضيعة للوقت", "موازناً بين العبادة والفائدة", "طوال اليوم دون توقف"], c: 1 },
+            { q: "وصلكِ رابط لربح جائزة مالية ضخمة بشكل مفاجئ:", a: ["أضغط عليه بسرعة", "أتجاهله لأنه قد يكون اختراقاً", "أرسله لكل المضافين عندي"], c: 1 },
+            { q: "وجدتِ تطبيقاً يطلب الوصول لموقعك وصورك دون حاجة:", a: ["أوافق للسرعة", "أرفض لحماية خصوصيتي", "أسأل صديقتي"], c: 1 },
+            { q: "بصمتك الرقمية هي:", a: ["أثرك الذي تتركينه في الإنترنت", "عدد إعجاباتك فقط", "نوع جهازك المحمول"], c: 0 }
+        ];
+
+        let index = 0;
+        let score = 0;
+
+        function startQuiz() {
+            document.getElementById('intro').style.display = 'none';
+            document.getElementById('content').style.display = 'block';
+            loadQ();
+        }
+
+        function loadQ() {
+            const item = quizData[index];
+            document.getElementById('question-text').innerText = item.q;
+            const area = document.getElementById('options-area');
+            area.innerHTML = "";
+            item.a.forEach((txt, i) => {
+                const b = document.createElement('button');
+                b.className = 'option';
+                b.innerText = txt;
+                b.onclick = (e) => select(e.target, i);
+                area.appendChild(b);
+            });
+        }
+
+        function select(el, i) {
+            const correct = i === quizData[index].c;
+            el.classList.add('shaking');
+            const btns = document.querySelectorAll('.option');
+            btns.forEach(b => b.style.pointerEvents = 'none');
+
+            setTimeout(() => {
+                el.classList.remove('shaking');
+                if(correct) {
+                    el.classList.add('glow-correct');
+                    document.getElementById('snd-success').play();
+                    score++;
+                } else {
+                    el.classList.add('glow-wrong');
+                    document.getElementById('snd-error').play();
+                }
+
+                setTimeout(() => {
+                    index++;
+                    if(index < quizData.length) loadQ();
+                    else finalize();
+                }, 1200);
+            }, 300);
+        }
+
+        function finalize() {
+            const quiz = document.getElementById('quiz-container');
+            quiz.innerHTML = `
+                <h2 style="color:var(--deep-orange)">أحسنتِ يا مبدعة! 🎉</h2>
+                <p style="font-size:1.6rem; font-weight:900; margin:15px 0;">درجتكِ النهائية: ${score} من 10</p>
+                <p>فخورون بوعيكِ الرقمي المتميز</p>
+                <button class="orange-btn" onclick="location.reload()" style="margin-top:20px;">إعادة التحدي</button>
+            `;
+        }
+    </script>
+</body>
+</html>
