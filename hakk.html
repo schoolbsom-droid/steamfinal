@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>هاكاثون قيمنا الرقمية</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #a29bfe 0%, #81ecec 100%);
+            --bg-color: #f8f9ff;
+        }
+
+        body {
+            font-family: 'Tajawal', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: var(--bg-color);
+            color: #333;
+            min-height: 100vh;
+        }
+
+        /* الجزء العلوي - شفاف وبسيط */
+        header {
+            padding: 20px;
+            text-align: center;
+            background: white;
+            border-bottom: 1px solid #eee;
+        }
+        .header-text { margin: 5px 0; font-size: 0.95rem; color: #666; }
+        .manager-highlight { color: #6c5ce7; font-weight: bold; font-size: 1.1rem; }
+
+        /* منطقة العنوان الرئيسية (Hero) */
+        .hero-box {
+            background: var(--primary-gradient);
+            padding: 50px 20px;
+            text-align: center;
+            color: white;
+            clip-path: ellipse(150% 100% at 50% 0%); /* انحناء مشابه لبوسترات طويق */
+        }
+        .hero-box p { font-weight: bold; letter-spacing: 1px; margin-bottom: 10px; }
+        .project-title { 
+            color: #000; 
+            font-size: 2.5rem; 
+            font-weight: 900; 
+            margin: 0; 
+        }
+
+        .container { max-width: 650px; margin: -30px auto 50px; padding: 20px; }
+
+        /* بطاقات المحتوى */
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            margin-bottom: 25px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* المنفذات */
+        .organizers-list { line-height: 1.8; font-size: 1.1rem; }
+        .label { color: #6c5ce7; font-weight: bold; display: block; margin-bottom: 10px; }
+
+        /* مراحل المشروع - أيقونات وهمية بالرسم */
+        .step {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            padding: 10px;
+            border-right: 4px solid #81ecec;
+            background: #fbfbfb;
+            border-radius: 8px;
+        }
+        .step-num { font-weight: 900; font-size: 1.2rem; color: #a29bfe; margin-left: 15px; }
+
+        /* قسم الأمثلة المثرية */
+        .example-card {
+            background: #6c5ce7;
+            color: white;
+            padding: 20px;
+            border-radius: 20px;
+        }
+        .example-item {
+            background: rgba(255,255,255,0.1);
+            padding: 12px;
+            border-radius: 10px;
+            margin-top: 10px;
+            font-size: 0.9rem;
+        }
+
+        /* الجوائز - مركزة */
+        .prize-section {
+            text-align: center;
+            padding: 30px;
+            background: white;
+            border: 3px dashed #81ecec;
+            border-radius: 20px;
+        }
+        .prize-amount { font-size: 1.5rem; font-weight: 900; color: #000; }
+
+        footer { text-align: center; padding: 30px; font-size: 0.8rem; color: #999; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <p class="header-text">المتوسطة الواحدة والعشرون بخميس مشيط</p>
+        <p class="manager-highlight">مديرة المدرسة: أمينة آل مشيط</p>
+    </header>
+
+    <div class="hero-box">
+        <p>مجال العلوم والتقنية يقدم</p>
+        <h1 class="project-title">هاكاثون قيمنا الرقمية</h1>
+    </div>
+
+    <div class="container">
+        
+        <div class="card">
+            <span class="label">المنفذات للمبادرة:</span>
+            <div class="organizers-list">
+                <div>كرزية عسيري</div>
+                <div>ابتسام الشهري</div>
+            </div>
+        </div>
+
+        <div class="card">
+            <span class="label">رحلة بناء مشروعك:</span>
+            <div class="step"><span class="step-num">01</span> ابحثي عن فكرة تخدم قيمنا (الصدق، الاحترام، العطاء).</div>
+            <div class="step"><span class="step-num">02</span> ارسمي مخططاً بسيطاً لشاشات مشروعك.</div>
+            <div class="step"><span class="step-num">03</span> استخدمي أدوات الذكاء الاصطناعي (ChatGPT/Canva) للتنفيذ.</div>
+            <div class="step"><span class="step-num">04</span> كوني جاهزة لعرض ابتكارك أمام الجميع!</div>
+        </div>
+
+        <div class="example-card">
+            <span style="font-weight: bold; font-size: 1.1rem;">أفكار تلهمكِ 💡</span>
+            <div class="example-item">
+                <strong>تطبيق "رفيق الأخلاق":</strong> ينبهكِ بعبارات تحفيزية عند دخول منصات التواصل.
+            </div>
+            <div class="example-item">
+                <strong>لعبة "صدق أو لا تصدق":</strong> تحدي رقمي لكشف الأخبار المزيفة بذكاء.
+            </div>
+            <div class="example-item">
+                <strong>منصة "بصمتي":</strong> ركن رقمي لعرض مبادرات الطالبات التطوعية.
+            </div>
+        </div>
+
+        <div class="prize-section" style="margin-top: 30px;">
+            <p style="margin: 0; color: #666;">تكريم خاص بانتظار</p>
+            <div class="prize-amount">3 فائزات مبدعات</div>
+            <p style="font-size: 0.8rem; color: #aaa; margin-top: 10px;">انضمي إلينا وحولي فكرتك إلى حقيقة</p>
+        </div>
+
+        <footer>
+            جميع الحقوق محفوظة - المتوسطة 21 بخميس مشيط
+        </footer>
+    </div>
+
+</body>
+</html>
