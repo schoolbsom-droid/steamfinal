@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>هاكاثون قيمنا الرقمية - المتوسطة 21</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #4a148c; /* بنفسجي غامق */
+            --secondary-color: #00bcd4; /* سماوي تقني */
+            --accent-color: #ffc107; /* ذهبي للجوائز */
+            --bg-light: #f4f7f6;
+        }
+
+        body {
+            font-family: 'Tajawal', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-light);
+            color: #333;
+        }
+
+        /* Header */
+        header {
+            background: white;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+        }
+
+        .hero h1 { font-size: 3rem; margin-bottom: 10px; }
+        .hero p { font-size: 1.2rem; opacity: 0.9; }
+
+        /* Sections */
+        .container { max-width: 1000px; margin: auto; padding: 40px 20px; }
+        
+        .section-title {
+            text-align: center;
+            color: var(--primary-color);
+            margin-bottom: 40px;
+            font-size: 2rem;
+            border-bottom: 3px solid var(--secondary-color);
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            text-align: center;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+        .card:hover { transform: translateY(-10px); }
+
+        /* Prizes */
+        .prizes {
+            background: #fff;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            border: 2px dashed var(--accent-color);
+        }
+
+        .prize-item { color: var(--primary-color); font-weight: bold; font-size: 1.5rem; margin: 10px 0; }
+
+        /* Footer */
+        footer {
+            background: #222;
+            color: white;
+            text-align: center;
+            padding: 30px;
+            margin-top: 50px;
+        }
+
+        .btn {
+            background: var(--accent-color);
+            color: #222;
+            padding: 15px 40px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            display: inline-block;
+            margin-top: 20px;
+            font-size: 1.2rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h3>المتوسطة الواحدة والعشرون بخميس مشيط</h3>
+        <p>مجال العلوم والتقنية</p>
+    </header>
+
+    <section class="hero">
+        <h1>هاكاثون قيمنا الرقمية 🚀</h1>
+        <p>نبتكر بالتقنية.. لنرتقي بالقيم</p>
+        <a href="#" class="btn">سجلي الآن كـ مبدعة</a>
+    </section>
+
+    <div class="container">
+        <div style="text-align: center; margin-bottom: 60px;">
+            <h2 class="section-title">عن الهاكاثون</h2>
+            <p>سباق إبداعي لطالباتنا الموهوبات لتحويل الأفكار التقنية إلى واقع يخدم قيمنا الإسلامية والاجتماعية في الفضاء الرقمي.</p>
+        </div>
+
+        <h2 class="section-title">المنفذات للمبادرة</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>أ. كرزية عسيري</h3>
+                <p>إشراف وتنفيذ تقني</p>
+            </div>
+            <div class="card">
+                <h3>أ. ابتسام الشهري</h3>
+                <p>إشراف وتنفيذ قيمي</p>
+            </div>
+        </div>
+
+        <div style="margin-top: 80px;">
+            <h2 class="section-title">جوائز التحدي 🏆</h2>
+            <div class="prizes">
+                <p>مكافآت قيمة لثلاث مبدعات فائزات:</p>
+                <div class="prize-item">🥇 المركز الأول: وسام الابتكار الرقمي + جائزة كبرى</div>
+                <div class="prize-item">🥈 المركز الثاني: وسام التميز التقني + جائزة قيمة</div>
+                <div class="prize-item">🥉 المركز الثالث: وسام الإبداع القيمي + جائزة تشجيعية</div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>تحت رعاية مديرة المدرسة</p>
+        <h2>أ. أمينة آل مشيط</h2>
+        <p>© 2024 المتوسطة 21 بخميس مشيط - جميع الحقوق محفوظة</p>
+    </footer>
+
+</body>
+</html>
