@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>هاكاثون قيمنا الرقمية</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --orange-main: #ff8f00;
+            --orange-gradient: linear-gradient(135deg, #ff9100 0%, #ff6d00 100%);
+            --soft-bg: #fffbf5;
+        }
+
+        body {
+            font-family: 'Tajawal', sans-serif;
+            margin: 0;
+            background-color: var(--soft-bg);
+            color: #2d3436;
+        }
+
+        /* الجزء العلوي الموحد (Header) */
+        header {
+            background: white;
+            padding: 25px 15px;
+            text-align: center;
+            border-bottom: 3px solid #ffe0b2;
+        }
+
+        .header-content {
+            font-size: 1.1rem; /* حجم موحد كما طلبتِ */
+            font-weight: 700;
+            color: #444;
+            line-height: 1.8;
+        }
+
+        /* منطقة العنوان (Hero Section) */
+        .hero {
+            background: var(--orange-gradient);
+            padding: 60px 20px;
+            text-align: center;
+            color: white;
+            box-shadow: inset 0 -10px 20px rgba(0,0,0,0.05);
+        }
+
+        .hero span { font-weight: bold; font-size: 1rem; opacity: 0.9; }
+        
+        /* اسم المشروع بالأسود العريض */
+        .project-title {
+            color: #000000;
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin: 15px 0 0 0;
+            letter-spacing: -1px;
+        }
+
+        .container { max-width: 750px; margin: -40px auto 50px; padding: 0 20px; }
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 25px;
+            box-shadow: 0 10px 25px rgba(255, 145, 0, 0.1);
+            margin-bottom: 25px;
+        }
+
+        .section-label {
+            color: var(--orange-main);
+            font-weight: 900;
+            font-size: 1.3rem;
+            display: block;
+            margin-bottom: 15px;
+            border-right: 5px solid var(--orange-main);
+            padding-right: 15px;
+        }
+
+        /* نظام الاختبار التفاعلي */
+        .quiz-box {
+            text-align: center;
+            background: #fff3e0;
+            border: 2px dashed var(--orange-main);
+            padding: 30px;
+            border-radius: 20px;
+        }
+
+        .option-btn {
+            display: block;
+            width: 100%;
+            background: white;
+            border: 2px solid #ffe0b2;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 12px;
+            font-family: 'Tajawal';
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .option-btn:hover { background: var(--orange-main); color: white; border-color: var(--orange-main); }
+
+        footer { text-align: center; padding: 40px; color: #aaa; font-size: 0.8rem; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-content">
+            مدرسة المتوسطة الواحدة والعشرون بخميس مشيط<br>
+            مديرة المدرسة: أمينة آل مشيط<br>
+            المنفذات للمبادرة: كرزية عسيري - ابتسام الشهري
+        </div>
+    </header>
+
+    <div class="hero">
+        <span>مجال العلوم والتقنية يرحب بكنّ في</span>
+        <h1 class="project-title">هاكاثون قيمنا الرقمية</h1>
+    </div>
+
+    <div class="container">
+        <div class="card">
+            <span class="section-label">فكرة المسابقة</span>
+            <p>مبادرة تفاعلية تسعى لتمكين طالباتنا من مهارات القرن الحادي والعشرين عبر ربط التقنية بالقيم الأصيلة. خوضي التحدي الآن واختبري وعيكِ الرقمي في 10 مواقف ذكية.</p>
+        </div>
+
+        <div class="card">
+            <span class="section-label">أمثلة لمشاريع مثرية</span>
+            <p>• <strong>المستشار الرقمي:</strong> تطبيق يقترح عليكِ بدائل تقنية آمنة.</p>
+            <p>• <strong>لعبة "قيمنا":</strong> رحلة برمجية لتعزيز الصدق والأمانة في الفضاء الإلكتروني.</p>
+            <p>• <strong>منصة "أثر":</strong> ركن لعرض المبادرات التطوعية الرقمية بالمدرسة.</p>
+        </div>
+
+        <div class="card quiz-box" id="quiz-container">
+            <h3 id="question-text">هل أنتِ مستعدة لبدء التحدي؟</h3>
+            <div id="options-area">
+                <button class="option-btn" onclick="startQuiz()">اضغطي هنا للبدء 🚀</button>
+            </div>
+            <p id="progress-text" style="font-size: 0.8rem; margin-top: 15px; color: #888;"></p>
+        </div>
+    </div>
+
+    <footer>
+        جميع الحقوق محفوظة © 2026 - مدرسة المتوسطة 21
+    </footer>
+
+    <script>
+        const questions = [
+            { q: "رأيتِ خبراً غريباً في منصة التواصل، أول خطوة هي:", a: ["نشره فوراً للتحذير", "التأكد من المصدر الرسمي", "إرساله لصديقاتي"], c: 1 },
+            { q: "استخدام صورة شخص آخر دون إذنه يعتبر:", a: ["ذكاء تقني", "تعدي على الخصوصية", "أمر عادي"], c: 1 },
+            { q: "عند إنشاء كلمة مرور، الأفضل أن تكون:", a: ["تاريخ ميلادي", "مزيج من حروف وأرقام ورموز", "اسم مدرستي"], c: 1 },
+            { q: "الأمانة الرقمية تعني:", a: ["حماية بياناتي فقط", "نسب الفضل لأصحابه عند الاقتباس", "إخفاء هويتي دائماً"], c: 1 },
+            { q: "التنمر الرقمي هو سلوك:", a: ["مرفوض قيميّاً وتقنيّاً", "مقبول إذا كان مزاحاً", "شجاعة إلكترونية"], c: 0 },
+            { q: "البصمة الرقمية هي:", a: ["اسم المستخدم", "كل ما تتركينه من أثر خلفك في الإنترنت", "بصمة الإصبع للدخول"], c: 1 },
+            { q: "إذا تعرضتِ لمضايقة إلكترونية، التصرف الأصح:", a: ["الرد بعنف", "إبلاغ الوالدين أو المعلمة", "إغلاق الجهاز للأبد"], c: 1 },
+            { q: "احترام أوقات الآخرين في الرسائل الرقمية يندرج تحت:", a: ["إتيكيت التواصل الرقمي", "ضعف شخصية", "خوف من الآخرين"], c: 0 },
+            { q: "الهدف من التقنية في حياتنا هو:", a: ["إضاعة الوقت", "تسهيل الحياة ونشر الفائدة", "الشهرة فقط"], c: 1 },
+            { q: "أفضل طريقة لحماية جهازك من الفيروسات:", a: ["عدم فتح روابط مجهولة", "تحميل كل الألعاب المجانية", "إلغاء التحديثات"], c: 0 }
+        ];
+
+        let currentIdx = 0;
+        let score = 0;
+
+        function startQuiz() {
+            showQuestion();
+        }
+
+        function showQuestion() {
+            const q = questions[currentIdx];
+            document.getElementById("question-text").innerText = q.q;
+            document.getElementById("progress-text").innerText = `السؤال ${currentIdx + 1} من 10`;
+            const area = document.getElementById("options-area");
+            area.innerHTML = "";
+            q.a.forEach((opt, i) => {
+                const btn = document.createElement("button");
+                btn.className = "option-btn";
+                btn.innerText = opt;
+                btn.onclick = () => check(i);
+                area.appendChild(btn);
+            });
+        }
+
+        function check(i) {
+            if(i === questions[currentIdx].c) score++;
+            currentIdx++;
+            if(currentIdx < questions.length) showQuestion();
+            else finish();
+        }
+
+        function finish() {
+            document.getElementById("quiz-container").innerHTML = `
+                <h2 style="color:var(--orange-main)">انتهى التحدي! 🎉</h2>
+                <p>درجتك هي: ${score} من 10</p>
+                <p>فخورة بكِ يا بطلة القيم الرقمية!</p>
+                <button class="option-btn" onclick="location.reload()">إعادة الاختبار</button>
+            `;
+        }
+    </script>
+</body>
+</html>
