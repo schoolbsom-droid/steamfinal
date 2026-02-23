@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>هاكاثون قيمنا الرقمية</title>
+
+  <link href="https://fonts.cdnfonts.com/css/vazirmatn" rel="stylesheet">
+
+  <style>
+    :root {
+      /* تدرج لوني فخم (بنفسجي عميق إلى أزرق كهربائي) مستوحى من تصاميم التقنية الحديثة */
+      --main-gradient: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #312e81 100%);
+      --glass-bg: rgba(255, 255, 255, 0.94);
+      --neon-purple: #8b5cf6;
+      --neon-blue: #3b82f6;
+      --text-dark: #1e293b;
+      --silver: #94a3b8;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--main-gradient);
+      background-attachment: fixed;
+      font-family: 'Vazirmatn', sans-serif;
+      color: var(--text-dark);
+      display: flex;
+      justify-content: center;
+    }
+
+    .page-wrapper {
+      width: 100%;
+      max-width: 450px;
+      padding: 25px 20px;
+    }
+
+    /* بطاقة بيانات المدرسة - تصميم شفاف وأنيق */
+    .school-card {
+      background: var(--glass-bg);
+      border-radius: 24px;
+      padding: 20px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+      margin-bottom: 35px;
+      text-align: center;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .school-card span { display: block; margin-bottom: 5px; }
+
+    .school-name { font-weight: 900; color: var(--neon-purple); font-size: 1rem; }
+    .label-meta { font-weight: 400; color: var(--silver); font-size: 0.8rem; }
+    .teacher-highlight { font-weight: 800; color: #000; font-size: 1.1rem; margin-top: 5px; }
+
+    header { text-align: center; margin-bottom: 30px; }
+
+    /* جعل العنوان أكثر بريقاً واهتماماً */
+    .hero-title {
+      font-size: 3rem;
+      font-weight: 900;
+      color: #ffffff;
+      margin: 10px 0;
+      text-shadow: 0 0 20px rgba(139, 92, 246, 0.8), 0 0 40px rgba(59, 130, 246, 0.4);
+      letter-spacing: -2px;
+      line-height: 1.1;
+    }
+
+    .hero-sub {
+      color: var(--neon-blue);
+      font-weight: 700;
+      font-size: 1.1rem;
+      text-shadow: 0 0 10px rgba(59, 130, 246, 0.3);
+    }
+
+    .card {
+      background: var(--glass-bg);
+      border-radius: 28px;
+      padding: 25px;
+      margin-bottom: 22px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+    }
+
+    .card-title {
+      font-size: 1.25rem;
+      font-weight: 900;
+      margin-bottom: 15px;
+      color: var(--neon-purple);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .card p { font-size: 0.95rem; line-height: 1.8; color: #475569; }
+
+    .idea-item {
+      background: rgba(139, 92, 246, 0.05);
+      padding: 12px 15px;
+      border-radius: 15px;
+      margin-bottom: 10px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      border-right: 4px solid var(--neon-purple);
+    }
+
+    .prizes-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+
+    .prize-box {
+      background: linear-gradient(90deg, #f8fafc, #ffffff);
+      padding: 15px;
+      border-radius: 18px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      border: 1px solid #e2e8f0;
+      transition: 0.3s;
+    }
+
+    .prize-box:hover { transform: scale(1.02); border-color: var(--neon-blue); }
+
+    .prize-icon { font-size: 1.5rem; }
+
+    /* زر التسجيل بتأثير الوميض الكهربائي */
+    .reg-btn {
+      width: 100%;
+      border: none;
+      border-radius: 20px;
+      padding: 18px;
+      font-size: 1.2rem;
+      font-weight: 900;
+      color: white;
+      background: linear-gradient(90deg, var(--neon-purple), var(--neon-blue));
+      cursor: pointer;
+      box-shadow: 0 15px 35px rgba(139, 92, 246, 0.4);
+      transition: 0.3s;
+    }
+
+    .reg-btn:hover { box-shadow: 0 15px 45px rgba(139, 92, 246, 0.6); transform: translateY(-2px); }
+
+    .visit-counter {
+      text-align: center;
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 0.8rem;
+      margin-top: 20px;
+    }
+
+    /* مودال التسجيل */
+    .modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(10px);
+      z-index: 100;
+    }
+
+    .modal-content {
+      background: white;
+      width: 90%;
+      max-width: 400px;
+      margin: 50px auto;
+      padding: 30px;
+      border-radius: 30px;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 14px;
+      margin-bottom: 15px;
+      border-radius: 15px;
+      border: 1px solid #e2e8f0;
+      font-family: 'Vazirmatn';
+    }
+
+    footer {
+      text-align: center;
+      color: rgba(255, 255, 255, 0.4);
+      padding: 30px 0;
+      font-size: 0.75rem;
+    }
+  </style>
+</head>
+<body>
+
+<div class="page-wrapper">
+  <div class="school-card">
+    <span class="school-name">المتوسطة الواحدة والعشرون بخميس مشيط</span>
+    <span class="label-meta">بإشراف المديرة الفاضلة</span>
+    <span class="teacher-highlight">أمينة آل مشيط</span>
+    <div style="height: 1px; background: #eee; margin: 15px 0;"></div>
+    <span class="label-meta">إعداد وتنفيذ المبدعات</span>
+    <span class="teacher-highlight">كرزية عسيري</span>
+    <span class="teacher-highlight">ابتسام الشهري</span>
+  </div>
+
+  <header>
+    <div style="color: var(--neon-blue); font-weight: 800; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 2px;">مجال العلوم والتقنية يقدم</div>
+    <h1 class="hero-title">هاكاثون<br>قيمنا الرقمية</h1>
+    <div class="hero-sub">رمضان ١٤٤٧ هـ | الإبداع بلا حدود</div>
+  </header>
+
+  <section class="card">
+    <h2 class="card-title">✨ مسارات الإبداع</h2>
+    <p>كوني جزءاً من التغيير وشاركي بفكرة تقنية بسيطة تعزز القيم الأخلاقية في عالمنا الرقمي:</p>
+    <div class="idea-item">🎬 تصميم فيديو توعوي بالذكاء الاصطناعي</div>
+    <div class="idea-item">🎨 ابتكار بوستر رقمي قيمي (AI Art)</div>
+    <div class="idea-item">🎙️ تسجيل برودكاست تقني ملهم</div>
+  </section>
+
+  <section class="card">
+    <h2 class="card-title">🏆 ألقاب التحدي</h2>
+    <div class="prizes-grid">
+      <div class="prize-box">
+        <span class="prize-icon">👑</span>
+        <div><b>وسام الريادة التقنية</b></div>
+      </div>
+      <div class="prize-box">
+        <span class="prize-icon">💎</span>
+        <div><b>لقب المبدعة الرقمية</b></div>
+      </div>
+      <div class="prize-box">
+        <span class="prize-icon">🌙</span>
+        <div><b>نجمة القيم الرمضانية</b></div>
+      </div>
+    </div>
+  </section>
+
+  <button class="reg-btn" onclick="openModal()">انضمي للتحدي الآن</button>
+
+  <div class="visit-counter">
+    عدد المبدعات اللاتي زُرنَ الموقع: <span id="visitCount">0</span>
+  </div>
+
+  <footer>
+    جميع الحقوق محفوظة - هاكاثون قيمنا الرقمية ١٤٤٧ هـ
+  </footer>
+</div>
+
+<div id="regModal" class="modal">
+  <div class="modal-content">
+    <h2 style="text-align: center; color: var(--neon-purple); font-weight: 900;">بطاقة المشاركة</h2>
+    <input type="text" id="name" placeholder="الاسم الثلاثي">
+    <select id="grade">
+      <option value="">اختاري الصف الدراسي</option>
+      <option>أول متوسط</option>
+      <option>ثاني متوسط</option>
+      <option>ثالث متوسط</option>
+    </select>
+    <textarea id="idea" rows="3" placeholder="وصفي فكرتك المبدعة هنا..."></textarea>
+    <button class="reg-btn" onclick="submitData()">إرسال ومشاركة</button>
+    <button onclick="closeModal()" style="width: 100%; background: none; border: none; color: #94a3b8; margin-top: 15px; cursor: pointer;">إغلاق</button>
+  </div>
+</div>
+
+<script>
+  // عداد الزيارات
+  let count = localStorage.getItem('hackathon_visits') || 0;
+  count++;
+  localStorage.setItem('hackathon_visits', count);
+  document.getElementById('visitCount').innerText = count;
+
+  function openModal() { document.getElementById('regModal').style.display = 'block'; }
+  function closeModal() { document.getElementById('regModal').style.display = 'none'; }
+
+  function submitData() {
+    const name = document.getElementById('name').value;
+    if(name) {
+      alert('تم استلام مشاركتك يا مبدعة ' + name + '! كوني مستعدة للتميز.');
+      closeModal();
+    } else {
+      alert('لطفاً أكملي بياناتك');
+    }
+  }
+</script>
+
+</body>
+</html>
