@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>اختبار القيم الرقمية الذكي</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6c5ce7;
+            --secondary: #81ecec;
+            --bg: linear-gradient(135deg, #f3f0ff 0%, #dcf5ff 100%);
+        }
+
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background: var(--bg);
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .quiz-container {
+            background: white;
+            width: 90%;
+            max-width: 500px;
+            padding: 30px;
+            border-radius: 25px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .header-info { font-size: 0.8rem; color: #888; margin-bottom: 20px; border-bottom: 1px solid #eee; padding-bottom: 10px; }
+
+        h1 { color: #000; font-size: 1.5rem; margin-bottom: 25px; }
+
+        .question { font-size: 1.1rem; font-weight: bold; margin-bottom: 20px; color: var(--primary); }
+
+        .options { display: flex; flex-direction: column; gap: 12px; }
+
+        .option-btn {
+            background: #f8f9ff;
+            border: 2px solid #e0e0ff;
+            padding: 15px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: 0.3s;
+            font-family: 'Tajawal', sans-serif;
+            font-size: 0.95rem;
+            text-align: right;
+        }
+
+        .option-btn:hover { background: var(--secondary); border-color: var(--primary); }
+
+        .score-box { display: none; }
+        .score-box h2 { color: var(--primary); font-size: 2rem; }
+
+        .progress-bar {
+            height: 8px;
+            background: #eee;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+        .progress { height: 100%; background: var(--primary); width: 0%; transition: 0.4s; }
+        
+        footer { margin-top: 20px; font-size: 0.7rem; color: #aaa; }
+    </style>
+</head>
+<body>
+
+<div class="quiz-container">
+    <div class="header-info">
+        المتوسطة 21 بخميس مشيط | مديرة المدرسة: أمينة آل مشيط
+    </div>
+
+    <div id="quiz">
+        <div class="progress-bar"><div class="progress" id="progress"></div></div>
+        <h1>اختبار القيم الرقمية الذكي</h1>
+        <div class="question" id="question">جاري التحميل...</div>
+        <div class="options" id="options"></div>
+    </div>
+
+    <div id="result" class="score-box">
+        <h2>رائع! 🎉</h2>
+        <p id="final-score"></p>
+        <p>بصمتك الرقمية أصبحت أكثر وعياً</p>
+        <button onclick="location.reload()" style="padding: 10px 20px; border-radius: 20px; border: none; background: var(--primary); color: white; cursor: pointer;">إعادة الاختبار</button>
+    </div>
+
+    <footer>المنفذات: كرزية عسيري & ابتسام الشهري</footer>
+</div>
+
+<script>
+    const questions = [
+        {
+            q: "وصلتك رسالة تتضمن إشاعة عن صديقتك، ماذا تفعلين؟",
+            options: ["أقوم بحذفها فوراً (التفكير قبل النشر)", "أرسلها لمجموعة الصف للتأكد", "أحفظها في جهازي"],
+            correct: 0
+        },
+        {
+            q: "وجدتِ محتوى أعجبكِ لشخص آخر وتريدين نشره، التصرف الصحيح هو:",
+            options: ["نسبه لنفسي", "الاستئذان منه أو ذكر اسمه (الأمانة الرقمية)", "نشره بدون ذكر المصدر"],
+            correct: 1
+        },
+        {
+            q: "شخص لا تعرفينه طلب منكِ معلوماتك الشخصية في لعبة إلكترونية:",
+            options: ["أعطيه الاسم فقط", "أرفض تماماً (الأمان للأمان والخصوصية)", "أخبره باسم مدرستي"],
+            correct: 1
+        }
+    ];
+
+    let currentQuestion = 0;
+    let score = 0;
+
+    function loadQuestion() {
+        const qData = questions[currentQuestion];
+        document.getElementById("question").innerText = qData.q;
+        const optionsDiv = document.getElementById("options");
+        optionsDiv.innerHTML = "";
+        
+        qData.options.forEach((opt, index) => {
+            const btn = document.createElement("button");
+            btn.className = "option-btn";
+            btn.innerText = opt;
+            btn.onclick = () => checkAnswer(index);
+            optionsDiv.appendChild(btn);
+        });
+
+        document.getElementById("progress").style.width = ((currentQuestion / questions.length) * 100) + "%";
+    }
+
+    function checkAnswer(index) {
+        if(index === questions[currentQuestion].correct) score++;
+        currentQuestion++;
+        if(currentQuestion < questions.length) {
+            loadQuestion();
+        } else {
+            showResult();
+        }
+    }
+
+    function showResult() {
+        document.getElementById("quiz").style.display = "none";
+        document.getElementById("result").style.display = "block";
+        document.getElementById("final-score").innerText = `لقد أجبتِ على ${score} من أصل ${questions.length} بشكل صحيح!`;
+        
+        // ملاحظة للمستقبل: هنا يتم وضع كود الربط بـ Excel Sheet عبر API
+        console.log("إرسال النتيجة إلى Excel:", score);
+    }
+
+    loadQuestion();
+</script>
+
+</body>
+</html>
