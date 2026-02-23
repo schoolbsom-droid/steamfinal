@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>هاكاثون قيمنا الرقمية</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --soft-purple: #e0d7ff; 
+            --soft-blue: #dcf5ff;
+            --main-gradient: linear-gradient(135deg, #a29bfe, #81ecec);
+            --text-color: #2d3436;
+        }
+
+        body {
+            font-family: 'Tajawal', sans-serif;
+            margin: 0;
+            background-color: #fdfbff;
+            color: var(--text-color);
+        }
+
+        /* الجزء العلوي (Header) */
+        .top-bar {
+            background: white;
+            text-align: center;
+            padding: 10px;
+            font-size: 0.85rem;
+            border-bottom: 1px solid #eee;
+        }
+        .manager { font-weight: bold; color: #6c5ce7; }
+
+        /* الواجهة الرئيسية */
+        .hero {
+            background: var(--main-gradient);
+            padding: 40px 20px;
+            text-align: center;
+            color: white;
+        }
+        .hero h1 { font-size: 1.6rem; margin: 5px 0; }
+        .hero p { font-size: 0.9rem; }
+
+        .container { max-width: 700px; margin: auto; padding: 20px; }
+
+        /* المنفذات */
+        .organizers {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .name-card {
+            background: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            border: 1px solid #d1d1d1;
+            font-size: 0.85rem;
+        }
+
+        /* مراحل بناء المشروع (تبسيط الأفكار) */
+        .steps-container { margin-top: 30px; }
+        .step {
+            background: white;
+            margin-bottom: 15px;
+            padding: 15px;
+            border-radius: 12px;
+            border-right: 5px solid #a29bfe;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        .step h3 { margin: 0 0 5px 0; font-size: 1rem; color: #6c5ce7; }
+        .step p { margin: 0; font-size: 0.85rem; color: #636e72; }
+
+        /* الجوائز */
+        .prizes-section {
+            background: var(--soft-blue);
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            margin-top: 30px;
+        }
+        .prize-list { list-style: none; padding: 0; font-size: 0.9rem; }
+        .prize-list li { margin: 10px 0; font-weight: bold; }
+
+        footer { text-align: center; padding: 20px; font-size: 0.75rem; color: #aaa; }
+    </style>
+</head>
+<body>
+
+    <div class="top-bar">
+        المتوسطة الواحدة والعشرون بخميس مشيط | <span class="manager">مديرة المدرسة: أمينة آل مشيط</span>
+    </div>
+
+    <section class="hero">
+        <p>مجال العلوم والتقنية يقدم</p>
+        <h1>هاكاثون قيمنا الرقمية</h1>
+        <p>رحلة بسيطة لتحويل فكرتك إلى واقع تقني</p>
+    </section>
+
+    <div class="container">
+        
+        <div class="organizers">
+            <div class="name-card">أ. كرزية عسيري</div>
+            <div class="name-card">أ. ابتسام الشهري</div>
+        </div>
+
+        <div class="steps-container">
+            <h2 style="text-align: center; font-size: 1.2rem;">كيف تبنين مشروعك؟</h2>
+            
+            <div class="step">
+                <h3>1. مرحلة الفكرة</h3>
+                <p>اختاري قيمة (مثل: الاحترام، الصدق) وفكري في مشكلة بسيطة تواجهنا في الإنترنت.</p>
+            </div>
+
+            <div class="step">
+                <h3>2. مرحلة الرسم</h3>
+                <p>ارسمي شكل التطبيق أو الموقع على الورق؛ أين نضغط؟ وماذا سيظهر لنا؟</p>
+            </div>
+
+            <div class="step">
+                <h3>3. مرحلة التنفيذ البسيط</h3>
+                <p>استخدمي أدوات سهلة (مثل Canva أو ChatGPT) لتصميم الواجهات وشرح عمل الفكرة.</p>
+            </div>
+
+            <div class="step">
+                <h3>4. مرحلة العرض</h3>
+                <p>قدمي مشروعك وأبهرينا بكيفية استخدام التقنية لنشر قيمنا الجميلة.</p>
+            </div>
+        </div>
+
+        <div class="prizes-section">
+            <h2 style="font-size: 1.1rem; margin-top: 0;">جوائز التحدي</h2>
+            <p style="font-size: 0.85rem;">تكريم خاص لأفضل ثلاث مشاريع مبتكرة:</p>
+            <ul class="prize-list">
+                <li>المركز الأول</li>
+                <li>المركز الثاني</li>
+                <li>المركز الثالث</li>
+            </ul>
+        </div>
+
+    </div>
+
+    <footer>
+        جميع الحقوق محفوظة - 2024
+    </footer>
+
+</body>
+</html>
