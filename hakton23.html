@@ -321,6 +321,7 @@
 </div>
 
 <script>
+    // عداد الزيارات باستخدام التخزين المحلي
     let v = parseInt(localStorage.getItem('hv') || '0') + 1;
     localStorage.setItem('hv', v);
     document.getElementById('count').textContent = v;
@@ -333,33 +334,50 @@
     function closeModal() {
         document.getElementById('modal').classList.remove('open');
         document.body.style.overflow = '';
+        // إعادة تهيئة النموذج عند الإغلاق بعد فترة بسيطة (للسماح بحركة الاختفاء)
         setTimeout(() => {
             document.getElementById('formView').style.display = 'block';
             document.getElementById('successView').style.display = 'none';
-            ['name','grade','track','idea'].forEach(id => document.getElementById(id).value = '');
+            ['name','grade','track','idea'].forEach(id => {
+                if(document.getElementById(id)) document.getElementById(id).value = '';
+            });
+            const btn = document.querySelector('.submit-btn');
+            btn.disabled = false;
+            btn.innerText = "إرسال التسجيل ←";
         }, 400);
     }
-async function submitData() {
-    const name = document.getElementById('name').value.trim();
-    const grade = document.getElementById('grade').value;
-    const idea = document.getElementById('idea').value.trim();
-    const btn = document.querySelector('.modal-actions .reg-btn');
 
-    if (name && grade && idea) {
-        // تعطيل الزر لمنع الإرسال المتكرر
-        btn.disabled = true;
-        btn.innerText = "جاري الإرسال...";
+    // الدالة الموحدة لإرسال البيانات والتحقق منها
+    async function submitForm() {
+        const name  = document.getElementById('name').value.trim();
+        const grade = document.getElementById('grade').value;
+        const track = document.getElementById('track').value;
+        const idea  = document.getElementById('idea').value.trim();
+        const btn   = document.querySelector('.submit-btn');
 
+        // 1. التحقق من إدخال جميع الحقول
+        if (!name || !grade || !track || !idea) { 
+            alert('يرجى إكمال جميع الحقول (الاسم، الصف، المسار، الفكرة) أولاً.'); 
+            return; 
+        }
+
+        // 2. تحضير البيانات للإرسال
         const data = {
             name: name,
             grade: grade,
+            track: track,
             idea: idea
         };
 
         try {
-            // الرابط الخاص بكِ تم وضعه هنا
+            // 3. تغيير حالة الزر لمنع الضغط المتكرر
+            btn.disabled = true;
+            btn.innerText = "جاري الحفظ...";
+
+            // 4. رابط السكربت الخاص بكِ (آخر رابط أرسلتيه)
             const scriptURL = 'https://script.google.com/macros/s/AKfycbyhwpXcS32ys-PoKesRjdgb51HrgxeAhpQZ20IbANhhvEl6fngPVFkYDVmIs0aYazywlw/exec';
 
+            // 5. عملية الإرسال الفعلي
             await fetch(scriptURL, {
                 method: 'POST',
                 mode: 'no-cors', 
@@ -368,39 +386,20 @@ async function submitData() {
                 body: JSON.stringify(data)
             });
 
-            // رسالة نجاح للطالبة
-            alert('شكرًا لمشاركتك يا ' + name + '، تم تسجيل فكرتك بنجاح في جدول البيانات.');
-            
-            // تفريغ الحقول وإغلاق النافذة
-            document.getElementById('name').value = '';
-            document.getElementById('grade').value = '';
-            document.getElementById('idea').value = '';
-            closeModal();
+            // 6. في حال النجاح: إخفاء النموذج وإظهار واجهة النجاح الأنيقة
+            document.getElementById('formView').style.display = 'none';
+            document.getElementById('successName').textContent = 'أهلاً بكِ يا ' + name + '! 🌟';
+            document.getElementById('successView').style.display = 'block';
 
         } catch (error) {
             console.error('Error!', error.message);
-            alert('عذراً، حدث خطأ أثناء الإرسال. يرجى التأكد من اتصالك بالإنترنت والمحاولة مرة أخرى.');
-        } finally {
-            // إعادة تفعيل الزر
+            alert('عذراً، حدث خطأ أثناء الاتصال بالخادم. يرجى التأكد من اتصال الإنترنت والمحاولة مرة أخرى.');
             btn.disabled = false;
-            btn.innerText = "إرسال التسجيل";
+            btn.innerText = "إرسال التسجيل ←";
         }
-
-    } else {
-        alert('يرجى إكمال جميع الحقول (الاسم، الصف، الفكرة) قبل الإرسال.');
-    }
-}
-    function submitForm() {
-        const name  = document.getElementById('name').value.trim();
-        const grade = document.getElementById('grade').value;
-        const track = document.getElementById('track').value;
-        const idea  = document.getElementById('idea').value.trim();
-        if (!name || !grade || !track || !idea) { alert('يرجى إكمال جميع الحقول أولاً.'); return; }
-        document.getElementById('formView').style.display = 'none';
-        document.getElementById('successName').textContent = 'أهلاً بكِ يا ' + name + '! 🌟';
-        document.getElementById('successView').style.display = 'block';
     }
 
+    // إغلاق النافذة عند الضغط خارج المربع الأبيض
     document.getElementById('modal').addEventListener('click', function(e) {
         if (e.target === this) closeModal();
     });
