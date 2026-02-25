@@ -339,7 +339,57 @@
             ['name','grade','track','idea'].forEach(id => document.getElementById(id).value = '');
         }, 400);
     }
+async function submitData() {
+    const name = document.getElementById('name').value.trim();
+    const grade = document.getElementById('grade').value;
+    const idea = document.getElementById('idea').value.trim();
+    const btn = document.querySelector('.modal-actions .reg-btn');
 
+    if (name && grade && idea) {
+        // تعطيل الزر لمنع الإرسال المتكرر
+        btn.disabled = true;
+        btn.innerText = "جاري الإرسال...";
+
+        const data = {
+            name: name,
+            grade: grade,
+            idea: idea
+        };
+
+        try {
+            // الرابط الخاص بكِ تم وضعه هنا
+            const scriptURL = 'https://script.google.com/macros/s/AKfycbyhjnUe2rN-YUMc4cFhZCsxmoSoOs-HRQXa-swzlCKG5KxGcaEpIWLKd1csVw4_1v9yNg/exec';
+
+            await fetch(scriptURL, {
+                method: 'POST',
+                mode: 'no-cors', 
+                cache: 'no-cache',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            });
+
+            // رسالة نجاح للطالبة
+            alert('شكرًا لمشاركتك يا ' + name + '، تم تسجيل فكرتك بنجاح في جدول البيانات.');
+            
+            // تفريغ الحقول وإغلاق النافذة
+            document.getElementById('name').value = '';
+            document.getElementById('grade').value = '';
+            document.getElementById('idea').value = '';
+            closeModal();
+
+        } catch (error) {
+            console.error('Error!', error.message);
+            alert('عذراً، حدث خطأ أثناء الإرسال. يرجى التأكد من اتصالك بالإنترنت والمحاولة مرة أخرى.');
+        } finally {
+            // إعادة تفعيل الزر
+            btn.disabled = false;
+            btn.innerText = "إرسال التسجيل";
+        }
+
+    } else {
+        alert('يرجى إكمال جميع الحقول (الاسم، الصف، الفكرة) قبل الإرسال.');
+    }
+}
     function submitForm() {
         const name  = document.getElementById('name').value.trim();
         const grade = document.getElementById('grade').value;
