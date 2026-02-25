@@ -1,4 +1,342 @@
-value.trim();
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>هاكاثون قيمنا الرقمية</title>
+
+  <link href="https://fonts.cdnfonts.com/css/vazirmatn" rel="stylesheet"> 
+
+  <style>
+    :root {
+      --bg-gradient: radial-gradient(circle at top,
+                      #f5f3ff 0%,
+                      #c4b5fd 20%,
+                      #818cf8 45%,
+                      #4f46e5 70%,
+                      #1d4ed8 100%);
+      --card-bg: rgba(255,255,255,0.92);
+      --primary-dark: #111827;
+      --muted: #6b7280;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--bg-gradient);
+      background-attachment: fixed;
+      font-family: 'Vazirmatn', sans-serif;
+      color: var(--primary-dark);
+      display: flex;
+      justify-content: center;
+    }
+
+    .page-wrapper {
+      width: 100%;
+      max-width: 430px;
+      padding: 22px 18px 32px;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 18px;
+    }
+
+    .section-tag {
+      display: inline-block;
+      padding: 4px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.9);
+      font-size: 0.75rem;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+
+    .hero-title {
+      font-size: 2.6rem;
+      font-weight: 900;
+      margin: 0 0 8px;
+      letter-spacing: -0.04em;
+      color: #000000;
+    }
+
+    .hero-sub {
+      font-weight: 700;
+      color: #e5e7eb;
+      font-size: 0.95rem;
+    }
+
+    .hero-sub small {
+      display: block;
+      margin-top: 4px;
+      color: #e5e7eb;
+      font-weight: 400;
+    }
+
+    .school-card {
+      background: var(--card-bg);
+      border-radius: 22px;
+      padding: 14px 18px;
+      box-shadow: 0 16px 40px rgba(15, 23, 42, 0.18);
+      font-size: 0.86rem;
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+
+    .school-card span { display: block; }
+
+    .school-name {
+      font-weight: 800;
+    }
+
+    .label-strong {
+      font-weight: 700;
+      color: var(--muted);
+    }
+
+    .teacher-name {
+      font-weight: 900;
+      color: var(--primary-dark);
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: 22px;
+      padding: 18px 18px 16px;
+      margin-bottom: 18px;
+      box-shadow: 0 16px 40px rgba(15, 23, 42, 0.18);
+    }
+
+    .card-title {
+      font-size: 1.15rem;
+      font-weight: 800;
+      margin: 0 0 10px;
+    }
+
+    .card p {
+      margin: 0 0 8px;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    .ideas-list {
+      margin-top: 8px;
+      font-size: 0.9rem;
+      text-align: right;
+    }
+
+    .ideas-list div {
+      margin-bottom: 4px;
+    }
+
+    .prizes-row div {
+      margin-bottom: 4px;
+      font-size: 0.9rem;
+      font-weight: 700;
+    }
+
+    .cta-card {
+      text-align: center;
+    }
+
+    .cta-text {
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-bottom: 14px;
+    }
+
+    .reg-btn {
+      width: 100%;
+      border: none;
+      border-radius: 999px;
+      padding: 14px;
+      font-size: 1rem;
+      font-weight: 800;
+      color: #ffffff;
+      cursor: pointer;
+      background: linear-gradient(135deg, #1d4ed8, #6366f1);
+      box-shadow: 0 12px 30px rgba(37, 99, 235, 0.6);
+    }
+
+    .reg-btn:disabled {
+      background: #9ca3af;
+      cursor: not-allowed;
+    }
+
+    .reg-btn:active {
+      transform: translateY(1px);
+      box-shadow: 0 8px 20px rgba(37, 99, 235, 0.5);
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 10px;
+      font-size: 0.8rem;
+      color: #e5e7eb;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.5);
+      backdrop-filter: blur(6px);
+      z-index: 40;
+    }
+
+    .modal-content {
+      background: #ffffff;
+      width: 90%;
+      max-width: 390px;
+      margin: 90px auto;
+      padding: 22px 20px 18px;
+      border-radius: 24px;
+      box-shadow: 0 24px 60px rgba(15, 23, 42, 0.35);
+    }
+
+    .modal-content h3 {
+      margin: 0 0 10px;
+      text-align: center;
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--primary-dark);
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 10px 11px;
+      margin: 7px 0;
+      border-radius: 12px;
+      border: 1px solid #e5e7eb;
+      font-family: 'Vazirmatn', sans-serif;
+      font-size: 0.9rem;
+      outline: none;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: #4f46e5;
+      box-shadow: 0 0 0 1px rgba(129, 140, 248, 0.4);
+    }
+
+    .modal-actions {
+      margin-top: 8px;
+    }
+
+    .close-btn {
+      margin-top: 6px;
+      background: none;
+      border: none;
+      color: var(--muted);
+      font-size: 0.86rem;
+      width: 100%;
+      cursor: pointer;
+    }
+
+    .visit-count {
+      margin-top: 12px;
+      text-align: center;
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="page-wrapper">
+
+    <header>
+      <div class="section-tag">مجال العلوم والتقنية يقدم</div>
+      <h1 class="hero-title">هاكاثون قيمنا الرقمية</h1>
+      <div class="hero-sub">
+        خلال شهر رمضان المبارك ١٤٤٧هـ
+        <small>فرصة سهلة لتحويل أفكارك إلى مشروع رقمي بسيط.</small>
+      </div>
+    </header>
+
+    <div class="school-card">
+      <span class="school-name">المدرسة المتوسطة الواحدة والعشرون</span>
+      <span><span class="label-strong">المديرة</span></span>
+      <span class="teacher-name">أمينة آل مشيط</span>
+      <span class="label-strong">إعداد وتنفيذ :</span>
+      <span class="teacher-name">كرزية عسيري</span>
+      <span class="teacher-name">ابتسام الشهري</span>
+    </div>
+
+    <section class="card">
+      <h2 class="card-title">شاركي بلمستك الإبداعية</h2>
+      <p>ندعو طالباتنا للمشاركة في مسابقة قيمنا الرقمية بأفكار سهلة يمكن تنفيذها من المنزل أو من معمل الحاسب.</p>
+      <div class="ideas-list">
+        <div>• تصميم فيديو توعوي قصير باستخدام أدوات الذكاء الاصطناعي.</div>
+        <div>• تصميم صورة إرشادية جميلة تعبّر عن قيمة من قيمنا الرقمية.</div>
+        <div>• إعداد برودكاست صوتي قصير يقدّم نصائح للاستخدام الآمن للإنترنت.</div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2 class="card-title">جوائز التحدي (ألقاب فخرية)</h2>
+      <div class="prizes-row">
+        <div>• وسام الريادة التقنية.</div>
+        <div>• لقب المبدعة الرقمية.</div>
+        <div>• نجمة القيم الرمضانية.</div>
+      </div>
+    </section>
+
+    <section class="card cta-card">
+      <h2 class="card-title">جاهزة للانطلاق؟</h2>
+      <button class="reg-btn" onclick="openModal()">تسجيل المشاركة</button>
+      <div class="visit-count">
+        عدد زيارات الصفحة: <span id="visitCount">0</span>
+      </div>
+    </section>
+
+    <footer>
+      المسابقة الرمضانية لقيمنا الرقمية ١٤٤٧ هـ
+    </footer>
+  </div>
+
+  <div id="regModal" class="modal">
+    <div class="modal-content">
+      <h3>بطاقة تسجيل مبدعة</h3>
+      <input type="text" id="name" placeholder="الاسم الثلاثي">
+      <select id="grade">
+        <option value="">اختر الصف الدراسي</option>
+        <option>أول متوسط</option>
+        <option>ثاني متوسط</option>
+        <option>ثالث متوسط</option>
+      </select>
+      <textarea id="idea" rows="3" placeholder="اشرحي فكرتك باختصار..."></textarea>
+
+      <div class="modal-actions">
+        <button id="submitBtn" class="reg-btn" onclick="submitData()">إرسال التسجيل</button>
+        <button class="close-btn" onclick="closeModal()">إلغاء</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // عداد الزيارات
+    let visits = localStorage.getItem('visits_qiyam2') || 0;
+    visits++;
+    localStorage.setItem('visits_qiyam2', visits);
+    document.getElementById('visitCount').textContent = visits;
+
+    function openModal() {
+      document.getElementById('regModal').style.display = 'block';
+    }
+
+    function closeModal() {
+      document.getElementById('regModal').style.display = 'none';
+    }
+
+    // الدالة الجديدة للربط مع جوجل شيت
+    async function submitData() {
+      const name = document.getElementById('name').value.trim();
+      const grade = document.getElementById('grade').value;
+      const idea = document.getElementById('idea').value.trim();
       const submitBtn = document.getElementById('submitBtn');
 
       if (name && grade && idea) {
