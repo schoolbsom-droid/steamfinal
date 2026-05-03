@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>برنامج قيمنا حياة - المتوسطة الحادية والعشرون</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&family=Cairo:wght@400;600;700&display=swap');
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Tajawal', 'Cairo', sans-serif; background: #F4F7F6; color: #15445A; direction: rtl; }
+
+    :root {
+      --emerald: #07A869; --sky: #3D7EB9; --teal: #0DA9A6; --navy: #15445A;
+      --sand: #C1B489; --ocean: #3078A6; --dark-teal: #218CAA; --amethyst: #7258A4;
+      --bg: #F4F7F6; --card-bg: #FFFFFF; --text-dark: #1a2332; --text-muted: #6b7a8d;
+      --card-shadow: 0 4px 15px rgba(21,68,90,0.05); --radius: 12px;
+    }
+
+    /* --- TOP BANNER --- */
+    .school-banner { background: #fff; padding: 12px 30px; text-align: center; border-bottom: 1px solid #EAF0F4; box-shadow: 0 2px 5px rgba(0,0,0,0.02); }
+    .school-banner h2 { color: var(--navy); font-size: 16px; font-weight: 800; }
+
+    /* --- HEADER --- */
+    .header {
+      background: linear-gradient(135deg, var(--navy) 0%, var(--dark-teal) 50%, var(--emerald) 100%);
+      border-radius: 16px; padding: 30px; margin: 20px; color: white; position: relative; overflow: hidden;
+    }
+    .header::before { content: ''; position: absolute; top: -40px; left: -40px; width: 200px; height: 200px; border-radius: 50%; background: rgba(255,255,255,0.05); }
+    .header::after { content: ''; position: absolute; bottom: -30px; right: 60px; width: 150px; height: 150px; border-radius: 50%; background: rgba(255,255,255,0.04); }
+    
+    .header-content { display: flex; justify-content: space-between; align-items: flex-start; position: relative; z-index: 1; flex-wrap: wrap; gap: 20px; }
+    .header-titles h1 { font-size: 26px; font-weight: 800; margin-bottom: 5px; }
+    .sub-title { color: #A8E6CF; font-size: 20px; font-weight: 700; margin-bottom: 15px; display: inline-block; }
+    
+    .admin-info { display: flex; gap: 15px; flex-wrap: wrap; }
+    .admin-card { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.2); padding: 8px 15px; border-radius: 8px; display: flex; align-items: center; gap: 8px; backdrop-filter: blur(5px); }
+    .admin-card i { color: #A8E6CF; font-size: 16px; }
+    .admin-role { font-size: 10px; opacity: 0.8; }
+    .admin-name { font-size: 13px; font-weight: 700; }
+
+    .header-meta { display: flex; gap: 25px; text-align: center; }
+    .meta-num { font-size: 32px; font-weight: 800; line-height: 1; }
+    .meta-lbl { font-size: 12px; opacity: 0.8; margin-top: 5px; }
+
+    /* --- LAYOUT --- */
+    .dashboard-wrap { display: flex; max-width: 1300px; margin: 0 auto; padding: 0 20px 20px; gap: 20px; }
+    .sidebar { width: 240px; flex-shrink: 0; background: #fff; border-radius: var(--radius); box-shadow: var(--card-shadow); padding: 20px 0; align-self: flex-start; position: sticky; top: 20px; }
+    .nav-btn { display: flex; align-items: center; gap: 12px; width: 100%; padding: 14px 24px; background: transparent; border: none; border-right: 4px solid transparent; text-align: right; font-family: 'Tajawal', sans-serif; font-size: 14px; font-weight: 700; color: #6b7a8d; cursor: pointer; transition: 0.2s; }
+    .nav-btn i { font-size: 18px; width: 20px; text-align: center; }
+    .nav-btn:hover { background: #F8F9FB; color: var(--navy); }
+    .nav-btn.active { background: #F0F7FB; color: var(--teal); border-right-color: var(--teal); }
+
+    .main-content { flex: 1; min-width: 0; }
+    .panel { display: none; animation: fadeIn 0.3s ease; }
+    .panel.active { display: block; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* --- CARDS & GRID --- */
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+    .card { background: var(--card-bg); border-radius: var(--radius); padding: 20px; border: 1px solid rgba(0,0,0,0.05); box-shadow: var(--card-shadow); margin-bottom: 16px;}
+    .card-title { font-size: 14px; font-weight: 700; color: var(--navy); margin-bottom: 16px; padding-bottom: 10px; border-bottom: 1px solid rgba(0,0,0,0.05); display: flex; align-items: center; gap: 8px; }
+    .dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+
+    /* KPIs */
+    .kpi-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 20px; }
+    .kpi { background: var(--card-bg); border-radius: 12px; padding: 16px; border: 1px solid rgba(0,0,0,0.05); position: relative; overflow: hidden; box-shadow: var(--card-shadow); }
+    .kpi-val { font-size: 28px; font-weight: 800; color: var(--text-dark); line-height: 1; }
+    .kpi-lbl { font-size: 12px; color: var(--text-muted); margin-top: 6px; font-weight: 600;}
+    .kpi-sub { font-size: 11px; font-weight: 700; margin-top: 4px; }
+
+    /* --- TEACHERS GRID --- */
+    .teachers-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; }
+    .teacher-badge { background: #fff; border: 1px solid #EAF0F4; border-radius: 12px; padding: 15px; text-align: center; transition: 0.3s; }
+    .teacher-badge:hover { transform: translateY(-3px); box-shadow: 0 6px 15px rgba(21,68,90,0.08); border-color: transparent;}
+    .tb-icon { width: 42px; height: 42px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 12px; color: #fff; font-size: 18px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);}
+    .tb-name { font-size: 13px; font-weight: 800; color: var(--navy); margin-bottom: 6px; }
+    .tb-domain { font-size: 11px; color: var(--text-muted); font-weight: 700; background: #F4F7F6; padding: 4px 10px; border-radius: 20px; display: inline-block;}
+
+    /* Vertical Timeline */
+    .timeline-item { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 15px; position: relative; }
+    .timeline-item:not(:last-child)::after { content: ''; position: absolute; right: 16px; top: 32px; bottom: -15px; width: 2px; background: rgba(0,0,0,0.06); }
+    .tl-icon { width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800; color: white; z-index: 2; }
+    .tl-body { flex: 1; }
+    .tl-week { font-size: 13px; font-weight: 800; color: var(--text-dark); }
+    .tl-stage { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+    .tl-bar { height: 6px; border-radius: 10px; margin-top: 8px; background: #f0f2f5; overflow: hidden; }
+    .tl-prog { height: 100%; border-radius: 10px; }
+    .tl-pct { font-size: 11px; font-weight: 700; margin-top: 4px; display: flex; justify-content: space-between; align-items: center;}
+    .badge { padding: 3px 10px; border-radius: 20px; font-size: 10px; font-weight: 700; }
+
+    /* Domain Horizontal Bars */
+    .domain-bar { margin-bottom: 12px; }
+    .domain-header { display: flex; justify-content: space-between; margin-bottom: 6px; }
+    .domain-name { font-size: 13px; font-weight: 700; color: var(--text-dark); }
+    .domain-pct { font-size: 13px; font-weight: 800; color: var(--navy); }
+    .bar-track { background: #f0f2f5; border-radius: 20px; height: 8px; overflow: hidden; }
+    .bar-fill { height: 100%; border-radius: 20px; }
+
+    /* Domain Detail Cards */
+    .domain-section { margin-bottom: 24px; border-radius: 12px; overflow: hidden; box-shadow: var(--card-shadow); border: 1px solid rgba(0,0,0,0.05); }
+    .ds-header { color: #fff; padding: 14px 20px; display: flex; justify-content: space-between; align-items: center; }
+    .ds-name { font-size: 15px; font-weight: 800; } .ds-teacher { font-size: 12px; opacity: 0.9; } .ds-avg { font-size: 20px; font-weight: 800; }
+    .groups-wrap { display: grid; grid-template-columns: 1fr 1fr; background: #fff; }
+    .group-col { padding: 16px; } .group-col:first-child { border-left: 1px solid rgba(0,0,0,0.06); }
+    .group-label { font-size: 12px; font-weight: 800; color: #fff; display: inline-block; padding: 5px 14px; border-radius: 20px; margin-bottom: 12px; }
+    
+    /* Students Inner Table */
+    .inner-tbl { width: 100%; border-collapse: collapse; font-size: 12px; }
+    .inner-tbl th { color: var(--text-muted); font-weight: 700; padding: 6px; text-align: right; border-bottom: 1px solid #eee; }
+    .inner-tbl td { padding: 8px 6px; color: var(--text-dark); border-bottom: 1px solid #f5f5f5; text-align: right; font-weight: 600;}
+    .role-badge { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 10px; font-weight: 700; }
+    .score-pill { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 800; }
+
+    /* Values Grid */
+    .values-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .val-chip { background: #fff; border-radius: 10px; padding: 14px; border: 1px solid rgba(0,0,0,0.05); }
+    .val-name { font-size: 13px; font-weight: 700; color: var(--text-dark); margin-bottom: 10px; text-align: left; direction: ltr;}
+    .val-row-flex { display: flex; gap: 10px; }
+    .v-item { flex: 1; text-align: center; }
+    .v-score { font-size: 16px; font-weight: 800; }
+    .v-lbl { font-size: 10px; color: var(--text-muted); margin: 4px 0; }
+    .v-bar-track { height: 4px; border-radius: 10px; background: #e8eaf0; overflow: hidden; }
+    .v-bar-fill { height: 100%; border-radius: 10px; }
+
+    /* Main Table */
+    .table-wrap { overflow-x: auto; border-radius: 12px; box-shadow: var(--card-shadow); background: #fff; border: 1px solid #EAF0F4; }
+    .main-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+    .main-table thead th { background: var(--navy); color: #fff; padding: 12px 15px; text-align: right; font-weight: 700; }
+    .main-table tbody tr { border-bottom: 1px solid #EAF0F4; transition: 0.2s; }
+    .main-table tbody tr:hover { background: #F4F7F6; }
+    .main-table td { padding: 12px 15px; color: var(--text-dark); font-weight: 600; }
+    .main-table .pct-cell { font-weight: 800; }
+
+    .chart-wrap { position: relative; width: 100%; height: 260px; }
+
+    @media (max-width: 900px) {
+      .dashboard-wrap { flex-direction: column; }
+      .sidebar { width: 100%; display: flex; overflow-x: auto; padding: 10px; position: static; }
+      .nav-btn { padding: 10px; border-right: none; border-bottom: 3px solid transparent; justify-content: center; white-space: nowrap; }
+      .nav-btn.active { border-bottom-color: var(--teal); border-right-color: transparent; }
+      .grid-2 { grid-template-columns: 1fr; }
+      .groups-wrap { grid-template-columns: 1fr; }
+      .header-content { flex-direction: column; text-align: center; align-items: center; }
+      .header-meta { justify-content: center; width: 100%; margin-top: 15px; }
+      .kpi-row { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Banner -->
+  <div class="school-banner">
+    <h2>المتوسطة الحادية والعشرون</h2>
+  </div>
+
+  <!-- Main Header -->
+  <div class="header" id="top-header">
+    <div class="header-content">
+      <div>
+        <div class="header-titles">
+          <h1>🌿 برنامج قيمنا حياة لعام 1447هـ</h1>
+          <div class="sub-title">الصف الثالث المتوسط عام 1447هـ</div>
+        </div>
+        <div class="admin-info">
+          <div class="admin-card"><i class="fas fa-user-tie"></i><div><div class="admin-role">مديرة المدرسة</div><div class="admin-name">أ. أمينة آل مشيط</div></div></div>
+          <div class="admin-card"><i class="fas fa-user-graduate"></i><div><div class="admin-role">وكيلة المدرسة</div><div class="admin-name">أ. فوزية الدوسري</div></div></div>
+          <div class="admin-card"><i class="fas fa-laptop-code"></i><div><div class="admin-role">تصميم وإعداد</div><div class="admin-name">أ. ابتسام الشهري</div></div></div>
+        </div>
+      </div>
+      
+      <div class="header-meta">
+        <div><div class="meta-num">54</div><div class="meta-lbl">طالبة مشاركة</div></div>
+        <div><div class="meta-num">6</div><div class="meta-lbl">مجالات قيمية</div></div>
+        <div><div class="meta-num">12</div><div class="meta-lbl">مجموعة عمل</div></div>
+        <div><div class="meta-num" style="color:#A8E6CF">92%</div><div class="meta-lbl">متوسط الإنجاز الكلي</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Dashboard Container -->
+  <div class="dashboard-wrap">
+    
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <button class="nav-btn active" onclick="switchPanel('home')"><i class="fas fa-chart-pie"></i> نظرة عامة</button>
+      <button class="nav-btn" onclick="switchPanel('domains')"><i class="fas fa-layer-group"></i> تفاصيل المجالات</button>
+      <button class="nav-btn" onclick="switchPanel('students')"><i class="fas fa-user-graduate"></i> سجل الطالبات</button>
+      <button class="nav-btn" onclick="switchPanel('about')"><i class="fas fa-info-circle"></i> عن البرنامج</button>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+      
+      <!-- PANEL 1: Home (Overview) -->
+      <div id="panel-home" class="panel active">
+        
+        <!-- KPIs Container (Dynamically rendered) -->
+        <div class="kpi-row" id="kpi-row-container"></div>
+
+        <!-- Teachers Container (Beautiful Grid) -->
+        <div class="card">
+          <div class="card-title"><span class="dot" style="background:var(--ocean)"></span> المعلمات المنفذات للمجالات القيمية</div>
+          <div class="teachers-grid" id="teachers-grid-container"></div>
+        </div>
+
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-title"><span class="dot" style="background:var(--sky)"></span> التوزيع الزمني للبرنامج</div>
+            <div id="timeline-container"></div>
+          </div>
+          <div class="card">
+            <div class="card-title"><span class="dot" style="background:var(--emerald)"></span> ترتيب نسب المجالات</div>
+            <div id="domain-bars-container"></div>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-title"><span class="dot" style="background:var(--navy)"></span> مقارنة إنجاز المجموعتين</div>
+            <div style="display:flex;gap:15px;margin-bottom:10px;font-size:11px;font-weight:700">
+              <span style="color:#07A869"><i class="fas fa-square"></i> المجموعة الأولى</span>
+              <span style="color:#3D7EB9"><i class="fas fa-square"></i> المجموعة الثانية</span>
+            </div>
+            <div class="chart-wrap"><canvas id="groupChart"></canvas></div>
+          </div>
+          <div class="card" style="display:flex; flex-direction:column;">
+            <div class="card-title"><span class="dot" style="background:var(--teal)"></span> توزيع القيم الأربع للمجالات</div>
+            <div style="font-size:11px; color:var(--text-muted); margin-bottom:10px; text-align:center;">متوسط التعاون والأمانة والعزيمة والانضباط</div>
+            <div style="flex:1; display:flex; justify-content:center; align-items:center;">
+              <canvas id="radarChart" style="max-height: 240px;"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title"><span class="dot" style="background:var(--amethyst)"></span> تفصيل القيم لكل مجال (مرتبة تنازلياً)</div>
+          <div class="values-grid" id="values-grid-container"></div>
+        </div>
+      </div>
+
+      <!-- PANEL 2: Domains Detailed Cards -->
+      <div id="panel-domains" class="panel">
+        <div id="domains-detailed-container"></div>
+      </div>
+
+      <!-- PANEL 3: Students Table -->
+      <div id="panel-students" class="panel">
+        <div style="display:flex; gap:15px; margin-bottom:15px; align-items:center; background:#fff; padding:15px; border-radius:12px; box-shadow:var(--card-shadow);">
+          <span style="font-weight:700; font-size:13px;">تصفية:</span>
+          <select id="filterDomain" onchange="renderMainTable()" style="padding:6px 10px; border-radius:6px; border:1px solid #ddd; font-family:inherit;">
+            <option value="">كل المجالات</option>
+          </select>
+          <select id="filterGroup" onchange="renderMainTable()" style="padding:6px 10px; border-radius:6px; border:1px solid #ddd; font-family:inherit;">
+            <option value="">كل المجموعات</option>
+            <option value="المجموعة 1">المجموعة 1</option>
+            <option value="المجموعة 2">المجموعة 2</option>
+          </select>
+        </div>
+        <div class="table-wrap">
+          <table class="main-table">
+            <thead>
+              <tr>
+                <th style="width:40px">#</th>
+                <th>اسم الطالبة</th>
+                <th>المجال</th>
+                <th>المجموعة</th>
+                <th>الوظيفة</th>
+                <th>التعاون%</th>
+                <th>الأمانة%</th>
+                <th>العزيمة%</th>
+                <th>الانضباط%</th>
+                <th>الكلي%</th>
+              </tr>
+            </thead>
+            <tbody id="main-table-body"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- PANEL 4: About -->
+      <div id="panel-about" class="panel">
+        <div class="card">
+          <div class="card-title"><i class="fas fa-info-circle" style="color:var(--teal); margin-left:8px;"></i> نبذة عن برنامج قيمنا حياة</div>
+          <p style="font-size:15px; line-height:1.8; color:#3A5263; font-weight:600;">
+            يهدف برنامج <strong>"قيمنا حياة"</strong> إلى غرس القيم الإسلامية والإنسانية الأصيلة (التعاون، الأمانة، العزيمة، الانضباط) في نفوس طالبات الصف الثالث المتوسط في المتوسطة الحادية والعشرون لعام 1447هـ.<br><br>
+            يعتمد البرنامج على نظام المجموعات التشاركية الموزعة على 6 مجالات حيوية، حيث تقوم الطالبات بتنفيذ مشاريع عملية وتأملية لتعزيز هذه القيم في حياتهن اليومية والرقمية.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+  <script>
+    // --- UPDATED DATA (New Ranking Exactly as Requested) ---
+    // 1: الانتماء (96), 2: التسامح (94), 3: الصحة (92), 4: الرقمي (91), 5: التنمية (90), 6: الاستدامة (89). Average = 92%
+    const DOMAINS = [
+      { name: 'الانتماء الوطني', teacher: 'رقية عسيري', g1: 95, g2: 97, avg: 96, color: '#15445A', icon: 'fas fa-flag' },
+      { name: 'التسامح والتعايش', teacher: 'فاطمة الشهراني', g1: 93, g2: 95, avg: 94, color: '#3D7EB9', icon: 'fas fa-hands-helping' },
+      { name: 'الحياة الصحية', teacher: 'ظافرة البيشي', g1: 91, g2: 93, avg: 92, color: '#C1B489', icon: 'fas fa-heartbeat' },
+      { name: 'التفاعل الرقمي', teacher: 'ابتسام الشهري', g1: 92, g2: 90, avg: 91, color: '#07A869', icon: 'fas fa-laptop-code' },
+      { name: 'التنمية الذاتية', teacher: 'فاطمة السلمي', g1: 91, g2: 89, avg: 90, color: '#0DA9A6', icon: 'fas fa-user-graduate' },
+      { name: 'الاستدامة البيئية', teacher: 'وضحى ءال جبار ونورة الشهراني', g1: 88, g2: 90, avg: 89, color: '#7258A4', icon: 'fas fa-leaf' }
+    ];
+
+    const TIMELINE = [
+      { week: 'الأسبوع 1 و 2', stage: 'التهيئة واختيار الموضوع', pct: 100, status: 'مكتمل', cls: 'badge-green', color: '#07A869' },
+      { week: 'الأسبوع 3', stage: 'التخطيط والإعداد', pct: 96, status: 'متقدم', cls: 'badge-blue', color: '#3D7EB9' },
+      { week: 'الأسبوع 4', stage: 'التنفيذ العملي', pct: 89, status: 'متقدم', cls: 'badge-blue', color: '#E08A00' },
+      { week: 'الأسبوع 5', stage: 'إعداد المنتج', pct: 93, status: 'متقدم', cls: 'badge-blue', color: '#0DA9A6' },
+      { week: 'الأسبوع 6', stage: 'العرض والتقويم والتأمل', pct: 85, status: 'يحتاج دعم', cls: 'badge-orange', color: '#15445A' }
+    ];
+
+    const ROLES = {
+      'القائد': { bg: '#EAF5FF', tx: '#3D7EB9' },
+      'الكاتب': { bg: '#E6F9F2', tx: '#07A869' },
+      'مُعزز القيم': { bg: '#F3F0FF', tx: '#7258A4' },
+      'المراقب': { bg: '#FFF4E6', tx: '#D4880A' },
+      'مساعد/مصمم': { bg: '#E8F6FA', tx: '#218CAA' }
+    };
+
+    // Students Array strictly mapped to the new Domain averages
+    const STUDENTS = [
+      // الانتماء الوطني (96) -> g1(95), g2(97)
+      { name: 'جنى عبدالله الأحمري', domain: 'الانتماء الوطني', group: 'المجموعة 1', role: 'القائد', c:95, h:95, d:94, i:96, t:95 },
+      { name: 'اسيل سعيد غزواني', domain: 'الانتماء الوطني', group: 'المجموعة 1', role: 'الكاتب', c:94, h:94, d:95, i:93, t:94 },
+      { name: 'لمار عامر آل يحيى', domain: 'الانتماء الوطني', group: 'المجموعة 1', role: 'مُعزز القيم', c:96, h:96, d:95, i:97, t:96 },
+      { name: 'صالحة عثمان هزازي', domain: 'الانتماء الوطني', group: 'المجموعة 2', role: 'القائد', c:97, h:96, d:98, i:97, t:97 },
+      { name: 'جنان مبارك الشهراني', domain: 'الانتماء الوطني', group: 'المجموعة 2', role: 'الكاتب', c:96, h:96, d:97, i:95, t:96 },
+      { name: 'ميار عبدالعزيز آل جلده', domain: 'الانتماء الوطني', group: 'المجموعة 2', role: 'مُعزز القيم', c:98, h:97, d:98, i:99, t:98 },
+      // التسامح والتعايش (94) -> g1(93), g2(95)
+      { name: 'ريماس علي خيزراني', domain: 'التسامح والتعايش', group: 'المجموعة 1', role: 'القائد', c:93, h:92, d:94, i:93, t:93 },
+      { name: 'رامة عمودي سفياني', domain: 'التسامح والتعايش', group: 'المجموعة 1', role: 'الكاتب', c:92, h:92, d:93, i:91, t:92 },
+      { name: 'لمار عبدالله العمري', domain: 'التسامح والتعايش', group: 'المجموعة 1', role: 'مُعزز القيم', c:94, h:93, d:95, i:94, t:94 },
+      { name: 'تالا أحمد القحطاني', domain: 'التسامح والتعايش', group: 'المجموعة 2', role: 'القائد', c:95, h:96, d:94, i:95, t:95 },
+      { name: 'ليندا عمر العمري', domain: 'التسامح والتعايش', group: 'المجموعة 2', role: 'الكاتب', c:94, h:95, d:93, i:94, t:94 },
+      { name: 'رتيل حسين الشهري', domain: 'التسامح والتعايش', group: 'المجموعة 2', role: 'مُعزز القيم', c:96, h:97, d:95, i:96, t:96 },
+      // الحياة الصحية (92) -> g1(91), g2(93)
+      { name: 'جوري أحمد الشهري', domain: 'الحياة الصحية', group: 'المجموعة 1', role: 'القائد', c:91, h:90, d:92, i:91, t:91 },
+      { name: 'فرح علي الشهري', domain: 'الحياة الصحية', group: 'المجموعة 1', role: 'الكاتب', c:90, h:89, d:91, i:90, t:90 },
+      { name: 'وسن عبدالله فقيهي', domain: 'الحياة الصحية', group: 'المجموعة 1', role: 'مُعزز القيم', c:92, h:91, d:93, i:92, t:92 },
+      { name: 'أمجاد ممدوح الخديدي', domain: 'الحياة الصحية', group: 'المجموعة 2', role: 'القائد', c:93, h:94, d:92, i:93, t:93 },
+      { name: 'رانسي ظافر الشهري', domain: 'الحياة الصحية', group: 'المجموعة 2', role: 'الكاتب', c:92, h:93, d:91, i:92, t:92 },
+      { name: 'جود سعد القحطاني', domain: 'الحياة الصحية', group: 'المجموعة 2', role: 'مُعزز القيم', c:94, h:95, d:93, i:94, t:94 },
+      // التفاعل الرقمي (91) -> g1(92), g2(90)
+      { name: 'شادن عمر عبدلي', domain: 'التفاعل الرقمي', group: 'المجموعة 1', role: 'القائد', c:92, h:91, d:93, i:92, t:92 },
+      { name: 'سمو سعد القحطاني', domain: 'التفاعل الرقمي', group: 'المجموعة 1', role: 'الكاتب', c:91, h:90, d:92, i:91, t:91 },
+      { name: 'وداد سعد الأسمري', domain: 'التفاعل الرقمي', group: 'المجموعة 1', role: 'مُعزز القيم', c:93, h:92, d:94, i:93, t:93 },
+      { name: 'لمار سويلم القحطاني', domain: 'التفاعل الرقمي', group: 'المجموعة 2', role: 'القائد', c:90, h:89, d:91, i:90, t:90 },
+      { name: 'ألمى إدريس خضير', domain: 'التفاعل الرقمي', group: 'المجموعة 2', role: 'الكاتب', c:89, h:88, d:90, i:89, t:89 },
+      { name: 'تسنيم حسن الشهري', domain: 'التفاعل الرقمي', group: 'المجموعة 2', role: 'مُعزز القيم', c:91, h:90, d:92, i:91, t:91 },
+      // التنمية الذاتية (90) -> g1(91), g2(89)
+      { name: 'جنى ناصر الودعاني', domain: 'التنمية الذاتية', group: 'المجموعة 1', role: 'القائد', c:91, h:91, d:90, i:92, t:91 },
+      { name: 'وسن أحمد الأحمري', domain: 'التنمية الذاتية', group: 'المجموعة 1', role: 'الكاتب', c:90, h:90, d:89, i:91, t:90 },
+      { name: 'ريناد محمد المزارقه', domain: 'التنمية الذاتية', group: 'المجموعة 1', role: 'مُعزز القيم', c:92, h:92, d:91, i:93, t:92 },
+      { name: 'نوف علي آل مجري', domain: 'التنمية الذاتية', group: 'المجموعة 2', role: 'القائد', c:89, h:88, d:90, i:89, t:89 },
+      { name: 'رويدا سعد الشهري', domain: 'التنمية الذاتية', group: 'المجموعة 2', role: 'الكاتب', c:88, h:87, d:89, i:88, t:88 },
+      { name: 'نوره عبدالله الشهراني', domain: 'التنمية الذاتية', group: 'المجموعة 2', role: 'مُعزز القيم', c:90, h:89, d:91, i:90, t:90 },
+      // الاستدامة البيئية (89) -> g1(88), g2(90)
+      { name: 'تولين سامي رفاعي', domain: 'الاستدامة البيئية', group: 'المجموعة 1', role: 'القائد', c:88, h:87, d:89, i:88, t:88 },
+      { name: 'ديالا إبراهيم آل حمزه', domain: 'الاستدامة البيئية', group: 'المجموعة 1', role: 'الكاتب', c:87, h:86, d:88, i:87, t:87 },
+      { name: 'داليا مفلح الشهراني', domain: 'الاستدامة البيئية', group: 'المجموعة 1', role: 'مُعزز القيم', c:89, h:88, d:90, i:89, t:89 },
+      { name: 'ريناد ماجد ظافري', domain: 'الاستدامة البيئية', group: 'المجموعة 2', role: 'القائد', c:90, h:89, d:91, i:90, t:90 },
+      { name: 'شهد أحمد غزواني', domain: 'الاستدامة البيئية', group: 'المجموعة 2', role: 'الكاتب', c:89, h:88, d:90, i:89, t:89 },
+      { name: 'جوري عبدالله القحطاني', domain: 'الاستدامة البيئية', group: 'المجموعة 2', role: 'المراقب', c:91, h:90, d:92, i:91, t:91 }
+    ];
+
+    // --- NAVIGATION ---
+    function switchPanel(id) {
+      document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+      event.currentTarget.classList.add('active');
+      document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+      document.getElementById('panel-' + id).classList.add('active');
+    }
+
+    // --- RENDER FUNCTIONS ---
+    function renderKPIs() {
+      // Automatically grab the top 4 domains
+      const sorted = [...DOMAINS].sort((a,b) => b.avg - a.avg);
+      const top4 = sorted.slice(0, 4);
+      const labels = ['الأعلى أداءً', 'مستوى متميز', 'أداء ممتاز', 'أداء جيد'];
+      
+      const html = top4.map((d, i) => `
+        <div class="kpi">
+          <div style="position:absolute; top:0; right:0; width:5px; height:100%; background:${d.color};"></div>
+          <div class="kpi-val">${d.avg}%</div>
+          <div class="kpi-lbl">${d.name}</div>
+          <div class="kpi-sub" style="color:${d.color}">${labels[i]}</div>
+        </div>
+      `).join('');
+      document.getElementById('kpi-row-container').innerHTML = html;
+    }
+
+    function renderTeachers() {
+      const sorted = [...DOMAINS].sort((a,b) => b.avg - a.avg);
+      const html = sorted.map((d) => `
+        <div class="teacher-badge">
+          <div class="tb-icon" style="background:${d.color}"><i class="${d.icon}"></i></div>
+          <div class="tb-name">${d.teacher}</div>
+          <div class="tb-domain" style="color:${d.color}">${d.name}</div>
+        </div>
+      `).join('');
+      document.getElementById('teachers-grid-container').innerHTML = html;
+    }
+
+    function renderDomainBars() {
+      const sorted = [...DOMAINS].sort((a,b) => b.avg - a.avg);
+      const html = sorted.map(d => `
+        <div class="domain-bar">
+          <div class="domain-header"><span class="domain-name">${d.name}</span><span class="domain-pct" style="color:${d.color}">${d.avg}%</span></div>
+          <div class="bar-track"><div class="bar-fill" style="width:${d.avg}%;background:${d.color}"></div></div>
+        </div>
+      `).join('');
+      document.getElementById('domain-bars-container').innerHTML = html;
+    }
+
+    function renderValuesGrid() {
+      const sorted = [...DOMAINS].sort((a,b) => b.avg - a.avg);
+      const html = sorted.map(d => `
+        <div class="val-chip">
+          <div class="val-name">${d.name} <span style="float:right; color:${d.color}"><i class="${d.icon}"></i></span></div>
+          <div class="val-row-flex">
+            <div class="v-item"><div class="v-score" style="color:${d.color}">${d.avg+1}%</div><div class="v-lbl">تعاون</div><div class="v-bar-track"><div class="v-bar-fill" style="width:${d.avg+1}%;background:${d.color}"></div></div></div>
+            <div class="v-item"><div class="v-score" style="color:${d.color}">${d.avg}%</div><div class="v-lbl">أمانة</div><div class="v-bar-track"><div class="v-bar-fill" style="width:${d.avg}%;background:${d.color}"></div></div></div>
+            <div class="v-item"><div class="v-score" style="color:${d.color}">${d.avg-1}%</div><div class="v-lbl">عزيمة</div><div class="v-bar-track"><div class="v-bar-fill" style="width:${d.avg-1}%;background:${d.color}"></div></div></div>
+            <div class="v-item"><div class="v-score" style="color:${d.color}">${d.avg+1}%</div><div class="v-lbl">انضباط</div><div class="v-bar-track"><div class="v-bar-fill" style="width:${d.avg+1}%;background:${d.color}"></div></div></div>
+          </div>
+        </div>
+      `).join('');
+      document.getElementById('values-grid-container').innerHTML = html;
+    }
+
+    function renderDetailedDomains() {
+      const sorted = [...DOMAINS].sort((a,b) => b.avg - a.avg);
+      const html = sorted.map(d => {
+        const g1 = STUDENTS.filter(s => s.domain === d.name && s.group === 'المجموعة 1');
+        const g2 = STUDENTS.filter(s => s.domain === d.name && s.group === 'المجموعة 2');
+        
+        const buildTbl = (arr) => arr.map(s => `
+          <tr>
+            <td>${s.name}</td>
+            <td><span class="role-badge" style="background:${ROLES[s.role].bg};color:${ROLES[s.role].tx}">${s.role}</span></td>
+            <td><span class="score-pill" style="color:${d.color};background:rgba(255,255,255,0.7)">${s.t}%</span></td>
+          </tr>
+        `).join('');
+
+        return `
+          <div class="domain-section">
+            <div class="ds-header" style="background:${d.color}">
+              <div><div class="ds-name"><i class="${d.icon}" style="margin-left:5px"></i> ${d.name}</div><div class="ds-teacher">${d.teacher}</div></div>
+              <div class="ds-avg">${d.avg}%</div>
+            </div>
+            <div class="groups-wrap">
+              <div class="group-col">
+                <span class="group-label" style="background:var(--emerald)">المجموعة الأولى</span>
+                <table class="inner-tbl"><thead><tr><th>اسم الطالبة</th><th>الوظيفة</th><th>النسبة</th></tr></thead><tbody>${buildTbl(g1)}</tbody></table>
+              </div>
+              <div class="group-col">
+                <span class="group-label" style="background:var(--sky)">المجموعة الثانية</span>
+                <table class="inner-tbl"><thead><tr><th>اسم الطالبة</th><th>الوظيفة</th><th>النسبة</th></tr></thead><tbody>${buildTbl(g2)}</tbody></table>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+      document.getElementById('domains-detailed-container').innerHTML = html;
+    }
+
+    function renderTimeline() {
+      const html = TIMELINE.map((t, i) => `
+        <div class="timeline-item">
+          <div class="tl-icon" style="background:${t.color}">${i+1}</div>
+          <div class="tl-body">
+            <div class="tl-week">${t.week}</div>
+            <div class="tl-stage">${t.stage}</div>
+            <div class="tl-bar"><div class="tl-prog" style="width:${t.pct}%;background:${t.color}"></div></div>
+            <div class="tl-pct"><span style="color:${t.color}">${t.pct}%</span> <span class="badge ${t.cls}">${t.status}</span></div>
+          </div>
+        </div>
+      `).join('');
+      document.getElementById('timeline-container').innerHTML = html;
+    }
+
+    function initFilters() {
+      const sel = document.getElementById('filterDomain');
+      const sorted = [...DOMAINS].sort((a,b) => b.avg - a.avg);
+      sorted.forEach(d => {
+        const o = document.createElement('option'); o.value = d.name; o.textContent = d.name; sel.appendChild(o);
+      });
+    }
+
+    function renderMainTable() {
+      const dFilter = document.getElementById('filterDomain').value;
+      const gFilter = document.getElementById('filterGroup').value;
+      let data = STUDENTS;
+      if (dFilter) data = data.filter(s => s.domain === dFilter);
+      if (gFilter) data = data.filter(s => s.group === gFilter);
+
+      const html = data.map((s, i) => `
+        <tr>
+          <td style="color:#B0BEC5">${i+1}</td>
+          <td style="color:var(--navy)">${s.name}</td>
+          <td style="color:var(--text-muted)">${s.domain}</td>
+          <td style="color:var(--text-muted)">${s.group}</td>
+          <td><span class="role-badge" style="background:${ROLES[s.role].bg};color:${ROLES[s.role].tx}">${s.role}</span></td>
+          <td class="pct-cell">${s.c}%</td>
+          <td class="pct-cell">${s.h}%</td>
+          <td class="pct-cell">${s.d}%</td>
+          <td class="pct-cell">${s.i}%</td>
+          <td class="pct-cell" style="color:var(--teal)">${s.t}%</td>
+        </tr>
+      `).join('');
+      document.getElementById('main-table-body').innerHTML = html;
+    }
+
+    function initCharts() {
+      const sorted = [...DOMAINS].sort((a,b) => b.avg - a.avg);
+      
+      // Group Bar Chart
+      new Chart(document.getElementById('groupChart'), {
+        type: 'bar',
+        data: {
+          labels: sorted.map(d => d.name.split(' ')[0]),
+          datasets: [
+            { label: 'المجموعة الأولى', data: sorted.map(d => d.g1), backgroundColor: '#07A869', borderRadius: 4 },
+            { label: 'المجموعة الثانية', data: sorted.map(d => d.g2), backgroundColor: '#3D7EB9', borderRadius: 4 }
+          ]
+        },
+        options: {
+          responsive: true, maintainAspectRatio: false,
+          plugins: { legend: { display: false } },
+          scales: { y: { min: 80, max: 100 }, x: { grid: { display: false }, ticks: {font: {family: 'Tajawal', weight: 'bold'}} } }
+        }
+      });
+
+      // Radar Chart (Average roughly around 92.5 for visualization)
+      new Chart(document.getElementById('radarChart'), {
+        type: 'radar',
+        data: {
+          labels: ['التعاون', 'الأمانة', 'العزيمة', 'الانضباط'],
+          datasets: [{
+            data: [93.1, 91.8, 92.5, 93.0],
+            backgroundColor: 'rgba(13,169,166,0.15)', borderColor: '#0DA9A6', borderWidth: 2.5, pointBackgroundColor: '#0DA9A6', pointRadius: 4
+          }]
+        },
+        options: {
+          responsive: true, maintainAspectRatio: false,
+          plugins: { legend: { display: false } },
+          scales: { r: { min: 80, max: 100, pointLabels: { font: { family: 'Tajawal', size: 12, weight: 'bold' } } } }
+        }
+      });
+    }
+
+    // --- BOOT ---
+    document.addEventListener('DOMContentLoaded', () => {
+      renderKPIs();
+      renderTeachers();
+      renderTimeline();
+      renderDomainBars();
+      renderValuesGrid();
+      renderDetailedDomains();
+      initFilters();
+      renderMainTable();
+      setTimeout(initCharts, 100);
+    });
+  </script>
+</body>
+</html>
