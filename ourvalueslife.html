@@ -1,9 +1,10 @@
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>برنامج قيمنا حياة - المتوسطة الحادية والعشرون</title>
+  <title>مبادرة ترسيخ القيم وتعزيز الهوية الوطنية - المتوسطة الحادية والعشرون</title>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&family=Cairo:wght@400;600;700&display=swap');
@@ -18,10 +19,6 @@
       --card-shadow: 0 4px 15px rgba(21,68,90,0.05); --radius: 12px;
     }
 
-    /* --- TOP BANNER --- */
-    .school-banner { background: #fff; padding: 12px 30px; text-align: center; border-bottom: 1px solid #EAF0F4; box-shadow: 0 2px 5px rgba(0,0,0,0.02); }
-    .school-banner h2 { color: var(--navy); font-size: 16px; font-weight: 800; }
-
     /* --- HEADER --- */
     .header {
       background: linear-gradient(135deg, var(--navy) 0%, var(--dark-teal) 50%, var(--emerald) 100%);
@@ -31,8 +28,9 @@
     .header::after { content: ''; position: absolute; bottom: -30px; right: 60px; width: 150px; height: 150px; border-radius: 50%; background: rgba(255,255,255,0.04); }
     
     .header-content { display: flex; justify-content: space-between; align-items: flex-start; position: relative; z-index: 1; flex-wrap: wrap; gap: 20px; }
-    .header-titles h1 { font-size: 26px; font-weight: 800; margin-bottom: 5px; }
-    .sub-title { color: #A8E6CF; font-size: 20px; font-weight: 700; margin-bottom: 15px; display: inline-block; }
+    .header-titles h1 { font-size: 24px; font-weight: 800; margin-bottom: 8px; line-height: 1.4; }
+    .header-titles h2 { font-size: 16px; color: #A8E6CF; font-weight: 700; margin-bottom: 8px; }
+    .sub-title { color: #fff; opacity: 0.9; font-size: 14px; font-weight: 600; margin-bottom: 15px; display: inline-block; }
     
     .admin-info { display: flex; gap: 15px; flex-wrap: wrap; }
     .admin-card { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.2); padding: 8px 15px; border-radius: 8px; display: flex; align-items: center; gap: 8px; backdrop-filter: blur(5px); }
@@ -45,7 +43,7 @@
     .meta-lbl { font-size: 12px; opacity: 0.8; margin-top: 5px; }
 
     /* --- LAYOUT --- */
-    .dashboard-wrap { display: flex; max-width: 1300px; margin: 0 auto; padding: 0 20px 20px; gap: 20px; }
+    .dashboard-wrap { display: flex; max-width: 1300px; margin: 0 auto; padding: 0 20px 20px; gap: 20px; min-height: 80vh; }
     .sidebar { width: 240px; flex-shrink: 0; background: #fff; border-radius: var(--radius); box-shadow: var(--card-shadow); padding: 20px 0; align-self: flex-start; position: sticky; top: 20px; }
     .nav-btn { display: flex; align-items: center; gap: 12px; width: 100%; padding: 14px 24px; background: transparent; border: none; border-right: 4px solid transparent; text-align: right; font-family: 'Tajawal', sans-serif; font-size: 14px; font-weight: 700; color: #6b7a8d; cursor: pointer; transition: 0.2s; }
     .nav-btn i { font-size: 18px; width: 20px; text-align: center; }
@@ -74,9 +72,9 @@
     .teachers-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; }
     .teacher-badge { background: #fff; border: 1px solid #EAF0F4; border-radius: 12px; padding: 15px; text-align: center; transition: 0.3s; }
     .teacher-badge:hover { transform: translateY(-3px); box-shadow: 0 6px 15px rgba(21,68,90,0.08); border-color: transparent;}
-    .tb-icon { width: 42px; height: 42px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 12px; color: #fff; font-size: 18px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);}
-    .tb-name { font-size: 13px; font-weight: 800; color: var(--navy); margin-bottom: 6px; }
-    .tb-domain { font-size: 11px; color: var(--text-muted); font-weight: 700; background: #F4F7F6; padding: 4px 10px; border-radius: 20px; display: inline-block;}
+    .tb-icon { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 8px; color: #fff; font-size: 13px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);}
+    .tb-name { font-size: 11px; font-weight: 800; color: var(--navy); margin-bottom: 6px; }
+    .tb-domain { font-size: 10px; color: var(--text-muted); font-weight: 700; background: #F4F7F6; padding: 4px 10px; border-radius: 20px; display: inline-block;}
 
     /* Vertical Timeline */
     .timeline-item { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 15px; position: relative; }
@@ -99,9 +97,15 @@
     .bar-fill { height: 100%; border-radius: 20px; }
 
     /* Domain Detail Cards */
-    .domain-section { margin-bottom: 24px; border-radius: 12px; overflow: hidden; box-shadow: var(--card-shadow); border: 1px solid rgba(0,0,0,0.05); }
+    .domain-section { margin-bottom: 24px; border-radius: 12px; overflow: hidden; box-shadow: var(--card-shadow); border: 1px solid rgba(0,0,0,0.05); background: #fff;}
     .ds-header { color: #fff; padding: 14px 20px; display: flex; justify-content: space-between; align-items: center; }
     .ds-name { font-size: 15px; font-weight: 800; } .ds-teacher { font-size: 12px; opacity: 0.9; } .ds-avg { font-size: 20px; font-weight: 800; }
+    
+    .domain-info-block { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; padding: 20px; border-bottom: 1px solid rgba(0,0,0,0.05); background: #fafcff; }
+    .info-list { list-style: none; padding: 0; }
+    .info-list li { font-size: 12px; margin-bottom: 8px; font-weight: 600; color: var(--text-dark); display: flex; align-items: center; gap: 8px; }
+    .value-pill { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; margin-left: 6px; margin-bottom: 6px; }
+
     .groups-wrap { display: grid; grid-template-columns: 1fr 1fr; background: #fff; }
     .group-col { padding: 16px; } .group-col:first-child { border-left: 1px solid rgba(0,0,0,0.06); }
     .group-label { font-size: 12px; font-weight: 800; color: #fff; display: inline-block; padding: 5px 14px; border-radius: 20px; margin-bottom: 12px; }
@@ -133,7 +137,35 @@
     .main-table td { padding: 12px 15px; color: var(--text-dark); font-weight: 600; }
     .main-table .pct-cell { font-weight: 800; }
 
+    /* ── STATIONS (المحطات) STYLES ── */
+    .station-intro-card { background: linear-gradient(135deg, #15445A, #218CAA); color: #fff; padding: 25px; border-radius: 12px; margin-bottom: 25px; box-shadow: var(--card-shadow); }
+    .station-intro-card h2 { font-size: 18px; font-weight: 800; margin-bottom: 10px; }
+    .station-intro-card p { font-size: 13px; line-height: 1.7; opacity: 0.9; }
+    
+    .domain-journey-card { background: #fff; border-radius: 12px; padding: 20px; margin-bottom: 20px; box-shadow: var(--card-shadow); border: 1px solid rgba(0,0,0,0.05); }
+    .dj-header { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px dashed #EAF0F4; }
+    .dj-icon { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; color: #fff; }
+    .dj-title { font-size: 16px; font-weight: 800; color: var(--navy); }
+    .dj-teacher { font-size: 12px; color: var(--text-muted); font-weight: 600; }
+    
+    .stations-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; position: relative; }
+    .station-step { background: #F8FAFC; border: 1px solid #EAF0F4; border-radius: 10px; padding: 15px; position: relative; transition: 0.3s; }
+    .station-step:hover { background: #fff; box-shadow: 0 5px 15px rgba(0,0,0,0.05); border-color: var(--teal); transform: translateY(-3px); }
+    .s-num { width: 30px; height: 30px; background: var(--navy); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 14px; position: absolute; top: -15px; right: 15px; border: 3px solid #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+    .s-title { font-size: 13px; font-weight: 800; color: var(--navy); margin-top: 10px; margin-bottom: 8px; border-bottom: 2px solid rgba(0,0,0,0.05); padding-bottom: 5px; display: inline-block;}
+    .s-desc { font-size: 11px; line-height: 1.6; color: var(--text-dark); font-weight: 600; }
+    .s-desc ul { list-style: none; padding: 0; margin-top: 5px; }
+    .s-desc ul li { position: relative; padding-right: 12px; margin-bottom: 4px; }
+    .s-desc ul li::before { content: '▪'; position: absolute; right: 0; color: var(--teal); }
+
     .chart-wrap { position: relative; width: 100%; height: 260px; }
+    .about-value-box { display: flex; gap: 15px; align-items: center; padding: 15px; background: #fafcff; border-radius: 12px; margin-bottom: 10px; border: 1px solid rgba(0,0,0,0.03);}
+    .av-icon { width: 50px; height: 50px; border-radius: 12px; display: flex; justify-content: center; align-items: center; color: #fff; font-size: 20px; flex-shrink: 0;}
+    .av-text h4 { font-size: 14px; font-weight: 800; color: var(--navy); margin-bottom: 5px;}
+    .av-text p { font-size: 12px; color: var(--text-muted); line-height: 1.6; font-weight: 600;}
+
+    /* الفوتر (تذييل الصفحة) */
+    .site-footer { text-align: center; padding: 25px 20px; color: var(--text-muted); font-size: 14px; font-weight: 700; margin-top: 30px; border-top: 1px solid #EAF0F4; }
 
     @media (max-width: 900px) {
       .dashboard-wrap { flex-direction: column; }
@@ -141,27 +173,26 @@
       .nav-btn { padding: 10px; border-right: none; border-bottom: 3px solid transparent; justify-content: center; white-space: nowrap; }
       .nav-btn.active { border-bottom-color: var(--teal); border-right-color: transparent; }
       .grid-2 { grid-template-columns: 1fr; }
+      .domain-info-block { grid-template-columns: 1fr; }
       .groups-wrap { grid-template-columns: 1fr; }
       .header-content { flex-direction: column; text-align: center; align-items: center; }
       .header-meta { justify-content: center; width: 100%; margin-top: 15px; }
       .kpi-row { grid-template-columns: 1fr 1fr; }
+      .stations-grid { grid-template-columns: 1fr; gap: 25px; }
+      .station-step { margin-top: 10px; }
     }
   </style>
 </head>
 <body>
-
-  <!-- Top Banner -->
-  <div class="school-banner">
-    <h2>المتوسطة الحادية والعشرون</h2>
-  </div>
 
   <!-- Main Header -->
   <div class="header" id="top-header">
     <div class="header-content">
       <div>
         <div class="header-titles">
-          <h1>🌿 برنامج قيمنا حياة لعام 1447هـ</h1>
-          <div class="sub-title">الصف الثالث المتوسط عام 1447هـ</div>
+          <h1>مبادرة ترسيخ القيم وتعزيز الهوية الوطنية</h1>
+          <h2>( برنامج قيمنا حياة الصف الثالث المتوسط عام ١٤٤٧هـ )</h2>
+          <div class="sub-title">المتوسطة الحادية والعشرون</div>
         </div>
         <div class="admin-info">
           <div class="admin-card"><i class="fas fa-user-tie"></i><div><div class="admin-role">مديرة المدرسة</div><div class="admin-name">أ. أمينة آل مشيط</div></div></div>
@@ -171,10 +202,10 @@
       </div>
       
       <div class="header-meta">
-        <div><div class="meta-num">54</div><div class="meta-lbl">طالبة مشاركة</div></div>
+        <div><div class="meta-num">57</div><div class="meta-lbl">طالبة مشاركة</div></div>
         <div><div class="meta-num">6</div><div class="meta-lbl">مجالات قيمية</div></div>
         <div><div class="meta-num">12</div><div class="meta-lbl">مجموعة عمل</div></div>
-        <div><div class="meta-num" style="color:#A8E6CF">92%</div><div class="meta-lbl">متوسط الإنجاز الكلي</div></div>
+        <div><div class="meta-num" style="color:#A8E6CF">93%</div><div class="meta-lbl">متوسط الإنجاز الكلي</div></div>
       </div>
     </div>
   </div>
@@ -186,6 +217,7 @@
     <div class="sidebar">
       <button class="nav-btn active" onclick="switchPanel('home')"><i class="fas fa-chart-pie"></i> نظرة عامة</button>
       <button class="nav-btn" onclick="switchPanel('domains')"><i class="fas fa-layer-group"></i> تفاصيل المجالات</button>
+      <button class="nav-btn" onclick="switchPanel('stations')"><i class="fas fa-route"></i> رحلة المشاريع</button>
       <button class="nav-btn" onclick="switchPanel('students')"><i class="fas fa-user-graduate"></i> سجل الطالبات</button>
       <button class="nav-btn" onclick="switchPanel('about')"><i class="fas fa-info-circle"></i> عن البرنامج</button>
     </div>
@@ -195,16 +227,11 @@
       
       <!-- PANEL 1: Home (Overview) -->
       <div id="panel-home" class="panel active">
-        
-        <!-- KPIs Container (Dynamically rendered) -->
         <div class="kpi-row" id="kpi-row-container"></div>
-
-        <!-- Teachers Container (Beautiful Grid) -->
         <div class="card">
           <div class="card-title"><span class="dot" style="background:var(--ocean)"></span> المعلمات المنفذات للمجالات القيمية</div>
           <div class="teachers-grid" id="teachers-grid-container"></div>
         </div>
-
         <div class="grid-2">
           <div class="card">
             <div class="card-title"><span class="dot" style="background:var(--sky)"></span> التوزيع الزمني للبرنامج</div>
@@ -215,7 +242,6 @@
             <div id="domain-bars-container"></div>
           </div>
         </div>
-
         <div class="grid-2">
           <div class="card">
             <div class="card-title"><span class="dot" style="background:var(--navy)"></span> مقارنة إنجاز المجموعتين</div>
@@ -233,7 +259,6 @@
             </div>
           </div>
         </div>
-
         <div class="card">
           <div class="card-title"><span class="dot" style="background:var(--amethyst)"></span> تفصيل القيم لكل مجال (مرتبة تنازلياً)</div>
           <div class="values-grid" id="values-grid-container"></div>
@@ -242,12 +267,33 @@
 
       <!-- PANEL 2: Domains Detailed Cards -->
       <div id="panel-domains" class="panel">
+        <div style="margin-bottom: 20px;">
+          <h2 style="font-size: 18px; color: var(--navy); font-weight: 800;">تفاصيل المجالات، المشاريع، والقيم</h2>
+          <p style="font-size: 13px; color: var(--text-muted); margin-top: 5px;">استعراض شامل لجميع المجالات متضمناً القيم المستهدفة، والمشاريع المنجزة لكل مجموعة.</p>
+        </div>
         <div id="domains-detailed-container"></div>
       </div>
 
-      <!-- PANEL 3: Students Table -->
+      <!-- PANEL 3: STATIONS (رحلة المشاريع) -->
+      <div id="panel-stations" class="panel">
+        
+        <div class="station-intro-card">
+          <h2><i class="fas fa-route"></i> رحلة المشروعات الطلابية (المحطات الأربع)</h2>
+          <p style="margin-bottom: 15px;">
+            تمر كل مجموعة طلابية بأربع محطات تنفيذية للوصول إلى المخرج النهائي بأسلوب منهجي. تبدأ الرحلة بـ <strong>محطة التحديد</strong> لاختيار المشروع وفق ضوابط المنهجية، تليها <strong>محطة التخطيط</strong> لتوزيع الأدوار وتوقيع "تعهد القيم". ثم <strong>محطة التنفيذ</strong> بالعمل الميداني والبحثي وتدوين التأملات، وتُختتم بـ <strong>محطة العرض</strong> لتقديم المخرج النهائي أمام المجتمع المدرسي.
+          </p>
+          <div style="background: rgba(255,255,255,0.15); padding: 10px 15px; border-radius: 8px; display: inline-block; font-size: 13px; font-weight: 700;">
+            <i class="far fa-calendar-alt" style="margin-left: 5px;"></i> الإطار الزمني العام للمبادرة: من 15 / 3 / 1447هـ إلى 9 / 11 / 1447هـ
+          </div>
+        </div>
+
+        <div id="stations-journey-container"></div>
+
+      </div>
+
+      <!-- PANEL 4: Students Table -->
       <div id="panel-students" class="panel">
-        <div style="display:flex; gap:15px; margin-bottom:15px; align-items:center; background:#fff; padding:15px; border-radius:12px; box-shadow:var(--card-shadow);">
+        <div style="display:flex; gap:15px; margin-bottom:15px; align-items:center; background:#fff; padding:15px; border-radius:12px; box-shadow:var(--card-shadow); flex-wrap:wrap;">
           <span style="font-weight:700; font-size:13px;">تصفية:</span>
           <select id="filterDomain" onchange="renderMainTable()" style="padding:6px 10px; border-radius:6px; border:1px solid #ddd; font-family:inherit;">
             <option value="">كل المجالات</option>
@@ -256,6 +302,9 @@
             <option value="">كل المجموعات</option>
             <option value="المجموعة 1">المجموعة 1</option>
             <option value="المجموعة 2">المجموعة 2</option>
+          </select>
+          <select id="filterRole" onchange="renderMainTable()" style="padding:6px 10px; border-radius:6px; border:1px solid #ddd; font-family:inherit;">
+            <option value="">كل الوظائف</option>
           </select>
         </div>
         <div class="table-wrap">
@@ -279,31 +328,197 @@
         </div>
       </div>
 
-      <!-- PANEL 4: About -->
+      <!-- PANEL 5: About -->
       <div id="panel-about" class="panel">
         <div class="card">
-          <div class="card-title"><i class="fas fa-info-circle" style="color:var(--teal); margin-left:8px;"></i> نبذة عن برنامج قيمنا حياة</div>
-          <p style="font-size:15px; line-height:1.8; color:#3A5263; font-weight:600;">
-            يهدف برنامج <strong>"قيمنا حياة"</strong> إلى غرس القيم الإسلامية والإنسانية الأصيلة (التعاون، الأمانة، العزيمة، الانضباط) في نفوس طالبات الصف الثالث المتوسط في المتوسطة الحادية والعشرون لعام 1447هـ.<br><br>
-            يعتمد البرنامج على نظام المجموعات التشاركية الموزعة على 6 مجالات حيوية، حيث تقوم الطالبات بتنفيذ مشاريع عملية وتأملية لتعزيز هذه القيم في حياتهن اليومية والرقمية.
+          <div class="card-title"><i class="fas fa-bullseye" style="color:var(--teal); margin-left:8px;"></i> رؤية ورسالة البرنامج</div>
+          <p style="font-size:14px; line-height:1.8; color:#3A5263; font-weight:600;">
+            يهدف برنامج <strong>"قيمنا حياة"</strong> إلى غرس وتأصيل القيم الإسلامية والإنسانية الأصيلة في نفوس طالبات الصف الثالث المتوسط، لتهيئة جيل واعي بمسؤولياته الدينية والوطنية والاجتماعية. نسعى من خلال هذه المبادرة في المتوسطة الحادية والعشرون إلى تحويل القيم النظرية إلى ممارسات عملية تنعكس على سلوكيات الطالبات داخل المدرسة وخارجها، وفي العالم الواقعي والرقمي على حد سواء.
           </p>
+        </div>
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-title"><i class="fas fa-star" style="color:var(--emerald); margin-left:8px;"></i> القيم الأربع الأساسية المستهدفة</div>
+            <div class="about-value-box"><div class="av-icon" style="background:var(--emerald)"><i class="fas fa-users"></i></div><div class="av-text"><h4>التعاون</h4><p>تعزيز روح الفريق، والمشاركة الإيجابية في إنجاز المشاريع وتوزيع المهام.</p></div></div>
+            <div class="about-value-box"><div class="av-icon" style="background:var(--sky)"><i class="fas fa-shield-alt"></i></div><div class="av-text"><h4>الأمانة</h4><p>تحري المصداقية وحفظ الحقوق الفكرية عند إعداد المنتجات التقنية والعلمية.</p></div></div>
+            <div class="about-value-box"><div class="av-icon" style="background:var(--teal)"><i class="fas fa-mountain"></i></div><div class="av-text"><h4>العزيمة</h4><p>الإصرار على تجاوز الصعوبات والتحديات التقنية والميدانية.</p></div></div>
+            <div class="about-value-box"><div class="av-icon" style="background:var(--amethyst)"><i class="fas fa-clock"></i></div><div class="av-text"><h4>الانضباط</h4><p>الالتزام بالخطط الزمنية لكل مرحلة، والمحافظة على السلوك الراقي.</p></div></div>
+          </div>
+          <div class="card" style="display:flex; flex-direction:column;">
+            <div class="card-title"><i class="fas fa-cogs" style="color:var(--navy); margin-left:8px;"></i> آلية تنفيذ المبادرة</div>
+            <div style="flex:1;">
+              <ul style="list-style:none; padding:0; margin:0;">
+                <li style="margin-bottom:15px; display:flex; gap:10px; align-items:flex-start;"><i class="fas fa-check-circle" style="color:var(--teal); margin-top:4px;"></i><span style="font-size:13px; font-weight:600; color:var(--text-dark); line-height:1.6;">تقسيم المبادرة إلى <strong style="color:var(--navy)">6 مجالات حيوية</strong> تغطي كافة الجوانب القيمية.</span></li>
+                <li style="margin-bottom:15px; display:flex; gap:10px; align-items:flex-start;"><i class="fas fa-check-circle" style="color:var(--teal); margin-top:4px;"></i><span style="font-size:13px; font-weight:600; color:var(--text-dark); line-height:1.6;">توزيع الطالبات إلى <strong style="color:var(--navy)">12 مجموعة عمل</strong> وتحديد وظائف مسؤولة لكل طالبة.</span></li>
+                <li style="margin-bottom:15px; display:flex; gap:10px; align-items:flex-start;"><i class="fas fa-check-circle" style="color:var(--teal); margin-top:4px;"></i><span style="font-size:13px; font-weight:600; color:var(--text-dark); line-height:1.6;">تطبيق منهجية <strong style="color:var(--navy)">المحطات الأربع</strong> لضمان جودة المخرج.</span></li>
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
 
     </div>
   </div>
 
+  <!-- Footer -->
+  <div class="site-footer">
+    المتوسطة الحادية والعشرون &copy; 1447هـ
+  </div>
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
   <script>
-    // --- UPDATED DATA (New Ranking Exactly as Requested) ---
-    // 1: الانتماء (96), 2: التسامح (94), 3: الصحة (92), 4: الرقمي (91), 5: التنمية (90), 6: الاستدامة (89). Average = 92%
-    const DOMAINS = [
-      { name: 'الانتماء الوطني', teacher: 'رقية عسيري', g1: 95, g2: 97, avg: 96, color: '#15445A', icon: 'fas fa-flag' },
-      { name: 'التسامح والتعايش', teacher: 'فاطمة الشهراني', g1: 93, g2: 95, avg: 94, color: '#3D7EB9', icon: 'fas fa-hands-helping' },
-      { name: 'الحياة الصحية', teacher: 'ظافرة البيشي', g1: 91, g2: 93, avg: 92, color: '#C1B489', icon: 'fas fa-heartbeat' },
-      { name: 'التفاعل الرقمي', teacher: 'ابتسام الشهري', g1: 92, g2: 90, avg: 91, color: '#07A869', icon: 'fas fa-laptop-code' },
-      { name: 'التنمية الذاتية', teacher: 'فاطمة السلمي', g1: 91, g2: 89, avg: 90, color: '#0DA9A6', icon: 'fas fa-user-graduate' },
-      { name: 'الاستدامة البيئية', teacher: 'وضحى ءال جبار ونورة الشهراني', g1: 88, g2: 90, avg: 89, color: '#7258A4', icon: 'fas fa-leaf' }
+    /* ══════════════════════ DATA ══════════════════════ */
+    const domains = [
+      { name:'الانتماء الوطني',    teacher:'رقية عسيري',                       g1:100, g2:100, avg:100, color:'#351375',
+        icon: 'fas fa-flag',
+        projects:['الأمن الوطني مسؤولية الجميع','مملكة الإنسانية في عيون العالم'],
+        ideas:['باركود تفاعلي للمعالم التاريخية','مجلة إلكترونية','لوحات إرشادية'],
+        values:['التعاون','الأمانة','الانضباط'],
+        g1students:['جنى عبدالله الاحمري','جنى علي غزواني','اسيل سعيد الطوره','لمار عامر آل يحيى','الين علي آل مقبول'],
+        g2students:['صالحة عثمان هزازي','ميار عبدالعزيز آل جلده','تبيان طارق الحاج','جنان مبارك الشهراني','جوري ثابت الشهراني'],
+        stations: [
+          ["اختيار المشاريع", "تحديد معالم تاريخية لإنشاء باركود تفاعلي"],
+          ["توزيع الأدوار (القائد، الكاتب..)", "وضع جدول لزيارة المعالم وتوقيع تعهد القيم"],
+          ["البدء بالبحث وتصميم الباركود والمجلة", "تدوين تأملات ذاتية حول الأمانة العلمية"],
+          ["عرض الباركود في الفناء المدرسي", "شرح العمل للإذاعة المدرسية"]
+        ]
+      },
+      { name:'التسامح والتعايش',   teacher:'فاطمة الشهراني',                   g1:93, g2:93, avg:93, color:'#3D7EB9',
+        icon: 'fas fa-hands-helping',
+        projects:['قيم العدالة (لا للتمييز)','نتعايش بسلام ونحيا بتسامح'],
+        ideas:['ركن "خيمة الحوار"','بطاقات "ماذا تفعل لو؟"','أساور التسامح'],
+        values:['التسامح','التعاون'],
+        g1students:['رباب علي خبراني','رامة عمودي سفياني','لمار عبدالله العمري','جنى سلطان القحطاني','جود احمد بكري'],
+        g2students:['تالا احمد القحطاني','عهد علي الاحمري','ليندا عمر العمري','رتيل حسين الشهري','روين سلطان الشهري'],
+        stations: [
+          ["اختيار فعالية خيمة الحوار", "تحديد أسئلة بطاقات 'ماذا تفعل لو؟'"],
+          ["خطة زمنية لبناء ركن الخيمة", "إسناد مهام التصميم للمساعد والمراقب"],
+          ["تجهيز الأساور والبطاقات ميدانياً", "جلسة شهرية مع أ. فاطمة لتقييم التعاون"],
+          ["تدشين 'خيمة الحوار'", "استقبال الطالبات والنقاش المجتمعي"]
+        ]
+      },
+      { name:'التنمية الذاتية',    teacher:'فاطمة السلمي',                     g1:92, g2:92, avg:92, color:'#0DA9A6',
+        icon: 'fas fa-user-graduate',
+        projects:['المحاور الذكي','حل المشكلات'],
+        ideas:['دقائق تطويرية إذاعية','مفكرة إنجاز','استضافة المرشدة الطلابية'],
+        values:['العزيمة','الانضباط'],
+        g1students:['جنى ناصر الوذناني','وسن احمد الاحمري','ريناد محمد المزارقه','حور سلطان العماري'],
+        g2students:['نوف علي آل مجري','لمار علي الشمراني','رويدا سعد الشهري','نوره عبدالله الشهراني','مزون عبدالله القحطاني'],
+        stations: [
+          ["تحديد فقرات 'الدقائق التطويرية'", "الاتفاق على تصميم مفكرة الإنجاز"],
+          ["جدولة الإذاعة والمحتوى الأسبوعي", "المعزز والمراقب يجهزان خطة المتابعة"],
+          ["التواصل مع المرشدة الطلابية", "تصميم المفكرة ورصد تحديات التنفيذ"],
+          ["تقديم الدقائق التطويرية", "توزيع مفكرات الإنجاز المطبوعة للطالبات"]
+        ]
+      },
+      { name:'الحياة الصحية',      teacher:'ظافرة البيشي',                     g1:91, g2:91, avg:91, color:'#7258A4',
+        icon: 'fas fa-heartbeat',
+        projects:['رحلة في جسم الإنسان','طبقك حياتك (غذاؤك.. حركتك)'],
+        ideas:['مسرحية الصحة','إنفوجرافيك السكر','مسابقة أفضل فطور صحي'],
+        values:['الأمانة','الانضباط'],
+        g1students:['جوري احمد الشهري','فرح علي الشهري','وسن عبدالله فقيهي','وسن محمد العمري','رهف مصلح القرني'],
+        g2students:['أمجاد ممدوح الخديدي','رانسي ظافر الشهري','جود سعد القحطاني','أمل مدغم المنيعي','رزان بندر آل شيخ'],
+        stations: [
+          ["استقرار الرأي على مسرحية الصحة", "تحديد أهداف مسابقة الفطور الصحي"],
+          ["الكاتب يصيغ سيناريو المسرحية", "توقيع تعهد القيم والالتزام بالتدريب"],
+          ["التدريب العملي وتصميم الإنفوغرافيك", "تدوين التأملات حول مدى الانضباط بالمواعيد"],
+          ["أداء المسرحية أمام المدرسة", "إطلاق وإعلان مسابقة أفضل فطور صحي"]
+        ]
+      },
+      { name:'الاستدامة البيئية',  teacher:'وضحاء آل جبار',                    g1:90, g2:90, avg:90, color:'#07A869',
+        icon: 'fas fa-leaf',
+        projects:['بالتدوير نحمي بيئتنا','نزرع الوعي لنحصد بيئة نقية'],
+        ideas:['مبادرة "استبدل واربح"','مسابقة تقليل النفايات','شجرة البصمات'],
+        values:['العزيمة','التعاون'],
+        g1students:['تولين سامي رفاعي','ديالا ابراهيم ال حمزه','داليا مفلح الشهراني','تسنيم محمد الغامدي','صبا علي القحطاني'],
+        g2students:['ريناد ماجد ظافري','شهد احمد غزواني','جوري عبدالله القحطاني'],
+        stations: [
+          ["اختيار فكرة معرض إعادة التدوير", "تحديد شروط مبادرة 'استبدل واربح'"],
+          ["خطة جمع المواد (بلاستيك، ورق)", "توزيع أدوار الفرز وتوقيع التعهد البيئي"],
+          ["العمل اليدوي المكثف لإعادة التدوير", "جلسات مع أ. وضحاء لتعزيز التعاون"],
+          ["افتتاح معرض منتجات التدوير", "شرح آلية 'استبدل واربح' للزائرات"]
+        ]
+      },
+      { name:'التفاعل الرقمي',     teacher:'ابتسام الشهري',                    g1:89, g2:89, avg:89, color:'#218CAA',
+        icon: 'fas fa-laptop-code',
+        projects:['كلمة تؤذي وكلمة تبني','روبوتات المحادثة والذكاء الاصطناعي'],
+        ideas:['حملة "لا تضغط على الرابط"','اختبار الأمان الرقمي','ملصقات الخصوصية'],
+        values:['الأمانة','الانضباط'],
+        g1students:['شادن عمر عبدلي','سمو سعد القحطاني','وداد سعد الاسمري','رند عبدالله الشهري','ألين علي الخثيمي'],
+        g2students:['لمار سويلم القحطاني','المى ادريس خضير','تسنيم حسن الشهري','ندى حازم المالكي','درر عبدالخالق الشهري'],
+        stations: [
+          ["تحديد مشروع اختبار الأمان الرقمي", "اختيار محاور حملة الروابط الاحتيالية"],
+          ["رسم رؤية برمجية للاختبار", "توزيع مهام البرمجة والتصميم وتعهد القيم"],
+          ["تجاوز التحديات التقنية (العزيمة)", "اجتماعات توجيهية دورية مع أ. ابتسام"],
+          ["نشر روابط الاختبار التفاعلي", "توزيع ملصقات الخصوصية بالممرات"]
+        ]
+      }
+    ];
+
+    const students = [
+      // الانتماء الوطني
+      {name:'جنى عبدالله الاحمري',  domain:'الانتماء الوطني', group:'المجموعة 1', role:'القائد',      coop:100, honest:100, deter:100, disc:100, total:100},
+      {name:'جنى علي غزواني',       domain:'الانتماء الوطني', group:'المجموعة 1', role:'الكاتب',      coop:100, honest:100, deter:100, disc:100, total:100},
+      {name:'اسيل سعيد الطوره',     domain:'الانتماء الوطني', group:'المجموعة 1', role:'مُعزز القيم', coop:100, honest:100, deter:100, disc:100, total:100},
+      {name:'لمار عامر آل يحيى',    domain:'الانتماء الوطني', group:'المجموعة 1', role:'مساعد/مصمم',  coop:100, honest:100, deter:100, disc:100, total:100},
+      {name:'الين علي آل مقبول',    domain:'الانتماء الوطني', group:'المجموعة 1', role:'مساعد/مصمم',  coop:100, honest:100, deter:100, disc:100, total:100},
+      {name:'صالحة عثمان هزازي',    domain:'الانتماء الوطني', group:'المجموعة 2', role:'المراقب',     coop:100, honest:100, deter:100, disc:100, total:100},
+      {name:'ميار عبدالعزيز آل جلده',domain:'الانتماء الوطني',group:'المجموعة 2', role:'مُعزز القيم', coop:100, honest:100, deter:100, disc:100, total:100},
+      {name:'تبيان طارق الحاج',     domain:'الانتماء الوطني', group:'المجموعة 2', role:'المراقب',     coop:100, honest:100, deter:100, disc:100, total:100},
+      {name:'جنان مبارك الشهراني',  domain:'الانتماء الوطني', group:'المجموعة 2', role:'مُعزز القيم', coop:100, honest:100, deter:100, disc:100, total:100},
+      {name:'جوري ثابت الشهراني',   domain:'الانتماء الوطني', group:'المجموعة 2', role:'مساعد/مصمم',  coop:100, honest:100, deter:100, disc:100, total:100},
+      // التسامح والتعايش
+      {name:'رباب علي خبراني',      domain:'التسامح والتعايش', group:'المجموعة 1', role:'القائد',      coop:95, honest:93, deter:91, disc:96, total:94},
+      {name:'رامة عمودي سفياني',    domain:'التسامح والتعايش', group:'المجموعة 1', role:'الكاتب',      coop:88, honest:95, deter:93, disc:96, total:93},
+      {name:'لمار عبدالله العمري',  domain:'التسامح والتعايش', group:'المجموعة 1', role:'مُعزز القيم', coop:96, honest:92, deter:91, disc:92, total:93},
+      {name:'جنى سلطان القحطاني',   domain:'التسامح والتعايش', group:'المجموعة 1', role:'المراقب',     coop:91, honest:91, deter:93, disc:94, total:92},
+      {name:'جود احمد بكري',        domain:'التسامح والتعايش', group:'المجموعة 1', role:'مساعد/مصمم',  coop:87, honest:89, deter:94, disc:87, total:89},
+      {name:'تالا احمد القحطاني',   domain:'التسامح والتعايش', group:'المجموعة 2', role:'القائد',      coop:96, honest:93, deter:93, disc:92, total:94},
+      {name:'عهد علي الاحمري',      domain:'التسامح والتعايش', group:'المجموعة 2', role:'مُعزز القيم', coop:94, honest:93, deter:93, disc:93, total:93},
+      {name:'ليندا عمر العمري',     domain:'التسامح والتعايش', group:'المجموعة 2', role:'الكاتب',      coop:89, honest:97, deter:89, disc:90, total:91},
+      {name:'رتيل حسين الشهري',     domain:'التسامح والتعايش', group:'المجموعة 2', role:'مُعزز القيم', coop:95, honest:91, deter:91, disc:91, total:92},
+      {name:'روين سلطان الشهري',    domain:'التسامح والتعايش', group:'المجموعة 2', role:'المراقب',     coop:88, honest:87, deter:88, disc:95, total:90},
+      // التنمية الذاتية
+      {name:'جنى ناصر الوذناني',    domain:'التنمية الذاتية', group:'المجموعة 1', role:'القائد',      coop:92, honest:92, deter:96, disc:92, total:93},
+      {name:'وسن احمد الاحمري',     domain:'التنمية الذاتية', group:'المجموعة 1', role:'الكاتب',      coop:86, honest:94, deter:87, disc:87, total:89},
+      {name:'ريناد محمد المزارقه',  domain:'التنمية الذاتية', group:'المجموعة 1', role:'مُعزز القيم', coop:94, honest:91, deter:91, disc:91, total:92},
+      {name:'حور سلطان العماري',    domain:'التنمية الذاتية', group:'المجموعة 1', role:'المراقب',     coop:91, honest:91, deter:91, disc:96, total:92},
+      {name:'نوف علي آل مجري',      domain:'التنمية الذاتية', group:'المجموعة 2', role:'القائد',      coop:89, honest:89, deter:96, disc:89, total:91},
+      {name:'لمار علي الشمراني',    domain:'التنمية الذاتية', group:'المجموعة 2', role:'مُعزز القيم', coop:95, honest:93, deter:93, disc:93, total:94},
+      {name:'رويدا سعد الشهري',     domain:'التنمية الذاتية', group:'المجموعة 2', role:'الكاتب',      coop:87, honest:95, deter:93, disc:87, total:91},
+      {name:'نوره عبدالله الشهراني',domain:'التنمية الذاتية', group:'المجموعة 2', role:'مُعزز القيم', coop:96, honest:92, deter:91, disc:92, total:93},
+      {name:'مزون عبدالله القحطاني',domain:'التنمية الذاتية', group:'المجموعة 2', role:'المراقب',     coop:89, honest:89, deter:88, disc:95, total:90},
+      // الحياة الصحية
+      {name:'جوري احمد الشهري',     domain:'الحياة الصحية', group:'المجموعة 1', role:'القائد',       coop:89, honest:94, deter:89, disc:88, total:90},
+      {name:'فرح علي الشهري',       domain:'الحياة الصحية', group:'المجموعة 1', role:'الكاتب',       coop:86, honest:95, deter:87, disc:86, total:89},
+      {name:'وسن عبدالله فقيهي',    domain:'الحياة الصحية', group:'المجموعة 1', role:'مُعزز القيم',  coop:96, honest:91, deter:91, disc:91, total:92},
+      {name:'وسن محمد العمري',      domain:'الحياة الصحية', group:'المجموعة 1', role:'المراقب',      coop:90, honest:90, deter:89, disc:96, total:91},
+      {name:'رهف مصلح القرني',      domain:'الحياة الصحية', group:'المجموعة 1', role:'مساعد/مصمم',   coop:87, honest:88, deter:93, disc:88, total:89},
+      {name:'أمجاد ممدوح الخديدي',  domain:'الحياة الصحية', group:'المجموعة 2', role:'القائد',       coop:91, honest:96, deter:90, disc:91, total:92},
+      {name:'رانسي ظافر الشهري',    domain:'الحياة الصحية', group:'المجموعة 2', role:'الكاتب',       coop:88, honest:95, deter:89, disc:88, total:90},
+      {name:'جود سعد القحطاني',     domain:'الحياة الصحية', group:'المجموعة 2', role:'مُعزز القيم',  coop:95, honest:89, deter:89, disc:89, total:91},
+      {name:'أمل مدغم المنيعي',     domain:'الحياة الصحية', group:'المجموعة 2', role:'المراقب',      coop:90, honest:90, deter:90, disc:95, total:91},
+      {name:'رزان بندر آل شيخ',     domain:'الحياة الصحية', group:'المجموعة 2', role:'مساعد/مصمم',   coop:88, honest:88, deter:94, disc:87, total:89},
+      // الاستدامة البيئية
+      {name:'تولين سامي رفاعي',     domain:'الاستدامة البيئية', group:'المجموعة 1', role:'القائد',      coop:91, honest:91, deter:96, disc:91, total:92},
+      {name:'ديالا ابراهيم ال حمزه',domain:'الاستدامة البيئية', group:'المجموعة 1', role:'الكاتب',      coop:87, honest:95, deter:87, disc:87, total:89},
+      {name:'داليا مفلح الشهراني',  domain:'الاستدامة البيئية', group:'المجموعة 1', role:'مُعزز القيم', coop:94, honest:91, deter:90, disc:91, total:92},
+      {name:'تسنيم محمد الغامدي',   domain:'الاستدامة البيئية', group:'المجموعة 1', role:'المراقب',     coop:89, honest:89, deter:89, disc:93, total:90},
+      {name:'صبا علي القحطاني',     domain:'الاستدامة البيئية', group:'المجموعة 1', role:'مساعد/مصمم',  coop:86, honest:87, deter:91, disc:93, total:89},
+      {name:'ريناد ماجد ظافري',     domain:'الاستدامة البيئية', group:'المجموعة 2', role:'القائد',      coop:93, honest:93, deter:97, disc:92, total:94},
+      {name:'شهد احمد غزواني',      domain:'الاستدامة البيئية', group:'المجموعة 2', role:'الكاتب',      coop:87, honest:94, deter:88, disc:97, total:92},
+      {name:'جوري عبدالله القحطاني',domain:'الاستدامة البيئية', group:'المجموعة 2', role:'المراقب',     coop:89, honest:91, deter:89, disc:97, total:92},
+      // التفاعل الرقمي
+      {name:'شادن عمر عبدلي',       domain:'التفاعل الرقمي', group:'المجموعة 1', role:'القائد',       coop:91, honest:95, deter:91, disc:90, total:92},
+      {name:'سمو سعد القحطاني',     domain:'التفاعل الرقمي', group:'المجموعة 1', role:'الكاتب',       coop:88, honest:94, deter:89, disc:89, total:90},
+      {name:'وداد سعد الاسمري',     domain:'التفاعل الرقمي', group:'المجموعة 1', role:'مُعزز القيم',  coop:96, honest:92, deter:92, disc:92, total:93},
+      {name:'رند عبدالله الشهري',   domain:'التفاعل الرقمي', group:'المجموعة 1', role:'المراقب',      coop:90, honest:90, deter:90, disc:94, total:91},
+      {name:'ألين علي الخثيمي',     domain:'التفاعل الرقمي', group:'المجموعة 1', role:'مساعد/مصمم',   coop:85, honest:87, deter:92, disc:87, total:88},
+      {name:'لمار سويلم القحطاني',  domain:'التفاعل الرقمي', group:'المجموعة 2', role:'القائد',       coop:88, honest:93, deter:88, disc:87, total:89},
+      {name:'المى ادريس خضير',      domain:'التفاعل الرقمي', group:'المجموعة 2', role:'الكاتب',       coop:84, honest:90, deter:85, disc:86, total:86},
+      {name:'تسنيم حسن الشهري',     domain:'التفاعل الرقمي', group:'المجموعة 2', role:'مُعزز القيم',  coop:91, honest:87, deter:86, disc:87, total:88},
+      {name:'ندى حازم المالكي',     domain:'التفاعل الرقمي', group:'المجموعة 2', role:'المراقب',      coop:88, honest:88, deter:87, disc:93, total:89},
+      {name:'درر عبدالخالق الشهري', domain:'التفاعل الرقمي', group:'المجموعة 2', role:'مساعد/مصمم',   coop:83, honest:84, deter:89, disc:85, total:85},
     ];
 
     const TIMELINE = [
@@ -322,52 +537,6 @@
       'مساعد/مصمم': { bg: '#E8F6FA', tx: '#218CAA' }
     };
 
-    // Students Array strictly mapped to the new Domain averages
-    const STUDENTS = [
-      // الانتماء الوطني (96) -> g1(95), g2(97)
-      { name: 'جنى عبدالله الأحمري', domain: 'الانتماء الوطني', group: 'المجموعة 1', role: 'القائد', c:95, h:95, d:94, i:96, t:95 },
-      { name: 'اسيل سعيد غزواني', domain: 'الانتماء الوطني', group: 'المجموعة 1', role: 'الكاتب', c:94, h:94, d:95, i:93, t:94 },
-      { name: 'لمار عامر آل يحيى', domain: 'الانتماء الوطني', group: 'المجموعة 1', role: 'مُعزز القيم', c:96, h:96, d:95, i:97, t:96 },
-      { name: 'صالحة عثمان هزازي', domain: 'الانتماء الوطني', group: 'المجموعة 2', role: 'القائد', c:97, h:96, d:98, i:97, t:97 },
-      { name: 'جنان مبارك الشهراني', domain: 'الانتماء الوطني', group: 'المجموعة 2', role: 'الكاتب', c:96, h:96, d:97, i:95, t:96 },
-      { name: 'ميار عبدالعزيز آل جلده', domain: 'الانتماء الوطني', group: 'المجموعة 2', role: 'مُعزز القيم', c:98, h:97, d:98, i:99, t:98 },
-      // التسامح والتعايش (94) -> g1(93), g2(95)
-      { name: 'ريماس علي خيزراني', domain: 'التسامح والتعايش', group: 'المجموعة 1', role: 'القائد', c:93, h:92, d:94, i:93, t:93 },
-      { name: 'رامة عمودي سفياني', domain: 'التسامح والتعايش', group: 'المجموعة 1', role: 'الكاتب', c:92, h:92, d:93, i:91, t:92 },
-      { name: 'لمار عبدالله العمري', domain: 'التسامح والتعايش', group: 'المجموعة 1', role: 'مُعزز القيم', c:94, h:93, d:95, i:94, t:94 },
-      { name: 'تالا أحمد القحطاني', domain: 'التسامح والتعايش', group: 'المجموعة 2', role: 'القائد', c:95, h:96, d:94, i:95, t:95 },
-      { name: 'ليندا عمر العمري', domain: 'التسامح والتعايش', group: 'المجموعة 2', role: 'الكاتب', c:94, h:95, d:93, i:94, t:94 },
-      { name: 'رتيل حسين الشهري', domain: 'التسامح والتعايش', group: 'المجموعة 2', role: 'مُعزز القيم', c:96, h:97, d:95, i:96, t:96 },
-      // الحياة الصحية (92) -> g1(91), g2(93)
-      { name: 'جوري أحمد الشهري', domain: 'الحياة الصحية', group: 'المجموعة 1', role: 'القائد', c:91, h:90, d:92, i:91, t:91 },
-      { name: 'فرح علي الشهري', domain: 'الحياة الصحية', group: 'المجموعة 1', role: 'الكاتب', c:90, h:89, d:91, i:90, t:90 },
-      { name: 'وسن عبدالله فقيهي', domain: 'الحياة الصحية', group: 'المجموعة 1', role: 'مُعزز القيم', c:92, h:91, d:93, i:92, t:92 },
-      { name: 'أمجاد ممدوح الخديدي', domain: 'الحياة الصحية', group: 'المجموعة 2', role: 'القائد', c:93, h:94, d:92, i:93, t:93 },
-      { name: 'رانسي ظافر الشهري', domain: 'الحياة الصحية', group: 'المجموعة 2', role: 'الكاتب', c:92, h:93, d:91, i:92, t:92 },
-      { name: 'جود سعد القحطاني', domain: 'الحياة الصحية', group: 'المجموعة 2', role: 'مُعزز القيم', c:94, h:95, d:93, i:94, t:94 },
-      // التفاعل الرقمي (91) -> g1(92), g2(90)
-      { name: 'شادن عمر عبدلي', domain: 'التفاعل الرقمي', group: 'المجموعة 1', role: 'القائد', c:92, h:91, d:93, i:92, t:92 },
-      { name: 'سمو سعد القحطاني', domain: 'التفاعل الرقمي', group: 'المجموعة 1', role: 'الكاتب', c:91, h:90, d:92, i:91, t:91 },
-      { name: 'وداد سعد الأسمري', domain: 'التفاعل الرقمي', group: 'المجموعة 1', role: 'مُعزز القيم', c:93, h:92, d:94, i:93, t:93 },
-      { name: 'لمار سويلم القحطاني', domain: 'التفاعل الرقمي', group: 'المجموعة 2', role: 'القائد', c:90, h:89, d:91, i:90, t:90 },
-      { name: 'ألمى إدريس خضير', domain: 'التفاعل الرقمي', group: 'المجموعة 2', role: 'الكاتب', c:89, h:88, d:90, i:89, t:89 },
-      { name: 'تسنيم حسن الشهري', domain: 'التفاعل الرقمي', group: 'المجموعة 2', role: 'مُعزز القيم', c:91, h:90, d:92, i:91, t:91 },
-      // التنمية الذاتية (90) -> g1(91), g2(89)
-      { name: 'جنى ناصر الودعاني', domain: 'التنمية الذاتية', group: 'المجموعة 1', role: 'القائد', c:91, h:91, d:90, i:92, t:91 },
-      { name: 'وسن أحمد الأحمري', domain: 'التنمية الذاتية', group: 'المجموعة 1', role: 'الكاتب', c:90, h:90, d:89, i:91, t:90 },
-      { name: 'ريناد محمد المزارقه', domain: 'التنمية الذاتية', group: 'المجموعة 1', role: 'مُعزز القيم', c:92, h:92, d:91, i:93, t:92 },
-      { name: 'نوف علي آل مجري', domain: 'التنمية الذاتية', group: 'المجموعة 2', role: 'القائد', c:89, h:88, d:90, i:89, t:89 },
-      { name: 'رويدا سعد الشهري', domain: 'التنمية الذاتية', group: 'المجموعة 2', role: 'الكاتب', c:88, h:87, d:89, i:88, t:88 },
-      { name: 'نوره عبدالله الشهراني', domain: 'التنمية الذاتية', group: 'المجموعة 2', role: 'مُعزز القيم', c:90, h:89, d:91, i:90, t:90 },
-      // الاستدامة البيئية (89) -> g1(88), g2(90)
-      { name: 'تولين سامي رفاعي', domain: 'الاستدامة البيئية', group: 'المجموعة 1', role: 'القائد', c:88, h:87, d:89, i:88, t:88 },
-      { name: 'ديالا إبراهيم آل حمزه', domain: 'الاستدامة البيئية', group: 'المجموعة 1', role: 'الكاتب', c:87, h:86, d:88, i:87, t:87 },
-      { name: 'داليا مفلح الشهراني', domain: 'الاستدامة البيئية', group: 'المجموعة 1', role: 'مُعزز القيم', c:89, h:88, d:90, i:89, t:89 },
-      { name: 'ريناد ماجد ظافري', domain: 'الاستدامة البيئية', group: 'المجموعة 2', role: 'القائد', c:90, h:89, d:91, i:90, t:90 },
-      { name: 'شهد أحمد غزواني', domain: 'الاستدامة البيئية', group: 'المجموعة 2', role: 'الكاتب', c:89, h:88, d:90, i:89, t:89 },
-      { name: 'جوري عبدالله القحطاني', domain: 'الاستدامة البيئية', group: 'المجموعة 2', role: 'المراقب', c:91, h:90, d:92, i:91, t:91 }
-    ];
-
     // --- NAVIGATION ---
     function switchPanel(id) {
       document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
@@ -378,126 +547,148 @@
 
     // --- RENDER FUNCTIONS ---
     function renderKPIs() {
-      // Automatically grab the top 4 domains
-      const sorted = [...DOMAINS].sort((a,b) => b.avg - a.avg);
+      const sorted = [...domains].sort((a,b) => b.avg - a.avg);
       const top4 = sorted.slice(0, 4);
       const labels = ['الأعلى أداءً', 'مستوى متميز', 'أداء ممتاز', 'أداء جيد'];
-      
       const html = top4.map((d, i) => `
-        <div class="kpi">
-          <div style="position:absolute; top:0; right:0; width:5px; height:100%; background:${d.color};"></div>
-          <div class="kpi-val">${d.avg}%</div>
-          <div class="kpi-lbl">${d.name}</div>
-          <div class="kpi-sub" style="color:${d.color}">${labels[i]}</div>
-        </div>
-      `).join('');
+        <div class="kpi"><div style="position:absolute; top:0; right:0; width:5px; height:100%; background:${d.color};"></div>
+          <div class="kpi-val">${d.avg}%</div><div class="kpi-lbl">${d.name}</div><div class="kpi-sub" style="color:${d.color}">${labels[i]}</div>
+        </div>`).join('');
       document.getElementById('kpi-row-container').innerHTML = html;
     }
 
     function renderTeachers() {
-      const sorted = [...DOMAINS].sort((a,b) => b.avg - a.avg);
+      const sorted = [...domains].sort((a,b) => b.avg - a.avg);
       const html = sorted.map((d) => `
         <div class="teacher-badge">
           <div class="tb-icon" style="background:${d.color}"><i class="${d.icon}"></i></div>
-          <div class="tb-name">${d.teacher}</div>
-          <div class="tb-domain" style="color:${d.color}">${d.name}</div>
-        </div>
-      `).join('');
+          <div class="tb-name">${d.teacher}</div><div class="tb-domain" style="color:${d.color}">${d.name}</div>
+        </div>`).join('');
       document.getElementById('teachers-grid-container').innerHTML = html;
     }
 
     function renderDomainBars() {
-      const sorted = [...DOMAINS].sort((a,b) => b.avg - a.avg);
+      const sorted = [...domains].sort((a,b) => b.avg - a.avg);
       const html = sorted.map(d => `
         <div class="domain-bar">
           <div class="domain-header"><span class="domain-name">${d.name}</span><span class="domain-pct" style="color:${d.color}">${d.avg}%</span></div>
           <div class="bar-track"><div class="bar-fill" style="width:${d.avg}%;background:${d.color}"></div></div>
-        </div>
-      `).join('');
+        </div>`).join('');
       document.getElementById('domain-bars-container').innerHTML = html;
     }
 
     function renderValuesGrid() {
-      const sorted = [...DOMAINS].sort((a,b) => b.avg - a.avg);
+      const sorted = [...domains].sort((a,b) => b.avg - a.avg);
       const html = sorted.map(d => `
         <div class="val-chip">
           <div class="val-name">${d.name} <span style="float:right; color:${d.color}"><i class="${d.icon}"></i></span></div>
           <div class="val-row-flex">
-            <div class="v-item"><div class="v-score" style="color:${d.color}">${d.avg+1}%</div><div class="v-lbl">تعاون</div><div class="v-bar-track"><div class="v-bar-fill" style="width:${d.avg+1}%;background:${d.color}"></div></div></div>
+            <div class="v-item"><div class="v-score" style="color:${d.color}">${d.avg === 100 ? 100 : d.avg+1}%</div><div class="v-lbl">تعاون</div><div class="v-bar-track"><div class="v-bar-fill" style="width:${d.avg === 100 ? 100 : d.avg+1}%;background:${d.color}"></div></div></div>
             <div class="v-item"><div class="v-score" style="color:${d.color}">${d.avg}%</div><div class="v-lbl">أمانة</div><div class="v-bar-track"><div class="v-bar-fill" style="width:${d.avg}%;background:${d.color}"></div></div></div>
-            <div class="v-item"><div class="v-score" style="color:${d.color}">${d.avg-1}%</div><div class="v-lbl">عزيمة</div><div class="v-bar-track"><div class="v-bar-fill" style="width:${d.avg-1}%;background:${d.color}"></div></div></div>
-            <div class="v-item"><div class="v-score" style="color:${d.color}">${d.avg+1}%</div><div class="v-lbl">انضباط</div><div class="v-bar-track"><div class="v-bar-fill" style="width:${d.avg+1}%;background:${d.color}"></div></div></div>
+            <div class="v-item"><div class="v-score" style="color:${d.color}">${d.avg === 100 ? 100 : d.avg-1}%</div><div class="v-lbl">عزيمة</div><div class="v-bar-track"><div class="v-bar-fill" style="width:${d.avg === 100 ? 100 : d.avg-1}%;background:${d.color}"></div></div></div>
+            <div class="v-item"><div class="v-score" style="color:${d.color}">${d.avg === 100 ? 100 : d.avg+1}%</div><div class="v-lbl">انضباط</div><div class="v-bar-track"><div class="v-bar-fill" style="width:${d.avg === 100 ? 100 : d.avg+1}%;background:${d.color}"></div></div></div>
           </div>
-        </div>
-      `).join('');
+        </div>`).join('');
       document.getElementById('values-grid-container').innerHTML = html;
     }
 
     function renderDetailedDomains() {
-      const sorted = [...DOMAINS].sort((a,b) => b.avg - a.avg);
+      const sorted = [...domains].sort((a,b) => b.avg - a.avg);
       const html = sorted.map(d => {
-        const g1 = STUDENTS.filter(s => s.domain === d.name && s.group === 'المجموعة 1');
-        const g2 = STUDENTS.filter(s => s.domain === d.name && s.group === 'المجموعة 2');
+        const g1 = students.filter(s => s.domain === d.name && s.group === 'المجموعة 1');
+        const g2 = students.filter(s => s.domain === d.name && s.group === 'المجموعة 2');
         
-        const buildTbl = (arr) => arr.map(s => `
-          <tr>
-            <td>${s.name}</td>
-            <td><span class="role-badge" style="background:${ROLES[s.role].bg};color:${ROLES[s.role].tx}">${s.role}</span></td>
-            <td><span class="score-pill" style="color:${d.color};background:rgba(255,255,255,0.7)">${s.t}%</span></td>
-          </tr>
-        `).join('');
+        const buildTbl = (arr) => arr.map(s => `<tr><td>${s.name}</td><td><span class="role-badge" style="background:${ROLES[s.role] ? ROLES[s.role].bg : '#eee'};color:${ROLES[s.role] ? ROLES[s.role].tx : '#333'}">${s.role}</span></td><td><span class="score-pill" style="color:${d.color};background:rgba(255,255,255,0.7)">${s.total}%</span></td></tr>`).join('');
+        
+        const valuesHtml = d.values.map(v => `<span class="value-pill" style="background:${d.color}15; color:${d.color}; border: 1px solid ${d.color}30;">${v}</span>`).join('');
+        const projsHtml = d.projects.map(p => `<li><i class="fas fa-check-circle" style="color:${d.color};"></i> ${p}</li>`).join('');
+        const ideasHtml = d.ideas.map(i => `<li><i class="fas fa-lightbulb" style="color:#f39c12;"></i> ${i}</li>`).join('');
 
         return `
           <div class="domain-section">
             <div class="ds-header" style="background:${d.color}">
-              <div><div class="ds-name"><i class="${d.icon}" style="margin-left:5px"></i> ${d.name}</div><div class="ds-teacher">${d.teacher}</div></div>
+              <div><div class="ds-name"><i class="${d.icon}" style="margin-left:5px"></i> ${d.name}</div><div class="ds-teacher">إشراف المعلمة: ${d.teacher}</div></div>
               <div class="ds-avg">${d.avg}%</div>
             </div>
-            <div class="groups-wrap">
-              <div class="group-col">
-                <span class="group-label" style="background:var(--emerald)">المجموعة الأولى</span>
-                <table class="inner-tbl"><thead><tr><th>اسم الطالبة</th><th>الوظيفة</th><th>النسبة</th></tr></thead><tbody>${buildTbl(g1)}</tbody></table>
-              </div>
-              <div class="group-col">
-                <span class="group-label" style="background:var(--sky)">المجموعة الثانية</span>
-                <table class="inner-tbl"><thead><tr><th>اسم الطالبة</th><th>الوظيفة</th><th>النسبة</th></tr></thead><tbody>${buildTbl(g2)}</tbody></table>
-              </div>
+            <div class="domain-info-block">
+              <div><h4 style="font-size: 13px; color: var(--navy); margin-bottom: 10px; font-weight: 800;"><i class="fas fa-bullseye" style="color:${d.color}; margin-left:5px;"></i> القيم البارزة والمستهدفة:</h4><div style="margin-bottom: 15px;">${valuesHtml}</div></div>
+              <div><h4 style="font-size: 13px; color: var(--navy); margin-bottom: 10px; font-weight: 800;"><i class="fas fa-project-diagram" style="color:${d.color}; margin-left:5px;"></i> المشاريع والأفكار المنفذة:</h4><ul class="info-list">${projsHtml}${ideasHtml}</ul></div>
             </div>
-          </div>
-        `;
+            <div class="groups-wrap">
+              <div class="group-col"><span class="group-label" style="background:var(--emerald)">طالبات المجموعة الأولى</span><table class="inner-tbl"><thead><tr><th>اسم الطالبة</th><th>الوظيفة</th><th>النسبة</th></tr></thead><tbody>${buildTbl(g1)}</tbody></table></div>
+              <div class="group-col"><span class="group-label" style="background:var(--sky)">طالبات المجموعة الثانية</span><table class="inner-tbl"><thead><tr><th>اسم الطالبة</th><th>الوظيفة</th><th>النسبة</th></tr></thead><tbody>${buildTbl(g2)}</tbody></table></div>
+            </div>
+          </div>`;
       }).join('');
       document.getElementById('domains-detailed-container').innerHTML = html;
     }
 
+    function renderStationsJourney() {
+      const stationNames = ["التحديد (Identification)", "التخطيط (Planning)", "التنفيذ (Implementation)", "العرض (Presentation)"];
+      
+      const stationDates = [
+        "15 / 3 / 1447هـ - 15 / 4 / 1447هـ",
+        "16 / 4 / 1447هـ - 30 / 5 / 1447هـ",
+        "1 / 6 / 1447هـ - 30 / 9 / 1447هـ",
+        "1 / 10 / 1447هـ - 9 / 11 / 1447هـ"
+      ];
+
+      const html = domains.map(d => {
+        let boxes = '';
+        for(let i=0; i<4; i++){
+          boxes += `
+            <div class="station-step">
+              <div class="s-num" style="background:${d.color}">${i+1}</div>
+              <div class="s-title" style="color:${d.color}">محطة ${stationNames[i]}</div>
+              <div style="font-size: 10px; color: var(--text-muted); margin-bottom: 8px; font-weight: 700;"><i class="far fa-calendar-alt"></i> ${stationDates[i]}</div>
+              <div class="s-desc">
+                <ul>
+                  <li>${d.stations[i][0]}</li>
+                  <li>${d.stations[i][1]}</li>
+                </ul>
+              </div>
+            </div>
+          `;
+        }
+        return `
+          <div class="domain-journey-card" style="border-top: 4px solid ${d.color};">
+            <div class="dj-header">
+              <div class="dj-icon" style="background:${d.color}"><i class="${d.icon}"></i></div>
+              <div>
+                <div class="dj-title">${d.name}</div>
+                <div class="dj-teacher">إشراف: ${d.teacher}</div>
+              </div>
+            </div>
+            <div class="stations-grid">${boxes}</div>
+          </div>`;
+      }).join('');
+      document.getElementById('stations-journey-container').innerHTML = html;
+    }
+
     function renderTimeline() {
       const html = TIMELINE.map((t, i) => `
-        <div class="timeline-item">
-          <div class="tl-icon" style="background:${t.color}">${i+1}</div>
-          <div class="tl-body">
-            <div class="tl-week">${t.week}</div>
-            <div class="tl-stage">${t.stage}</div>
-            <div class="tl-bar"><div class="tl-prog" style="width:${t.pct}%;background:${t.color}"></div></div>
-            <div class="tl-pct"><span style="color:${t.color}">${t.pct}%</span> <span class="badge ${t.cls}">${t.status}</span></div>
-          </div>
-        </div>
-      `).join('');
+        <div class="timeline-item"><div class="tl-icon" style="background:${t.color}">${i+1}</div>
+          <div class="tl-body"><div class="tl-week">${t.week}</div><div class="tl-stage">${t.stage}</div><div class="tl-bar"><div class="tl-prog" style="width:${t.pct}%;background:${t.color}"></div></div><div class="tl-pct"><span style="color:${t.color}">${t.pct}%</span> <span class="badge ${t.cls}">${t.status}</span></div></div>
+        </div>`).join('');
       document.getElementById('timeline-container').innerHTML = html;
     }
 
     function initFilters() {
-      const sel = document.getElementById('filterDomain');
-      const sorted = [...DOMAINS].sort((a,b) => b.avg - a.avg);
-      sorted.forEach(d => {
-        const o = document.createElement('option'); o.value = d.name; o.textContent = d.name; sel.appendChild(o);
-      });
+      const selDomain = document.getElementById('filterDomain');
+      const selRole = document.getElementById('filterRole');
+      const sorted = [...domains].sort((a,b) => b.avg - a.avg);
+      sorted.forEach(d => { const o = document.createElement('option'); o.value = d.name; o.textContent = d.name; selDomain.appendChild(o); });
+      Object.keys(ROLES).forEach(r => { const o = document.createElement('option'); o.value = r; o.textContent = r; selRole.appendChild(o); });
     }
 
     function renderMainTable() {
       const dFilter = document.getElementById('filterDomain').value;
       const gFilter = document.getElementById('filterGroup').value;
-      let data = STUDENTS;
+      const rFilter = document.getElementById('filterRole').value;
+      let data = students;
       if (dFilter) data = data.filter(s => s.domain === dFilter);
       if (gFilter) data = data.filter(s => s.group === gFilter);
+      if (rFilter) data = data.filter(s => s.role === rFilter);
 
       const html = data.map((s, i) => `
         <tr>
@@ -505,52 +696,24 @@
           <td style="color:var(--navy)">${s.name}</td>
           <td style="color:var(--text-muted)">${s.domain}</td>
           <td style="color:var(--text-muted)">${s.group}</td>
-          <td><span class="role-badge" style="background:${ROLES[s.role].bg};color:${ROLES[s.role].tx}">${s.role}</span></td>
-          <td class="pct-cell">${s.c}%</td>
-          <td class="pct-cell">${s.h}%</td>
-          <td class="pct-cell">${s.d}%</td>
-          <td class="pct-cell">${s.i}%</td>
-          <td class="pct-cell" style="color:var(--teal)">${s.t}%</td>
-        </tr>
-      `).join('');
+          <td><span class="role-badge" style="background:${ROLES[s.role] ? ROLES[s.role].bg : '#eee'};color:${ROLES[s.role] ? ROLES[s.role].tx : '#333'}">${s.role}</span></td>
+          <td class="pct-cell">${s.coop}%</td><td class="pct-cell">${s.honest}%</td><td class="pct-cell">${s.deter}%</td><td class="pct-cell">${s.disc}%</td><td class="pct-cell" style="color:var(--teal)">${s.total}%</td>
+        </tr>`).join('');
       document.getElementById('main-table-body').innerHTML = html;
     }
 
     function initCharts() {
-      const sorted = [...DOMAINS].sort((a,b) => b.avg - a.avg);
-      
-      // Group Bar Chart
+      const sorted = [...domains].sort((a,b) => b.avg - a.avg);
       new Chart(document.getElementById('groupChart'), {
         type: 'bar',
-        data: {
-          labels: sorted.map(d => d.name.split(' ')[0]),
-          datasets: [
-            { label: 'المجموعة الأولى', data: sorted.map(d => d.g1), backgroundColor: '#07A869', borderRadius: 4 },
-            { label: 'المجموعة الثانية', data: sorted.map(d => d.g2), backgroundColor: '#3D7EB9', borderRadius: 4 }
-          ]
-        },
-        options: {
-          responsive: true, maintainAspectRatio: false,
-          plugins: { legend: { display: false } },
-          scales: { y: { min: 80, max: 100 }, x: { grid: { display: false }, ticks: {font: {family: 'Tajawal', weight: 'bold'}} } }
-        }
+        data: { labels: sorted.map(d => d.name.split(' ')[0]), datasets: [ { label: 'المجموعة الأولى', data: sorted.map(d => d.g1), backgroundColor: '#07A869', borderRadius: 4 }, { label: 'المجموعة الثانية', data: sorted.map(d => d.g2), backgroundColor: '#3D7EB9', borderRadius: 4 } ] },
+        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { min: 80, max: 100 }, x: { grid: { display: false }, ticks: {font: {family: 'Tajawal', weight: 'bold'}} } } }
       });
 
-      // Radar Chart (Average roughly around 92.5 for visualization)
       new Chart(document.getElementById('radarChart'), {
         type: 'radar',
-        data: {
-          labels: ['التعاون', 'الأمانة', 'العزيمة', 'الانضباط'],
-          datasets: [{
-            data: [93.1, 91.8, 92.5, 93.0],
-            backgroundColor: 'rgba(13,169,166,0.15)', borderColor: '#0DA9A6', borderWidth: 2.5, pointBackgroundColor: '#0DA9A6', pointRadius: 4
-          }]
-        },
-        options: {
-          responsive: true, maintainAspectRatio: false,
-          plugins: { legend: { display: false } },
-          scales: { r: { min: 80, max: 100, pointLabels: { font: { family: 'Tajawal', size: 12, weight: 'bold' } } } }
-        }
+        data: { labels: ['التعاون', 'الأمانة', 'العزيمة', 'الانضباط'], datasets: [{ data: [93.1, 91.8, 92.5, 93.0], backgroundColor: 'rgba(13,169,166,0.15)', borderColor: '#0DA9A6', borderWidth: 2.5, pointBackgroundColor: '#0DA9A6', pointRadius: 4 }] },
+        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { r: { min: 80, max: 100, pointLabels: { font: { family: 'Tajawal', size: 12, weight: 'bold' } } } } }
       });
     }
 
@@ -562,6 +725,7 @@
       renderDomainBars();
       renderValuesGrid();
       renderDetailedDomains();
+      renderStationsJourney();
       initFilters();
       renderMainTable();
       setTimeout(initCharts, 100);
