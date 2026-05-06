@@ -77,7 +77,7 @@
 
     /* Vertical Timeline */
     .timeline-item { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 15px; position: relative; }
-    .timeline-item:not(:last-child)::after { content: ''; position: absolute; right: 16px; top: 32px; bottom: -15px; width: 2px; background: rgba(0,0,0,0.06); }
+    .timeline-item:not(:last-child)::after { content: absolute; right: 16px; top: 32px; bottom: -15px; width: 2px; background: rgba(0,0,0,0.06); }
     .tl-icon { width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800; color: white; z-index: 2; }
     .tl-body { flex: 1; }
     .tl-week { font-size: 13px; font-weight: 800; color: var(--text-dark); }
@@ -285,7 +285,7 @@
       <div id="panel-domains" class="panel">
         <div style="margin-bottom: 20px;">
           <h2 style="font-size: 18px; color: var(--navy); font-weight: 800;">تفاصيل المجالات، المشاريع، والقيم</h2>
-          <p style="font-size: 13px; color: var(--text-muted); margin-top: 5px;">استعراض شامل لجميع المجالات متضمناً القيم المستهدفة، والمشاريع المنجزة لكل مجموعة.</p>
+          <p style="font-size: 13px; color: var(--text-muted); margin-top: 5px;">استعراض شامل لجميع المجالات متضمناً القيم المستهدفة، والمشاريع المخصصة لكل مجموعة بناءً على التقارير المعتمدة.</p>
         </div>
         <div id="domains-detailed-container"></div>
       </div>
@@ -385,9 +385,23 @@
   <script>
     /* ══════════════════════ DATA ══════════════════════ */
     const domains = [
+      { name:'الاستدامة البيئية',  teacher:'وضحاء آل جبار ونورة آل منصور',                    g1:90, g2:90, avg:90, color:'#07A869',
+        icon: 'fas fa-leaf',
+        projects:['بالتدوير... نحمي بيئتنا وتصنع الفرق', 'نزرع الوعي... لنحصد بيئة نقية'],
+        ideas:['مبادرة "استبدل واربح"','مسابقة تقليل النفايات','شجرة البصمات'],
+        values:['العزيمة','التعاون'],
+        g1students:['تولين سامي رفاعي','ديالا ابراهيم ال حمزه','داليا مفلح الشهراني','تسنيم محمد الغامدي','صبا علي القحطاني'],
+        g2students:['ريناد ماجد ظافري','شهد احمد غزواني','جوري عبدالله القحطاني'],
+        stations: [
+          ["اختيار فكرة معرض إعادة التدوير", "تحديد شروط مبادرة 'استبدل واربح'"],
+          ["خطة جمع المواد (بلاستيك، ورق)", "توزيع أدوار الفرز وتوقيع التعهد البيئي"],
+          ["العمل اليدوي المكثف لإعادة التدوير", "جلسات مع أ. وضحاء ونورة منصور لتعزيز التعاون"],
+          ["افتتاح معرض منتجات التدوير", "شرح آلية 'استبدل واربح' للزائرات"]
+        ]
+      },
       { name:'الانتماء الوطني',    teacher:'رقية عسيري',                       g1:100, g2:100, avg:100, color:'#351375',
         icon: 'fas fa-flag',
-        projects:['الأمن الوطني مسؤولية الجميع','مملكة الإنسانية في عيون العالم'],
+        projects:['الأمن الوطني مسؤولية الجميع', 'مملكة الإنسانية في عيون العالم.. تألق عالمي وإنجازات لا تنسى'],
         ideas:['باركود تفاعلي يوضع في ممرات المدرسة يظهر (مجلة إلكترونية تفاعلية)','مجلة إلكترونية','لوحات إرشادية'],
         values:['التعاون','الأمانة','الانضباط'],
         g1students:['جنى عبدالله الاحمري','جنى علي غزواني','اسيل سعيد الطوره','لمار عامر آل يحيى','الين علي آل مقبول'],
@@ -401,7 +415,7 @@
       },
       { name:'التسامح والتعايش',   teacher:'فاطمة الشهراني',                   g1:93, g2:93, avg:93, color:'#3D7EB9',
         icon: 'fas fa-hands-helping',
-        projects:['قيم العدالة (لا للتمييز)','نتعايش بسلام ونحيا بتسامح'],
+        projects:['قيم العدالة في المجتمع السعودي: لا للتمييز', 'نتعايش بسلام ... ونحيا بتسامح'],
         ideas:['ركن "خيمة الحوار"','بطاقات "ماذا تفعل لو؟"','أساور التسامح'],
         values:['التسامح','التعاون'],
         g1students:['رباب علي خبراني','رامة عمودي سفياني','لمار عبدالله العمري','جنى سلطان القحطاني','جود احمد بكري'],
@@ -413,9 +427,23 @@
           ["تدشين 'خيمة الحوار'", "استقبال الطالبات والنقاش المجتمعي"]
         ]
       },
+      { name:'التفاعل الرقمي',     teacher:'ابتسام الشهري',                    g1:89, g2:89, avg:89, color:'#218CAA',
+        icon: 'fas fa-laptop-code',
+        projects:['كلمة تؤذي... وكلمة تبني!', 'روبوتات المحادثة: الذكاء الذي يجيبك'],
+        ideas:['حملة "لا تضغط على الرابط"','اختبار الأمان الرقمي','ملصقات الخصوصية'],
+        values:['الأمانة','الانضباط'],
+        g1students:['شادن عمر عبدلي','سمو سعد القحطاني','وداد سعد الاسمري','رند عبدالله الشهري','ألين علي الخثيمي'],
+        g2students:['لمار سويلم القحطاني','المى ادريس خضير','تسنيم حسن الشهري','ندى حازم المالكي','درر عبدالخالق الشهري'],
+        stations: [
+          ["تحديد مشروع اختبار الأمان الرقمي", "اختيار محاور حملة الروابط الاحتيالية"],
+          ["رسم رؤية برمجية للاختبار", "توزيع مهام البرمجة والتصميم وتعهد القيم"],
+          ["تجاوز التحديات التقنية (العزيمة)", "اجتماعات توجيهية دورية مع أ. ابتسام"],
+          ["نشر روابط الاختبار التفاعلي", "توزيع ملصقات الخصوصية بالممرات"]
+        ]
+      },
       { name:'التنمية الذاتية',    teacher:'فاطمة السلمي',                     g1:92, g2:92, avg:92, color:'#0DA9A6',
         icon: 'fas fa-user-graduate',
-        projects:['المحاور الذكي','حل المشكلات'],
+        projects:['المحاور الذكي', 'حل المشكلات... أفكارنا تصنع الحلول'],
         ideas:['دقائق تطويرية إذاعية','مفكرة إنجاز','استضافة المرشدة الطلابية'],
         values:['العزيمة','الانضباط'],
         g1students:['جنى ناصر الوذناني','وسن احمد الاحمري','ريناد محمد المزارقه','حور سلطان العماري'],
@@ -429,7 +457,7 @@
       },
       { name:'الحياة الصحية',      teacher:'ظافرة البيشي',                     g1:91, g2:91, avg:91, color:'#7258A4',
         icon: 'fas fa-heartbeat',
-        projects:['رحلة في جسم الإنسان','طبقك حياتك (غذاؤك.. حركتك)'],
+        projects:['رحلة في جسم الإنسان', 'غذاؤك.. حركتك.. تركيزك'],
         ideas:['مسرحية الصحة','إنفوجرافيك السكر','مسابقة أفضل فطور صحي'],
         values:['الأمانة','الانضباط'],
         g1students:['جوري احمد الشهري','فرح علي الشهري','وسن عبدالله فقيهي','وسن محمد العمري','رهف مصلح القرني'],
@@ -439,34 +467,6 @@
           ["الكاتب يصيغ سيناريو المسرحية", "توقيع تعهد القيم والالتزام بالتدريب"],
           ["التدريب العملي وتصميم الإنفوغرافيك", "تدوين التأملات حول مدى الانضباط بالمواعيد"],
           ["أداء المسرحية أمام المدرسة", "إطلاق وإعلان مسابقة أفضل فطور صحي"]
-        ]
-      },
-      { name:'الاستدامة البيئية',  teacher:'وضحاء ءال جبار ونورة منصور',                    g1:90, g2:90, avg:90, color:'#07A869',
-        icon: 'fas fa-leaf',
-        projects:['بالتدوير نحمي بيئتنا','نزرع الوعي لنحصد بيئة نقية'],
-        ideas:['مبادرة "استبدل واربح"','مسابقة تقليل النفايات','شجرة البصمات'],
-        values:['العزيمة','التعاون'],
-        g1students:['تولين سامي رفاعي','ديالا ابراهيم ال حمزه','داليا مفلح الشهراني','تسنيم محمد الغامدي','صبا علي القحطاني'],
-        g2students:['ريناد ماجد ظافري','شهد احمد غزواني','جوري عبدالله القحطاني'],
-        stations: [
-          ["اختيار فكرة معرض إعادة التدوير", "تحديد شروط مبادرة 'استبدل واربح'"],
-          ["خطة جمع المواد (بلاستيك، ورق)", "توزيع أدوار الفرز وتوقيع التعهد البيئي"],
-          ["العمل اليدوي المكثف لإعادة التدوير", "جلسات مع أ. وضحاء ونورة منصور لتعزيز التعاون"],
-          ["افتتاح معرض منتجات التدوير", "شرح آلية 'استبدل واربح' للزائرات"]
-        ]
-      },
-      { name:'التفاعل الرقمي',     teacher:'ابتسام الشهري',                    g1:89, g2:89, avg:89, color:'#218CAA',
-        icon: 'fas fa-laptop-code',
-        projects:['كلمة تؤذي وكلمة تبني','روبوتات المحادثة والذكاء الاصطناعي'],
-        ideas:['حملة "لا تضغط على الرابط"','اختبار الأمان الرقمي','ملصقات الخصوصية'],
-        values:['الأمانة','الانضباط'],
-        g1students:['شادن عمر عبدلي','سمو سعد القحطاني','وداد سعد الاسمري','رند عبدالله الشهري','ألين علي الخثيمي'],
-        g2students:['لمار سويلم القحطاني','المى ادريس خضير','تسنيم حسن الشهري','ندى حازم المالكي','درر عبدالخالق الشهري'],
-        stations: [
-          ["تحديد مشروع اختبار الأمان الرقمي", "اختيار محاور حملة الروابط الاحتيالية"],
-          ["رسم رؤية برمجية للاختبار", "توزيع مهام البرمجة والتصميم وتعهد القيم"],
-          ["تجاوز التحديات التقنية (العزيمة)", "اجتماعات توجيهية دورية مع أ. ابتسام"],
-          ["نشر روابط الاختبار التفاعلي", "توزيع ملصقات الخصوصية بالممرات"]
         ]
       }
     ];
@@ -617,7 +617,6 @@
         const buildTbl = (arr) => arr.map(s => `<tr><td>${s.name}</td><td><span class="role-badge" style="background:${ROLES[s.role] ? ROLES[s.role].bg : '#eee'};color:${ROLES[s.role] ? ROLES[s.role].tx : '#333'}">${s.role}</span></td><td><span class="score-pill" style="color:${d.color};background:rgba(255,255,255,0.7)">${s.total}%</span></td></tr>`).join('');
         
         const valuesHtml = d.values.map(v => `<span class="value-pill" style="background:${d.color}15; color:${d.color}; border: 1px solid ${d.color}30;">${v}</span>`).join('');
-        const projsHtml = d.projects.map(p => `<li><i class="fas fa-check-circle" style="color:${d.color};"></i> ${p}</li>`).join('');
         const ideasHtml = d.ideas.map(i => `<li><i class="fas fa-lightbulb" style="color:#f39c12;"></i> ${i}</li>`).join('');
 
         return `
@@ -628,11 +627,27 @@
             </div>
             <div class="domain-info-block">
               <div><h4 style="font-size: 13px; color: var(--navy); margin-bottom: 10px; font-weight: 800;"><i class="fas fa-bullseye" style="color:${d.color}; margin-left:5px;"></i> القيم البارزة والمستهدفة:</h4><div style="margin-bottom: 15px;">${valuesHtml}</div></div>
-              <div><h4 style="font-size: 13px; color: var(--navy); margin-bottom: 10px; font-weight: 800;"><i class="fas fa-project-diagram" style="color:${d.color}; margin-left:5px;"></i> المشاريع والأفكار المنفذة:</h4><ul class="info-list">${projsHtml}${ideasHtml}</ul></div>
+              <div><h4 style="font-size: 13px; color: var(--navy); margin-bottom: 10px; font-weight: 800;"><i class="fas fa-lightbulb" style="color:${d.color}; margin-left:5px;"></i> الأفكار الإضافية للمجال:</h4><ul class="info-list">${ideasHtml}</ul></div>
             </div>
             <div class="groups-wrap">
-              <div class="group-col"><span class="group-label" style="background:var(--emerald)">طالبات المجموعة الأولى</span><table class="inner-tbl"><thead><tr><th>اسم الطالبة</th><th>الوظيفة</th><th>النسبة</th></tr></thead><tbody>${buildTbl(g1)}</tbody></table></div>
-              <div class="group-col"><span class="group-label" style="background:var(--sky)">طالبات المجموعة الثانية</span><table class="inner-tbl"><thead><tr><th>اسم الطالبة</th><th>الوظيفة</th><th>النسبة</th></tr></thead><tbody>${buildTbl(g2)}</tbody></table></div>
+              <div class="group-col">
+                <div style="margin-bottom: 12px; padding-bottom: 10px; border-bottom: 1px dashed rgba(0,0,0,0.1);">
+                    <span class="group-label" style="background:var(--emerald); margin-bottom: 8px;">طالبات المجموعة الأولى</span>
+                    <div style="font-size: 13px; font-weight: 800; color: var(--navy); line-height: 1.5;">
+                        <i class="fas fa-project-diagram" style="color:var(--emerald); margin-left: 4px;"></i> مشروع: ${d.projects[0] || 'غير محدد'}
+                    </div>
+                </div>
+                <table class="inner-tbl"><thead><tr><th>اسم الطالبة</th><th>الوظيفة</th><th>النسبة</th></tr></thead><tbody>${buildTbl(g1)}</tbody></table>
+              </div>
+              <div class="group-col">
+                <div style="margin-bottom: 12px; padding-bottom: 10px; border-bottom: 1px dashed rgba(0,0,0,0.1);">
+                    <span class="group-label" style="background:var(--sky); margin-bottom: 8px;">طالبات المجموعة الثانية</span>
+                    <div style="font-size: 13px; font-weight: 800; color: var(--navy); line-height: 1.5;">
+                        <i class="fas fa-project-diagram" style="color:var(--sky); margin-left: 4px;"></i> مشروع: ${d.projects[1] || 'غير محدد'}
+                    </div>
+                </div>
+                <table class="inner-tbl"><thead><tr><th>اسم الطالبة</th><th>الوظيفة</th><th>النسبة</th></tr></thead><tbody>${buildTbl(g2)}</tbody></table>
+              </div>
             </div>
           </div>`;
       }).join('');
