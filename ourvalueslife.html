@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -33,12 +32,12 @@
     .sub-title { color: #fff; opacity: 0.9; font-size: 14px; font-weight: 600; margin-bottom: 15px; display: inline-block; }
     
     .admin-info { display: flex; gap: 15px; flex-wrap: wrap; }
-    .admin-card { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.2); padding: 8px 15px; border-radius: 8px; display: flex; align-items: center; gap: 8px; backdrop-filter: blur(5px); }
+    .admin-card { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.2); padding: 8px 15px; border-radius: 8px; display: flex; align-items: center; gap: 8px; backdrop-filter: blur(5px); flex: 1; min-width: 150px;}
     .admin-card i { color: #A8E6CF; font-size: 16px; }
     .admin-role { font-size: 10px; opacity: 0.8; }
     .admin-name { font-size: 13px; font-weight: 700; }
 
-    .header-meta { display: flex; gap: 25px; text-align: center; }
+    .header-meta { display: flex; gap: 25px; text-align: center; flex-wrap: wrap; }
     .meta-num { font-size: 32px; font-weight: 800; line-height: 1; }
     .meta-lbl { font-size: 12px; opacity: 0.8; margin-top: 5px; }
 
@@ -69,7 +68,7 @@
     .kpi-sub { font-size: 11px; font-weight: 700; margin-top: 4px; }
 
     /* --- TEACHERS GRID --- */
-    .teachers-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; }
+    .teachers-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 15px; }
     .teacher-badge { background: #fff; border: 1px solid #EAF0F4; border-radius: 12px; padding: 15px; text-align: center; transition: 0.3s; }
     .teacher-badge:hover { transform: translateY(-3px); box-shadow: 0 6px 15px rgba(21,68,90,0.08); border-color: transparent;}
     .tb-icon { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 8px; color: #fff; font-size: 13px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);}
@@ -98,7 +97,7 @@
 
     /* Domain Detail Cards */
     .domain-section { margin-bottom: 24px; border-radius: 12px; overflow: hidden; box-shadow: var(--card-shadow); border: 1px solid rgba(0,0,0,0.05); background: #fff;}
-    .ds-header { color: #fff; padding: 14px 20px; display: flex; justify-content: space-between; align-items: center; }
+    .ds-header { color: #fff; padding: 14px 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;}
     .ds-name { font-size: 15px; font-weight: 800; } .ds-teacher { font-size: 12px; opacity: 0.9; } .ds-avg { font-size: 20px; font-weight: 800; }
     
     .domain-info-block { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; padding: 20px; border-bottom: 1px solid rgba(0,0,0,0.05); background: #fafcff; }
@@ -107,14 +106,14 @@
     .value-pill { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; margin-left: 6px; margin-bottom: 6px; }
 
     .groups-wrap { display: grid; grid-template-columns: 1fr 1fr; background: #fff; }
-    .group-col { padding: 16px; } .group-col:first-child { border-left: 1px solid rgba(0,0,0,0.06); }
+    .group-col { padding: 16px; overflow-x: auto; } .group-col:first-child { border-left: 1px solid rgba(0,0,0,0.06); }
     .group-label { font-size: 12px; font-weight: 800; color: #fff; display: inline-block; padding: 5px 14px; border-radius: 20px; margin-bottom: 12px; }
     
     /* Students Inner Table */
-    .inner-tbl { width: 100%; border-collapse: collapse; font-size: 12px; }
+    .inner-tbl { width: 100%; border-collapse: collapse; font-size: 12px; min-width: 300px; }
     .inner-tbl th { color: var(--text-muted); font-weight: 700; padding: 6px; text-align: right; border-bottom: 1px solid #eee; }
     .inner-tbl td { padding: 8px 6px; color: var(--text-dark); border-bottom: 1px solid #f5f5f5; text-align: right; font-weight: 600;}
-    .role-badge { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 10px; font-weight: 700; }
+    .role-badge { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 10px; font-weight: 700; white-space: nowrap;}
     .score-pill { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 800; }
 
     /* Values Grid */
@@ -123,18 +122,18 @@
     .val-name { font-size: 13px; font-weight: 700; color: var(--text-dark); margin-bottom: 10px; text-align: left; direction: ltr;}
     .val-row-flex { display: flex; gap: 10px; }
     .v-item { flex: 1; text-align: center; }
-    .v-score { font-size: 16px; font-weight: 800; }
+    .v-score { font-size: 14px; font-weight: 800; }
     .v-lbl { font-size: 10px; color: var(--text-muted); margin: 4px 0; }
     .v-bar-track { height: 4px; border-radius: 10px; background: #e8eaf0; overflow: hidden; }
     .v-bar-fill { height: 100%; border-radius: 10px; }
 
     /* Main Table */
     .table-wrap { overflow-x: auto; border-radius: 12px; box-shadow: var(--card-shadow); background: #fff; border: 1px solid #EAF0F4; }
-    .main-table { width: 100%; border-collapse: collapse; font-size: 12px; }
-    .main-table thead th { background: var(--navy); color: #fff; padding: 12px 15px; text-align: right; font-weight: 700; }
+    .main-table { width: 100%; border-collapse: collapse; font-size: 12px; min-width: 600px;}
+    .main-table thead th { background: var(--navy); color: #fff; padding: 12px 15px; text-align: right; font-weight: 700; white-space: nowrap;}
     .main-table tbody tr { border-bottom: 1px solid #EAF0F4; transition: 0.2s; }
     .main-table tbody tr:hover { background: #F4F7F6; }
-    .main-table td { padding: 12px 15px; color: var(--text-dark); font-weight: 600; }
+    .main-table td { padding: 12px 15px; color: var(--text-dark); font-weight: 600; white-space: nowrap;}
     .main-table .pct-cell { font-weight: 800; }
 
     /* ── STATIONS (المحطات) STYLES ── */
@@ -143,7 +142,7 @@
     .station-intro-card p { font-size: 13px; line-height: 1.7; opacity: 0.9; }
     
     .domain-journey-card { background: #fff; border-radius: 12px; padding: 20px; margin-bottom: 20px; box-shadow: var(--card-shadow); border: 1px solid rgba(0,0,0,0.05); }
-    .dj-header { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px dashed #EAF0F4; }
+    .dj-header { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px dashed #EAF0F4; flex-wrap: wrap;}
     .dj-icon { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; color: #fff; }
     .dj-title { font-size: 16px; font-weight: 800; color: var(--navy); }
     .dj-teacher { font-size: 12px; color: var(--text-muted); font-weight: 600; }
@@ -167,19 +166,35 @@
     /* الفوتر (تذييل الصفحة) */
     .site-footer { text-align: center; padding: 25px 20px; color: var(--text-muted); font-size: 14px; font-weight: 700; margin-top: 30px; border-top: 1px solid #EAF0F4; }
 
+    /* ====== MEDIA QUERIES للتجاوب مع جميع الأجهزة ====== */
     @media (max-width: 900px) {
       .dashboard-wrap { flex-direction: column; }
-      .sidebar { width: 100%; display: flex; overflow-x: auto; padding: 10px; position: static; }
-      .nav-btn { padding: 10px; border-right: none; border-bottom: 3px solid transparent; justify-content: center; white-space: nowrap; }
+      .sidebar { width: 100%; display: flex; overflow-x: auto; padding: 10px; position: static; white-space: nowrap;}
+      .nav-btn { padding: 10px 15px; border-right: none; border-bottom: 3px solid transparent; justify-content: center; }
       .nav-btn.active { border-bottom-color: var(--teal); border-right-color: transparent; }
       .grid-2 { grid-template-columns: 1fr; }
       .domain-info-block { grid-template-columns: 1fr; }
       .groups-wrap { grid-template-columns: 1fr; }
+      .group-col:first-child { border-left: none; border-bottom: 1px solid rgba(0,0,0,0.06); margin-bottom: 15px; padding-bottom: 15px;}
       .header-content { flex-direction: column; text-align: center; align-items: center; }
+      .admin-info { justify-content: center; }
       .header-meta { justify-content: center; width: 100%; margin-top: 15px; }
       .kpi-row { grid-template-columns: 1fr 1fr; }
-      .stations-grid { grid-template-columns: 1fr; gap: 25px; }
+      .stations-grid { grid-template-columns: 1fr 1fr; gap: 20px; }
       .station-step { margin-top: 10px; }
+      .values-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 600px) {
+      .header { padding: 20px; margin: 10px; }
+      .header-titles h1 { font-size: 20px; }
+      .header-titles h2 { font-size: 14px; }
+      .kpi-row { grid-template-columns: 1fr; }
+      .stations-grid { grid-template-columns: 1fr; }
+      .meta-num { font-size: 26px; }
+      .header-meta { gap: 15px; }
+      .val-row-flex { flex-wrap: wrap; }
+      .v-item { min-width: 45%; margin-bottom: 10px;}
     }
   </style>
 </head>
@@ -191,9 +206,10 @@
       <div>
         <div class="header-titles">
           <h1>مبادرة ترسيخ القيم وتعزيز الهوية الوطنية</h1>
-          <h2>( برنامج قيمنا حياة الصف الثالث المتوسط عام ١٤٤٧هـ )</h2>
+          <h2>( برنامج قيمنا حياة الصف الثالث المتوسط )</h2>
           <div class="sub-title">المتوسطة الحادية والعشرون</div>
         </div>
+        
         <div class="admin-info">
           <div class="admin-card"><i class="fas fa-user-tie"></i><div><div class="admin-role">مديرة المدرسة</div><div class="admin-name">أ. أمينة آل مشيط</div></div></div>
           <div class="admin-card"><i class="fas fa-user-graduate"></i><div><div class="admin-role">وكيلة المدرسة</div><div class="admin-name">أ. فوزية الدوسري</div></div></div>
@@ -295,15 +311,15 @@
       <div id="panel-students" class="panel">
         <div style="display:flex; gap:15px; margin-bottom:15px; align-items:center; background:#fff; padding:15px; border-radius:12px; box-shadow:var(--card-shadow); flex-wrap:wrap;">
           <span style="font-weight:700; font-size:13px;">تصفية:</span>
-          <select id="filterDomain" onchange="renderMainTable()" style="padding:6px 10px; border-radius:6px; border:1px solid #ddd; font-family:inherit;">
+          <select id="filterDomain" onchange="renderMainTable()" style="padding:6px 10px; border-radius:6px; border:1px solid #ddd; font-family:inherit; flex:1; min-width:120px;">
             <option value="">كل المجالات</option>
           </select>
-          <select id="filterGroup" onchange="renderMainTable()" style="padding:6px 10px; border-radius:6px; border:1px solid #ddd; font-family:inherit;">
+          <select id="filterGroup" onchange="renderMainTable()" style="padding:6px 10px; border-radius:6px; border:1px solid #ddd; font-family:inherit; flex:1; min-width:120px;">
             <option value="">كل المجموعات</option>
             <option value="المجموعة 1">المجموعة 1</option>
             <option value="المجموعة 2">المجموعة 2</option>
           </select>
-          <select id="filterRole" onchange="renderMainTable()" style="padding:6px 10px; border-radius:6px; border:1px solid #ddd; font-family:inherit;">
+          <select id="filterRole" onchange="renderMainTable()" style="padding:6px 10px; border-radius:6px; border:1px solid #ddd; font-family:inherit; flex:1; min-width:120px;">
             <option value="">كل الوظائف</option>
           </select>
         </div>
@@ -362,7 +378,7 @@
 
   <!-- Footer -->
   <div class="site-footer">
-    المتوسطة الحادية والعشرون &copy; 1447هـ
+    المتوسطة الحادية والعشرون &copy; مبادرة القيم
   </div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
@@ -372,7 +388,7 @@
       { name:'الانتماء الوطني',    teacher:'رقية عسيري',                       g1:100, g2:100, avg:100, color:'#351375',
         icon: 'fas fa-flag',
         projects:['الأمن الوطني مسؤولية الجميع','مملكة الإنسانية في عيون العالم'],
-        ideas:['باركود تفاعلي للمعالم التاريخية','مجلة إلكترونية','لوحات إرشادية'],
+        ideas:['باركود تفاعلي يوضع في ممرات المدرسة يظهر (مجلة إلكترونية تفاعلية)','مجلة إلكترونية','لوحات إرشادية'],
         values:['التعاون','الأمانة','الانضباط'],
         g1students:['جنى عبدالله الاحمري','جنى علي غزواني','اسيل سعيد الطوره','لمار عامر آل يحيى','الين علي آل مقبول'],
         g2students:['صالحة عثمان هزازي','ميار عبدالعزيز آل جلده','تبيان طارق الحاج','جنان مبارك الشهراني','جوري ثابت الشهراني'],
@@ -425,7 +441,7 @@
           ["أداء المسرحية أمام المدرسة", "إطلاق وإعلان مسابقة أفضل فطور صحي"]
         ]
       },
-      { name:'الاستدامة البيئية',  teacher:'وضحاء آل جبار',                    g1:90, g2:90, avg:90, color:'#07A869',
+      { name:'الاستدامة البيئية',  teacher:'وضحاء ءال جبار ونورة منصور',                    g1:90, g2:90, avg:90, color:'#07A869',
         icon: 'fas fa-leaf',
         projects:['بالتدوير نحمي بيئتنا','نزرع الوعي لنحصد بيئة نقية'],
         ideas:['مبادرة "استبدل واربح"','مسابقة تقليل النفايات','شجرة البصمات'],
@@ -435,7 +451,7 @@
         stations: [
           ["اختيار فكرة معرض إعادة التدوير", "تحديد شروط مبادرة 'استبدل واربح'"],
           ["خطة جمع المواد (بلاستيك، ورق)", "توزيع أدوار الفرز وتوقيع التعهد البيئي"],
-          ["العمل اليدوي المكثف لإعادة التدوير", "جلسات مع أ. وضحاء لتعزيز التعاون"],
+          ["العمل اليدوي المكثف لإعادة التدوير", "جلسات مع أ. وضحاء ونورة منصور لتعزيز التعاون"],
           ["افتتاح معرض منتجات التدوير", "شرح آلية 'استبدل واربح' للزائرات"]
         ]
       },
