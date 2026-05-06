@@ -77,7 +77,7 @@
 
     /* Vertical Timeline */
     .timeline-item { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 15px; position: relative; }
-    .timeline-item:not(:last-child)::after { content: absolute; right: 16px; top: 32px; bottom: -15px; width: 2px; background: rgba(0,0,0,0.06); }
+    .timeline-item:not(:last-child)::after { content: ''; position: absolute; right: 16px; top: 32px; bottom: -15px; width: 2px; background: rgba(0,0,0,0.06); }
     .tl-icon { width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800; color: white; z-index: 2; }
     .tl-body { flex: 1; }
     .tl-week { font-size: 13px; font-weight: 800; color: var(--text-dark); }
@@ -388,7 +388,7 @@
       { name:'الاستدامة البيئية',  teacher:'وضحاء آل جبار ونورة آل منصور',                    g1:90, g2:90, avg:90, color:'#07A869',
         icon: 'fas fa-leaf',
         projects:['بالتدوير... نحمي بيئتنا وتصنع الفرق', 'نزرع الوعي... لنحصد بيئة نقية'],
-        ideas:['مبادرة "استبدل واربح"','مسابقة تقليل النفايات','شجرة البصمات'],
+        ideas:['مشروع سلة المهملات الذكية المرتبطة بالمستشعرات (مبادرة إثرائية تقنية من أ. كرزية عسيري وأ. ابتسام الشهري)','مبادرة "استبدل واربح"','مسابقة تقليل النفايات','شجرة البصمات'],
         values:['العزيمة','التعاون'],
         g1students:['تولين سامي رفاعي','ديالا ابراهيم ال حمزه','داليا مفلح الشهراني','تسنيم محمد الغامدي','صبا علي القحطاني'],
         g2students:['ريناد ماجد ظافري','شهد احمد غزواني','جوري عبدالله القحطاني'],
